@@ -15,8 +15,8 @@ public class Guest implements Parcelable {
     float discount;
     @SerializedName("notes")
     String notes;
-    @SerializedName("coctailList")
-    List<Coctail> coctailList;
+    @SerializedName("cocktailList")
+    List<Cocktail> cocktailList;
 
     public Guest(String name) {
         this.name = name;
@@ -46,19 +46,19 @@ public class Guest implements Parcelable {
         this.notes = notes;
     }
 
-    public List<Coctail> getCocktailList() {
-        return coctailList;
+    public List<Cocktail> getCocktailList() {
+        return cocktailList;
     }
 
-    public void setCoctailList(List<Coctail> coctailList) {
-        this.coctailList = coctailList;
+    public void setCocktailList(List<Cocktail> cocktailList) {
+        this.cocktailList = cocktailList;
     }
 
     protected Guest(Parcel in) {
         name = in.readString();
         discount = in.readFloat();
         notes = in.readString();
-        coctailList = in.readArrayList(Coctail.class.getClassLoader());
+        cocktailList = in.readArrayList(Cocktail.class.getClassLoader());
     }
 
     @Override
@@ -71,7 +71,7 @@ public class Guest implements Parcelable {
         parcel.writeString(name);
         parcel.writeFloat(discount);
         parcel.writeString(notes);
-        parcel.writeList(coctailList);
+        parcel.writeList(cocktailList);
     }
 
     public static final Parcelable.Creator<Guest> CREATOR

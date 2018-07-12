@@ -1,9 +1,8 @@
 package bb.incognito.viewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import bb.incognito.model.Coctail;
+import bb.incognito.model.Cocktail;
 import bb.incognito.model.Guest;
 
 public class GuestDetailVM {
@@ -21,7 +20,7 @@ public class GuestDetailVM {
     public void setDiscount(String discount){guest.setDiscount(Float.valueOf(discount));}
     public String getNotes(){return guest.getNotes();}
     public void setNotes(String note) {guest.setNotes(note);}
-    public List<Coctail> getCocktailList()
+    public List<Cocktail> getCocktailList()
     {
         return guest.getCocktailList();
     }

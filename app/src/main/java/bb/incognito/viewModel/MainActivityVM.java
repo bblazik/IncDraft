@@ -30,7 +30,7 @@ public class MainActivityVM extends BaseObservable {
     {
         List array = new ArrayList<Guest>();
         array.add(new Guest("Zajac"));
-        guestAdapter.setCardList(array); //TODO Check if there is a better way
+        guestAdapter.setGuestList(array);
         notifyChange();
     }
 

@@ -16,9 +16,9 @@ import bb.incognito.databinding.GuestRowBinding;
 public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHolder>{
 
     private List<Guest> displayList = new ArrayList<>();
-//    private List<Guest> originalData = new ArrayList<>();
+    private List<Guest> originalData = new ArrayList<>();
 
-    public void setCardList(List<Guest> guestList) {
+    public void setGuestList(List<Guest> guestList) {
         displayList = guestList;
 //        originalData = displayList;
         notifyDataSetChanged();
