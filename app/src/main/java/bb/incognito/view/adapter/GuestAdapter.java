@@ -20,7 +20,7 @@ public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHol
 
     public void setGuestList(List<Guest> guestList) {
         displayList = guestList;
-//        originalData = displayList;
+        originalData = displayList;
         notifyDataSetChanged();
     }
 
@@ -40,6 +40,23 @@ public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHol
     @Override
     public int getItemCount() {
         return displayList.size();
+    }
+
+    public int filterByName(String query){ //Can be replaced with filter interface. But idk why would I.
+        List<Guest> filteredList = new ArrayList<>();
+        query = query.replaceAll("\\s+","").toLowerCase();
+        for(Guest c : originalData) { // due to lack of lambda in api<24
+            if(guestNameContains(c, query)){
+                filteredList.add(c);
+            }
+        }
+        displayList = filteredList;
+        notifyDataSetChanged();
+        return displayList.size();
+    }
+
+    boolean guestNameContains(Guest g, String query){
+        return g.getName().toLowerCase().contains(query);
     }
 
     class GuestViewHolder extends RecyclerView.ViewHolder {
