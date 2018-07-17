@@ -2,6 +2,7 @@ package bb.incognito.viewModel;
 
 import android.databinding.BaseObservable;
 import android.view.View;
+import android.widget.Toast;
 
 import bb.incognito.model.Guest;
 import bb.incognito.view.GuestDetail;

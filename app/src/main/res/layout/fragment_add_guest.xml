@@ -1,0 +1,98 @@
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <import type="android.view.View" />
+        <variable name="viewModel" type="bb.incognito.viewModel.AddGuestVM" />
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical" android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/dialogDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="desc"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/newNameDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Name: "
+            android:gravity="center"/>
+
+        <EditText
+            android:id="@+id/newName"
+            style="@android:style/Widget.Material.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@={viewModel.name}"
+            tools:ignore="LabelFor" />
+
+        <TextView
+            android:id="@+id/newDiscountDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Discount: "
+            android:gravity="center"/>
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:min="0"
+            android:progress="@={viewModel.discount}"
+            />
+
+        <TextView
+            android:id="@+id/newDiscount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.getStringDiscount}"
+            android:ems="10"/>
+
+        <TextView
+            android:id="@+id/newNotesDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Notes: "
+            android:gravity="center"/>
+
+        <EditText
+            android:id="@+id/newNotes"
+            style="@android:style/Widget.Material.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textMultiLine"
+            android:text="@={viewModel.notes}"
+            tools:ignore="LabelFor" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/cancelButton"
+                style="@android:style/Widget.Material.Light.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="cancel button"
+                android:onClick="@{viewModel.closeButton}"/>
+
+            <Button
+                android:id="@+id/acceptButton"
+                style="@android:style/Widget.Material.Button.Inset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="accept button"
+                android:onClick="@{viewModel.acceptButton}"/>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

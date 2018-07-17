@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <variable
-            name="vm"
-            type="bb.incognito.viewModel.MainActivityVM" />
+        <variable name="viewModel" type="bb.incognito.viewModel.MainActivityVM" />
         <import type="android.view.View" />
     </data>
     <RelativeLayout
@@ -14,13 +13,27 @@
         android:descendantFocusability="beforeDescendants"
         tools:context="bb.myapplication.view.MainActivity">
 
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/addGuest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="26dp"
+            android:layout_marginEnd="22dp"
+            android:clickable="true"
+            app:srcCompat="@android:drawable/ic_input_add"
+            android:onClick="@{viewModel::onClick}"/>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:descendantFocusability="beforeDescendants"
-            tools:listitem="@layout/guest_row" />
+            tools:listitem="@layout/guest_row" >
+
+        </android.support.v7.widget.RecyclerView>
 
         <!--<ProgressBar-->
             <!--android:id="@+id/progressBar"-->

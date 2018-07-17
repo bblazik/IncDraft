@@ -22,6 +22,12 @@ public class Guest implements Parcelable {
         this.name = name;
     }
 
+    public Guest(String name, float discount, String notes) {
+        this.name = name;
+        this.discount = discount;
+        this.notes = notes;
+    }
+
     public String getName() {
         return name;
     }

@@ -1,9 +1,14 @@
 package bb.incognito.viewModel;
 
+import android.view.View;
+import android.widget.Toast;
+
 import java.util.List;
 
+import bb.incognito.MyApp;
 import bb.incognito.model.Cocktail;
 import bb.incognito.model.Guest;
+import bb.incognito.view.GuestDetail;
 
 public class GuestDetailVM {
 
@@ -23,5 +28,10 @@ public class GuestDetailVM {
     public List<Cocktail> getCocktailList()
     {
         return guest.getCocktailList();
+    }
+
+    public void onClick(View view) {
+        //view.getContext().startActivity(GuestDetail.launchDetail(view.getContext(), guest));
+        Toast.makeText(view.getContext(), "Note and location cannot be empty", Toast.LENGTH_SHORT).show();
     }
 }

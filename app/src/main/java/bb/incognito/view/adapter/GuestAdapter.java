@@ -1,6 +1,8 @@
 package bb.incognito.view.adapter;
 
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -21,6 +23,11 @@ public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHol
     public void setGuestList(List<Guest> guestList) {
         displayList = guestList;
         originalData = displayList;
+        notifyDataSetChanged();
+    }
+    public void addGuestToList(Guest guest){
+        displayList.add(guest);
+        //originalData.add(guest);
         notifyDataSetChanged();
     }
 
@@ -61,6 +68,7 @@ public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHol
 
     class GuestViewHolder extends RecyclerView.ViewHolder {
         GuestRowBinding guestRowBinding;
+        Drawable settings;
 
         public GuestViewHolder(GuestRowBinding guestRowBinding) {
             super(guestRowBinding.guestRow);
@@ -74,6 +82,14 @@ public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHol
             } else {
                 guestRowBinding.getViewModel().setGuest(guest);
             }
+        }
+        public void onItemSelected() {
+            settings = itemView.getBackground();
+            itemView.setBackgroundColor(Color.LTGRAY);
+        }
+
+        public void onItemClear() {
+            itemView.setBackground(settings);
         }
     }
 }

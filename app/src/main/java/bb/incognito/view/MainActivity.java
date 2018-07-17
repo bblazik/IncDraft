@@ -24,13 +24,14 @@ public class MainActivity extends AppCompatActivity {
     public void initDataBinding(){
         mainActivityBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         setupAdapter();
-        mainActivityViewModel = new MainActivityVM(guestAdapter);
-        mainActivityBinding.setVm(mainActivityViewModel);
+        mainActivityViewModel = new MainActivityVM(guestAdapter, getFragmentManager());
+        mainActivityBinding.setViewModel(mainActivityViewModel);
     }
 
     private void setupAdapter(){
         guestAdapter= new GuestAdapter();
         mainActivityBinding.list.setAdapter(guestAdapter);
         mainActivityBinding.list.setLayoutManager(new LinearLayoutManager(this));
+
     }
 }
