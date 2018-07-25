@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 
+import bb.incognito.MyApp;
 import bb.incognito.R;
 import bb.incognito.databinding.ActivityMainBinding;
 import bb.incognito.view.adapter.GuestAdapter;
@@ -32,6 +33,5 @@ public class MainActivity extends AppCompatActivity {
         guestAdapter= new GuestAdapter();
         mainActivityBinding.list.setAdapter(guestAdapter);
         mainActivityBinding.list.setLayoutManager(new LinearLayoutManager(this));
-
     }
 }

@@ -1,6 +1,7 @@
 package bb.incognito;
 
 import android.app.Application;
+import android.app.FragmentManager;
 import android.content.Context;
 
 import bb.incognito.injection.component.ApplicationComponent;
@@ -13,6 +14,7 @@ public class MyApp extends Application{
     ApplicationComponent mApplicationComponent;
     private Scheduler scheduler;
     public static Context mContext;
+    public static FragmentManager fragmentManager;
 
     @Override
     public void onCreate() {
@@ -39,6 +41,15 @@ public class MyApp extends Application{
     // Needed to replace the component with a test specific one
     public void setComponent(ApplicationComponent applicationComponent) {
         mApplicationComponent = applicationComponent;
+    }
+
+    public static void setFragmentManager(FragmentManager fragmentManager) {
+        MyApp.fragmentManager = fragmentManager;
+    }
+
+    public static FragmentManager getFragmentManager()
+    {
+        return getFragmentManager();
     }
 
     public Scheduler subscribeScheduler() {

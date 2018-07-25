@@ -8,12 +8,28 @@
         <variable name="cocktailViewModel" type="bb.incognito.viewModel.CocktailRowVM" />
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/addCocktailButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="26dp"
+            android:layout_marginEnd="22dp"
+            android:clickable="true"
+            android:onClick="@{viewModel::onClick}"
+            app:srcCompat="@android:drawable/ic_input_add" />
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
+            <TextView
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,26 +57,17 @@
             android:paddingLeft="4dp"
             android:paddingRight="4dp">
 
-            <LinearLayout
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/list"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:descendantFocusability="beforeDescendants"
+                tools:listitem="@layout/cocktail_row" >
 
-                <TextView
-                    android:id="@+id/cocktailName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@{cocktailViewModel.name}" />
-            </LinearLayout>
+            </android.support.v7.widget.RecyclerView>
         </android.support.v7.widget.CardView>
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/addCocktailButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:onClick="@{viewModel::onClick}"
-            app:srcCompat="@android:drawable/ic_input_add" />
     </LinearLayout>
+    </RelativeLayout>
 </layout>

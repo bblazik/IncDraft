@@ -1,5 +1,9 @@
 package bb.incognito.viewModel;
 
+import android.app.Activity;
+import android.app.DialogFragment;
+import android.app.FragmentManager;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Toast;
 
@@ -8,15 +12,24 @@ import java.util.List;
 import bb.incognito.MyApp;
 import bb.incognito.model.Cocktail;
 import bb.incognito.model.Guest;
+import bb.incognito.view.AddCocktailFragment;
+import bb.incognito.view.AddGuestFragment;
 import bb.incognito.view.GuestDetail;
+import bb.incognito.view.adapter.CocktailAdapter;
+import bb.incognito.view.adapter.GuestAdapter;
 
 public class GuestDetailVM {
 
     private Guest guest;
+    public static CocktailAdapter cocktailAdapter;
+    FragmentManager fragmentManager;
 
-    public GuestDetailVM(Guest guest) {
+    public GuestDetailVM(Guest guest, FragmentManager fragmentManager, CocktailAdapter cocktailAdapter) {
         this.guest = guest;
+        this.fragmentManager = fragmentManager;
+        this.cocktailAdapter = cocktailAdapter;
     }
+
     public String getName()
     {
         return guest.getName();
@@ -31,7 +44,7 @@ public class GuestDetailVM {
     }
 
     public void onClick(View view) {
-        //view.getContext().startActivity(GuestDetail.launchDetail(view.getContext(), guest));
-        Toast.makeText(view.getContext(), "Note and location cannot be empty", Toast.LENGTH_SHORT).show();
+        DialogFragment newFragment = AddCocktailFragment.newInstance(false,-1, cocktailAdapter, guest);
+        newFragment.show(fragmentManager, "New dialog");
     }
 }

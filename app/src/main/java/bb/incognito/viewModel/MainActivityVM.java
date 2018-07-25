@@ -57,8 +57,6 @@ public class MainActivityVM extends BaseObservable {
     }
 
     public void onClick(View view) {
-        Toast.makeText(view.getContext(), "Note and location cannot be empty", Toast.LENGTH_SHORT).show();
-        //guestAdapter.addGuestToList();
         DialogFragment newFragment = AddGuestFragment.newInstance(false,-1, guestAdapter);
         newFragment.show(fragmentManager, "New dialog");
     }

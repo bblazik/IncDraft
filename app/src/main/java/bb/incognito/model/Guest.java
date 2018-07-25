@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Guest implements Parcelable {
@@ -16,7 +17,7 @@ public class Guest implements Parcelable {
     @SerializedName("notes")
     String notes;
     @SerializedName("cocktailList")
-    List<Cocktail> cocktailList;
+    List<Cocktail> cocktailList = new ArrayList<>();
 
     public Guest(String name) {
         this.name = name;
@@ -58,6 +59,11 @@ public class Guest implements Parcelable {
 
     public void setCocktailList(List<Cocktail> cocktailList) {
         this.cocktailList = cocktailList;
+    }
+
+    public void addCocktail(Cocktail cocktail)
+    {
+        cocktailList.add(cocktail);
     }
 
     protected Guest(Parcel in) {

@@ -12,10 +12,12 @@ import bb.incognito.view.adapter.GuestAdapter;
 
 public class AddGuestVM extends BaseObservable {
 
+    GuestAdapter guestAdapter;
+    AddGuestFragment df;
+
     public String name = "";
     public String notes = "";
     public float discount = 0f;
-    AddGuestFragment df;
     boolean edit = false;
     int position = -1;
 
@@ -27,9 +29,6 @@ public class AddGuestVM extends BaseObservable {
 
     public int getDiscount(){return (int)discount;}
     public String getStringDiscount(){return String.valueOf(discount);}
-
-
-    GuestAdapter guestAdapter;
 
     public AddGuestVM(AddGuestFragment dialogFragment, boolean editGuest, int pos, GuestAdapter guestAdapter){
         position = pos;

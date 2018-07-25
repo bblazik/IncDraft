@@ -5,16 +5,21 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 
+import bb.incognito.MyApp;
 import bb.incognito.R;
 import bb.incognito.databinding.GuestDetailBinding;
 import bb.incognito.model.Guest;
+import bb.incognito.view.adapter.CocktailAdapter;
+import bb.incognito.view.adapter.GuestAdapter;
 import bb.incognito.viewModel.GuestDetailVM;
 
 public class GuestDetail extends AppCompatActivity {
 
     GuestDetailBinding guestDetailBinding;
     GuestDetailVM guestDetailViewModel;
+    CocktailAdapter cocktailAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,12 +31,20 @@ public class GuestDetail extends AppCompatActivity {
     public void initDataBinding(){
         guestDetailBinding = DataBindingUtil.setContentView(this, R.layout.guest_detail);
         Guest guest = getIntent().getExtras().getParcelable("GUEST");
-        guestDetailViewModel = new GuestDetailVM(guest);
+        setupAdapter(guest);
+        guestDetailViewModel = new GuestDetailVM(guest, getFragmentManager(), cocktailAdapter);
         guestDetailBinding.setViewModel(guestDetailViewModel);
     }
     public static Intent launchDetail(Context context, Guest guest) {
         Intent intent = new Intent(context, GuestDetail.class);
         intent.putExtra("GUEST", guest);
         return intent;
+    }
+
+    private void setupAdapter(Guest guest){
+        cocktailAdapter= new CocktailAdapter(); //get data of cocktails. from guest
+        cocktailAdapter.setCocktailList(guest.getCocktailList());
+        guestDetailBinding.list.setAdapter(cocktailAdapter);
+        guestDetailBinding.list.setLayoutManager(new LinearLayoutManager(this));
     }
 }

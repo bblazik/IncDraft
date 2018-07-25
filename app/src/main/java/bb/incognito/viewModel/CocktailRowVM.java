@@ -13,7 +13,9 @@ public class CocktailRowVM extends BaseObservable {
     }
 
     public String getName(){ return cocktail.getName();}
-    public String getTags(){ return cocktail.getTags().toString();}
+    public String getTags() {
+        return cocktail.getTags().toString().replaceAll("\\[?\\]?,?", "");
+    }
     public String getNotes(){return cocktail.getNotes();}
     public String getOthers(){return cocktail.getOther();}
 
