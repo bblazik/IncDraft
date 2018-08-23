@@ -2,6 +2,7 @@ package bb.incognito;
 
 import android.app.Application;
 import android.app.FragmentManager;
+import android.arch.persistence.room.Room;
 import android.content.Context;
 
 import bb.incognito.injection.component.ApplicationComponent;
@@ -10,7 +11,7 @@ import bb.incognito.injection.module.ApplicationModule;
 import io.reactivex.Scheduler;
 import io.reactivex.schedulers.Schedulers;
 
-public class MyApp extends Application{
+public class MyApp extends Application {
     ApplicationComponent mApplicationComponent;
     private Scheduler scheduler;
     public static Context mContext;

@@ -1,9 +1,12 @@
 package bb.incognito.viewModel;
 
+import android.app.Application;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.SearchManager;
+import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.LiveData;
 import android.content.ComponentName;
 import android.content.Context;
 import android.databinding.BaseObservable;
@@ -12,52 +15,38 @@ import android.databinding.ObservableField;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.SearchView;
-import android.widget.Toast;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import bb.incognito.MyApp;
-import bb.incognito.data.DataManager;
 import bb.incognito.model.Guest;
+import bb.incognito.repositories.GuestRepository;
 import bb.incognito.view.AddGuestFragment;
 import bb.incognito.view.MainActivity;
-import bb.incognito.view.adapter.GuestAdapter;
-import io.reactivex.disposables.CompositeDisposable;
 
-public class MainActivityVM extends BaseObservable {
+import static bb.incognito.MyApp.fragmentManager;
 
-    private DataManager dataManager;
-    private static GuestAdapter guestAdapter;
-    private CompositeDisposable compositeDisposable;
-    public ObservableField<Boolean> progressBarVisible = new ObservableField<>();
-    FragmentManager fragmentManager;
+public class MainActivityVM extends AndroidViewModel {
+    private GuestRepository guestRepository;
+    private LiveData<List<Guest>> allGuests;
 
-    public MainActivityVM(GuestAdapter cardAdapter, FragmentManager fragmentManager) {
-        compositeDisposable = new CompositeDisposable();
-        dataManager = MyApp.get().getComponent().dataManager();
-        guestAdapter = cardAdapter;
+    public void setFragmentManager(FragmentManager fragmentManager) {
         this.fragmentManager = fragmentManager;
-        getGuestList();
     }
 
-    public void getGuestList()
-    {
-        List array = new ArrayList<Guest>();
-        array.add(new Guest("Zajac"));
-        array.add(new Guest("Zajac"));
-        array.add(new Guest("Zajac"));
-        array.add(new Guest("Zajac"));
-        array.add(new Guest("Zajac"));
-        array.add(new Guest("Zajac"));
-        array.add(new Guest("Zajac"));
-        array.add(new Guest("NieZajac"));
-        guestAdapter.setGuestList(array);
-        notifyChange();
+    private FragmentManager fragmentManager;
+
+    public MainActivityVM(Application application) {
+        super(application);
+        guestRepository = new GuestRepository(application);
+        allGuests = guestRepository.getAllGuests();
+    }
+
+    public LiveData<List<Guest>> getAllGuests() {
+        return allGuests;
     }
 
     public void onClick(View view) {
-        DialogFragment newFragment = AddGuestFragment.newInstance(false,-1, guestAdapter);
+        DialogFragment newFragment = AddGuestFragment.newInstance(false,-1, guestRepository);
         newFragment.show(fragmentManager, "New dialog");
     }
 
@@ -73,13 +62,13 @@ public class MainActivityVM extends BaseObservable {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                guestAdapter.filterByName(query);
+//                guestAdapter.filterByName(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                guestAdapter.filterByName(newText);
+//                guestAdapter.filterByName(newText);
                 return false;
             }
         });
@@ -94,7 +83,7 @@ public class MainActivityVM extends BaseObservable {
     public SwipeRefreshLayout.OnRefreshListener listener = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
         public void onRefresh() {
-            getGuestList();
+            getAllGuests();
         }
     };
 }

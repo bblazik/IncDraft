@@ -1,5 +1,9 @@
 package bb.incognito.model;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -8,14 +12,24 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Guest implements Parcelable {
+    @PrimaryKey(autoGenerate = true)
+    private int id;
 
+    @ColumnInfo(name = "name")
     @SerializedName("name")
     String name;
+
+    @ColumnInfo(name = "discount")
     @SerializedName("discount")
     float discount;
+
+    @ColumnInfo(name = "notes")
     @SerializedName("notes")
     String notes;
+
+    @Ignore
     @SerializedName("cocktailList")
     List<Cocktail> cocktailList = new ArrayList<>();
 
@@ -23,6 +37,7 @@ public class Guest implements Parcelable {
         this.name = name;
     }
 
+    @Ignore
     public Guest(String name, float discount, String notes) {
         this.name = name;
         this.discount = discount;
@@ -64,6 +79,15 @@ public class Guest implements Parcelable {
     public void addCocktail(Cocktail cocktail)
     {
         cocktailList.add(cocktail);
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     protected Guest(Parcel in) {

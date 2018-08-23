@@ -4,7 +4,7 @@ import android.databinding.BaseObservable;
 
 import bb.incognito.model.Cocktail;
 
-public class CocktailRowVM extends BaseObservable {
+public class CocktailRowVM {
 
     private Cocktail cocktail;
 
@@ -21,6 +21,6 @@ public class CocktailRowVM extends BaseObservable {
 
     public void setCocktail(Cocktail cocktail) {
         this.cocktail = cocktail;
-        notifyChange();
+
     }
 }
