@@ -11,6 +11,7 @@ import bb.incognito.MyApp;
 import bb.incognito.R;
 import bb.incognito.databinding.GuestDetailBinding;
 import bb.incognito.model.Guest;
+import bb.incognito.repositories.CocktailRepository;
 import bb.incognito.view.adapter.CocktailAdapter;
 import bb.incognito.view.adapter.GuestAdapter;
 import bb.incognito.viewModel.GuestDetailVM;
@@ -20,19 +21,22 @@ public class GuestDetail extends AppCompatActivity {
     GuestDetailBinding guestDetailBinding;
     GuestDetailVM guestDetailViewModel;
     CocktailAdapter cocktailAdapter;
+    CocktailRepository cocktailRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.guest_detail);
+
         initDataBinding();
     }
 
     public void initDataBinding(){
         guestDetailBinding = DataBindingUtil.setContentView(this, R.layout.guest_detail);
         Guest guest = getIntent().getExtras().getParcelable("GUEST");
+        cocktailRepository = new CocktailRepository(this.getApplication(), guest.getId());
         setupAdapter(guest);
-        guestDetailViewModel = new GuestDetailVM(guest, getFragmentManager(), cocktailAdapter);
+        guestDetailViewModel = new GuestDetailVM(guest, getFragmentManager(), cocktailRepository);
         guestDetailBinding.setViewModel(guestDetailViewModel);
     }
     public static Intent launchDetail(Context context, Guest guest) {

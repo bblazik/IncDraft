@@ -12,6 +12,7 @@ import java.util.List;
 import bb.incognito.MyApp;
 import bb.incognito.model.Cocktail;
 import bb.incognito.model.Guest;
+import bb.incognito.repositories.CocktailRepository;
 import bb.incognito.view.AddCocktailFragment;
 import bb.incognito.view.AddGuestFragment;
 import bb.incognito.view.GuestDetail;
@@ -21,13 +22,13 @@ import bb.incognito.view.adapter.GuestAdapter;
 public class GuestDetailVM {
 
     private Guest guest;
-    public static CocktailAdapter cocktailAdapter;
+    public static CocktailRepository cocktailRepository;
     FragmentManager fragmentManager;
 
-    public GuestDetailVM(Guest guest, FragmentManager fragmentManager, CocktailAdapter cocktailAdapter) {
+    public GuestDetailVM(Guest guest, FragmentManager fragmentManager, CocktailRepository cocktailRepository) {
         this.guest = guest;
         this.fragmentManager = fragmentManager;
-        this.cocktailAdapter = cocktailAdapter;
+        this.cocktailRepository = cocktailRepository;
     }
 
     public String getName()
@@ -44,7 +45,7 @@ public class GuestDetailVM {
     }
 
     public void onClick(View view) {
-        DialogFragment newFragment = AddCocktailFragment.newInstance(false,-1, cocktailAdapter, guest);
+        DialogFragment newFragment = AddCocktailFragment.newInstance(false,-1, cocktailRepository, guest);
         newFragment.show(fragmentManager, "New dialog");
     }
 }

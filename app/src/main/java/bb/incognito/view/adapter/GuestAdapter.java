@@ -1,5 +1,6 @@
 package bb.incognito.view.adapter;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -16,18 +17,10 @@ import bb.incognito.viewModel.GuestRowVM;
 import bb.incognito.databinding.GuestRowBinding;
 
 public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHolder>{
+    private List<Guest> guests;
 
-    private List<Guest> displayList = new ArrayList<>();
-    private List<Guest> originalData = new ArrayList<>();
-
-    public void setGuestList(List<Guest> guestList) {
-        displayList = guestList;
-        originalData = displayList;
-        notifyDataSetChanged();
-    }
-    public void addGuestToList(Guest guest){
-        displayList.add(guest);
-        //originalData.add(guest);
+    public void setGuests(List<Guest> guests) {
+        this.guests = guests;
         notifyDataSetChanged();
     }
 
@@ -41,30 +34,23 @@ public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHol
 
     @Override
     public void onBindViewHolder(GuestViewHolder holder, int position) {
-        holder.bindCard(displayList.get(position));
+        if (guests != null) {
+            holder.bindCard(guests.get(position));
+        } else {
+            holder.bindCard(new Guest("Nie ma gości :("));
+        }
     }
 
     @Override
     public int getItemCount() {
-        return displayList.size();
-    }
-
-    public int filterByName(String query){ //Can be replaced with filter interface. But idk why would I.
-        List<Guest> filteredList = new ArrayList<>();
-        query = query.replaceAll("\\s+","").toLowerCase();
-        for(Guest c : originalData) { // due to lack of lambda in api<24
-            if(guestNameContains(c, query)){
-                filteredList.add(c);
-            }
+        if (guests != null) {
+            return guests.size();
+        } else {
+            return 0;
         }
-        displayList = filteredList;
-        notifyDataSetChanged();
-        return displayList.size();
     }
 
-    boolean guestNameContains(Guest g, String query){
-        return g.getName().toLowerCase().contains(query);
-    }
+
 
     class GuestViewHolder extends RecyclerView.ViewHolder {
         GuestRowBinding guestRowBinding;

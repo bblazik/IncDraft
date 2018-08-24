@@ -13,6 +13,7 @@ import android.view.inputmethod.InputMethodManager;
 import bb.incognito.R;
 import bb.incognito.databinding.FragmentAddCocktailBinding;
 import bb.incognito.model.Guest;
+import bb.incognito.repositories.CocktailRepository;
 import bb.incognito.view.adapter.CocktailAdapter;
 import bb.incognito.viewModel.AddCocktailVM;
 
@@ -21,17 +22,17 @@ import com.google.android.gms.plus.PlusOneButton;
 public class AddCocktailFragment extends DialogFragment {
 
     FragmentAddCocktailBinding fragmentAddCocktailBinding;
-    static CocktailAdapter cocktailAdapter;
+    static CocktailRepository cocktailRepository;
     public AddCocktailFragment(){}
     static Guest guest;
 
-    public static AddCocktailFragment newInstance(boolean edit, int pos, CocktailAdapter ga, Guest _guest){
+    public static AddCocktailFragment newInstance(boolean edit, int pos, CocktailRepository cR, Guest _guest){
         AddCocktailFragment addCocktailFragment = new AddCocktailFragment();
         Bundle args = new Bundle();
         args.putBoolean("edit", edit);
         args.putInt("pos", pos);
         addCocktailFragment.setArguments(args);
-        cocktailAdapter = ga;
+        cocktailRepository = cR;
         guest = _guest;
         return addCocktailFragment;
     }
@@ -46,7 +47,7 @@ public class AddCocktailFragment extends DialogFragment {
         int pos = getArguments().getInt("pos");
         boolean edit = getArguments().getBoolean("edit");
 
-        fragmentAddCocktailBinding.setViewModel(new AddCocktailVM(this,edit, pos, cocktailAdapter, guest));
+        fragmentAddCocktailBinding.setViewModel(new AddCocktailVM(this,edit, pos, cocktailRepository, guest));
         return fragmentAddCocktailBinding.getRoot();
     }
 

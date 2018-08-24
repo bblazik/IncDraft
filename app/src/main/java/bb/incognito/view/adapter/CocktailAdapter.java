@@ -13,23 +13,13 @@ import java.util.List;
 import bb.incognito.R;
 import bb.incognito.databinding.CocktailRowBinding;
 import bb.incognito.model.Cocktail;
-import bb.incognito.model.Cocktail;
-import bb.incognito.view.GuestDetail;
 import bb.incognito.viewModel.CocktailRowVM;
 
 public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.CocktailViewHolder>{
-
-    private List<Cocktail> displayList = new ArrayList<>();
-    private List<Cocktail> originalData = new ArrayList<>();
+    private List<Cocktail> cocktails = new ArrayList<>();
 
     public void setCocktailList(List<Cocktail> cocktailList) {
-        displayList = cocktailList;
-        originalData = displayList;
-        notifyDataSetChanged();
-    }
-    public void addCocktailToList(Cocktail cocktail){
-        displayList.add(cocktail);
-        //originalData.add(cocktail);
+        cocktails = cocktailList;
         notifyDataSetChanged();
     }
 
@@ -43,25 +33,25 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.Cockta
 
     @Override
     public void onBindViewHolder(CocktailAdapter.CocktailViewHolder holder, int position) {
-        holder.bindCard(displayList.get(position));
+        holder.bindCard(cocktails.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return displayList.size();
+        return cocktails.size();
     }
 
     public int filterByName(String query){ //Can be replaced with filter interface. But idk why would I.
         List<Cocktail> filteredList = new ArrayList<>();
         query = query.replaceAll("\\s+","").toLowerCase();
-        for(Cocktail c : originalData) { // due to lack of lambda in api<24
+        for(Cocktail c : cocktails) { // due to lack of lambda in api<24
             if(cocktailNameContains(c, query)){
                 filteredList.add(c);
             }
         }
-        displayList = filteredList;
+        cocktails = filteredList;
         notifyDataSetChanged();
-        return displayList.size();
+        return cocktails.size();
     }
 
     boolean cocktailNameContains(Cocktail g, String query){

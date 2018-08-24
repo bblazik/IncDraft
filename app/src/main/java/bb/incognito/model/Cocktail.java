@@ -1,5 +1,11 @@
 package bb.incognito.model;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.Index;
+import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -7,17 +13,50 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Cocktail implements Parcelable{
+import static android.arch.persistence.room.ForeignKey.CASCADE;
 
+@Entity(
+        foreignKeys = @ForeignKey(
+                entity = Guest.class,
+                parentColumns = "id",
+                childColumns = "guest_id",
+                onDelete = CASCADE
+        ),
+        indices = {@Index("guest_id")}
+)
+public class Cocktail implements Parcelable {
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+
+    @ColumnInfo(name = "guest_id")
+    public int guestId;
+
+    @ColumnInfo(name = "name")
     @SerializedName("name")
     String name;
+
+    @Ignore
     @SerializedName("tags")
     List<String> tags;
+
+    @ColumnInfo(name = "notes")
     @SerializedName("notes")
     String notes;
+
+    @ColumnInfo(name = "other")
     @SerializedName("other")
     String other;
 
+    @Ignore
     public Cocktail(String name, List<String> tags, String notes, String other) {
         this.name = name;
         this.tags = tags;
@@ -25,8 +64,9 @@ public class Cocktail implements Parcelable{
         this.other = other;
     }
 
-    public Cocktail(String name) {
+    public Cocktail(String name, Integer guestId) {
         this.name = name;
+        this.guestId = guestId;
     }
 
     public String getName() {

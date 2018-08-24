@@ -1,5 +1,8 @@
 package bb.incognito.viewModel;
 
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.LiveData;
 import android.databinding.BaseObservable;
 import android.view.View;
 import android.widget.Toast;
@@ -7,7 +10,7 @@ import android.widget.Toast;
 import bb.incognito.model.Guest;
 import bb.incognito.view.GuestDetail;
 
-public class GuestRowVM extends BaseObservable {
+public class GuestRowVM {
 
     private Guest guest;
 
@@ -19,7 +22,6 @@ public class GuestRowVM extends BaseObservable {
 
     public void setGuest(Guest guest) {
         this.guest = guest;
-        notifyChange();
     }
 
     public void onItemClick(View view) {

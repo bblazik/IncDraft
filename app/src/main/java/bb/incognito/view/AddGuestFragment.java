@@ -12,6 +12,7 @@ import android.view.inputmethod.InputMethodManager;
 
 import bb.incognito.R;
 import bb.incognito.databinding.FragmentAddGuestBinding;
+import bb.incognito.repositories.GuestRepository;
 import bb.incognito.view.adapter.GuestAdapter;
 import bb.incognito.viewModel.AddGuestVM;
 
@@ -20,16 +21,16 @@ import com.google.android.gms.plus.PlusOneButton;
 public class AddGuestFragment extends DialogFragment {
 
     FragmentAddGuestBinding fragmentAddGuestBinding;
-    static GuestAdapter guestAdapter;
+    static GuestRepository guestRepository;
     public AddGuestFragment(){}
 
-    public static AddGuestFragment newInstance(boolean edit, int pos, GuestAdapter ga){
+    public static AddGuestFragment newInstance(boolean edit, int pos, GuestRepository gr){
         AddGuestFragment addGuestFragment = new AddGuestFragment();
         Bundle args = new Bundle();
         args.putBoolean("edit", edit);
         args.putInt("pos", pos);
         addGuestFragment.setArguments(args);
-        guestAdapter = ga;
+        guestRepository = gr;
         return addGuestFragment;
     }
 
@@ -43,7 +44,7 @@ public class AddGuestFragment extends DialogFragment {
         int pos = getArguments().getInt("pos");
         boolean edit = getArguments().getBoolean("edit");
 
-        fragmentAddGuestBinding.setViewModel(new AddGuestVM(this,edit, pos, guestAdapter));
+        fragmentAddGuestBinding.setViewModel(new AddGuestVM(this,edit, pos, guestRepository));
         return fragmentAddGuestBinding.getRoot();
     }
 
