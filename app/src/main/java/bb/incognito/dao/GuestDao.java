@@ -19,7 +19,7 @@ public interface GuestDao {
     public LiveData<Guest> getGuest(int id);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public void insertGuest(Guest guest);
+    public long insertGuest(Guest guest);
 
     @Query("DELETE FROM guest")
     void deleteAll();

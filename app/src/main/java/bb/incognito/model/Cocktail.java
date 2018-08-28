@@ -11,6 +11,7 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static android.arch.persistence.room.ForeignKey.CASCADE;
@@ -46,7 +47,7 @@ public class Cocktail implements Parcelable {
 
     @Ignore
     @SerializedName("tags")
-    List<String> tags;
+    List<String> tags = new ArrayList<>();
 
     @ColumnInfo(name = "notes")
     @SerializedName("notes")

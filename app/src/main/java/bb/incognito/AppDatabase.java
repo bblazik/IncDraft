@@ -55,7 +55,7 @@ public abstract class AppDatabase extends RoomDatabase {
         protected Void doInBackground(final Void... params) {
             mDao.deleteAll();
             Guest guest = new Guest("Dupa 1");
-            mDao.insertGuest(guest);
+            guest.setId((int) mDao.insertGuest(guest));
             guest = new Guest("Dupa 2");
             mDao.insertGuest(guest);
             return null;

@@ -33,6 +33,14 @@ public class Guest implements Parcelable {
     @SerializedName("cocktailList")
     List<Cocktail> cocktailList = new ArrayList<>();
 
+    public Guest(int id, String name, float discount, String notes, List<Cocktail> cocktailList) {
+        this.id = id;
+        this.name = name;
+        this.discount = discount;
+        this.notes = notes;
+        this.cocktailList = cocktailList;
+    }
+
     public Guest(String name) {
         this.name = name;
     }
@@ -91,6 +99,7 @@ public class Guest implements Parcelable {
     }
 
     protected Guest(Parcel in) {
+        id = in.readInt();
         name = in.readString();
         discount = in.readFloat();
         notes = in.readString();
@@ -104,6 +113,7 @@ public class Guest implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
         parcel.writeString(name);
         parcel.writeFloat(discount);
         parcel.writeString(notes);

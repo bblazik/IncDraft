@@ -49,7 +49,9 @@ public class AddCocktailVM extends BaseObservable{
         public void onClick(View v) {
             if(fieldsNotEmpty()) {
                 Cocktail newCocktail = new Cocktail(name, guest.getId());
+                guest.addCocktail(newCocktail);
                 cocktailRepository.insert(newCocktail);
+                notifyChange();
                 df.dismiss();
             }else {
                 Toast.makeText(v.getContext(), "Name cannot be empty", Toast.LENGTH_SHORT).show();
