@@ -1,6 +1,5 @@
 package bb.incognito.view.adapter;
 
-import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -12,14 +11,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bb.incognito.R;
+import bb.incognito.model.Cocktail;
 import bb.incognito.model.Guest;
+import bb.incognito.model.GuestWithCocktails;
 import bb.incognito.viewModel.GuestRowVM;
 import bb.incognito.databinding.GuestRowBinding;
 
 public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHolder>{
-    private List<Guest> guests;
+    private List<GuestWithCocktails> guests;
 
-    public void setGuests(List<Guest> guests) {
+    public void setGuests(List<GuestWithCocktails> guests) {
         this.guests = guests;
         notifyDataSetChanged();
     }
@@ -37,7 +38,7 @@ public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHol
         if (guests != null) {
             holder.bindCard(guests.get(position));
         } else {
-            holder.bindCard(new Guest("Nie ma gości :("));
+            holder.bindCard(new GuestWithCocktails(new Guest("Nie ma gości :(")));
         }
     }
 
@@ -61,7 +62,7 @@ public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHol
             this.guestRowBinding = guestRowBinding;
         }
 
-        void bindCard(Guest guest) {
+        void bindCard(GuestWithCocktails guest) {
             if (guestRowBinding.getViewModel() == null) {
                 guestRowBinding.setViewModel(
                         new GuestRowVM(guest));

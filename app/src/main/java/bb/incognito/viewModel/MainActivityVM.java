@@ -19,7 +19,9 @@ import java.util.List;
 
 import bb.incognito.MyApp;
 import bb.incognito.model.Guest;
+import bb.incognito.model.GuestWithCocktails;
 import bb.incognito.repositories.GuestRepository;
+import bb.incognito.repositories.GuestWithCocktailsRepository;
 import bb.incognito.view.AddGuestFragment;
 import bb.incognito.view.MainActivity;
 
@@ -27,7 +29,8 @@ import static bb.incognito.MyApp.fragmentManager;
 
 public class MainActivityVM extends AndroidViewModel {
     private GuestRepository guestRepository;
-    private LiveData<List<Guest>> allGuests;
+    private GuestWithCocktailsRepository guestWithCocktailsRepository;
+    private LiveData<List<GuestWithCocktails>> allGuests;
 
     public void setFragmentManager(FragmentManager fragmentManager) {
         this.fragmentManager = fragmentManager;
@@ -38,10 +41,11 @@ public class MainActivityVM extends AndroidViewModel {
     public MainActivityVM(Application application) {
         super(application);
         guestRepository = new GuestRepository(application);
-        allGuests = guestRepository.getAllGuests();
+        guestWithCocktailsRepository = new GuestWithCocktailsRepository(application);
+        allGuests = guestWithCocktailsRepository.getAllGuests();
     }
 
-    public LiveData<List<Guest>> getAllGuests() {
+    public LiveData<List<GuestWithCocktails>> getAllGuests() {
         return allGuests;
     }
 

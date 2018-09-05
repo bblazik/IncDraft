@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 
 import bb.incognito.dao.CocktailDao;
 import bb.incognito.dao.GuestDao;
+import bb.incognito.dao.GuestWithCocktailsDao;
 import bb.incognito.model.Cocktail;
 import bb.incognito.model.Guest;
 
@@ -17,6 +18,7 @@ import bb.incognito.model.Guest;
 public abstract class AppDatabase extends RoomDatabase {
     public abstract GuestDao guestDao();
     public abstract CocktailDao cocktailDao();
+    public abstract GuestWithCocktailsDao guestWithCocktailsDao();
 
     private static AppDatabase INSTANCE;
 
