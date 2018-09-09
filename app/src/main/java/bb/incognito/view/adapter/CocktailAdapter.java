@@ -6,6 +6,8 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,13 +15,17 @@ import java.util.List;
 import bb.incognito.R;
 import bb.incognito.databinding.CocktailRowBinding;
 import bb.incognito.model.Cocktail;
+import bb.incognito.model.GuestWithCocktails;
 import bb.incognito.viewModel.CocktailRowVM;
 
-public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.CocktailViewHolder>{
+public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.CocktailViewHolder> implements Filterable {
     private List<Cocktail> cocktails = new ArrayList<>();
+    private List<Cocktail> filteredCocktails = new ArrayList<>();
+    private CocktailAdapter.ItemFilter filter = new CocktailAdapter.ItemFilter();
 
     public void setCocktailList(List<Cocktail> cocktailList) {
         cocktails = cocktailList;
+        filteredCocktails = cocktailList;
         notifyDataSetChanged();
     }
 
@@ -33,29 +39,17 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.Cockta
 
     @Override
     public void onBindViewHolder(CocktailAdapter.CocktailViewHolder holder, int position) {
-        holder.bindCard(cocktails.get(position));
+        holder.bindCard(filteredCocktails.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return cocktails.size();
+        return filteredCocktails.size();
     }
 
-    public int filterByName(String query){ //Can be replaced with filter interface. But idk why would I.
-        List<Cocktail> filteredList = new ArrayList<>();
-        query = query.replaceAll("\\s+","").toLowerCase();
-        for(Cocktail c : cocktails) { // due to lack of lambda in api<24
-            if(cocktailNameContains(c, query)){
-                filteredList.add(c);
-            }
-        }
-        cocktails = filteredList;
-        notifyDataSetChanged();
-        return cocktails.size();
-    }
-
-    boolean cocktailNameContains(Cocktail g, String query){
-        return g.getName().toLowerCase().contains(query);
+    @Override
+    public Filter getFilter() {
+        return filter;
     }
 
     class CocktailViewHolder extends RecyclerView.ViewHolder {
@@ -82,6 +76,30 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.Cockta
 
         public void onItemClear() {
             itemView.setBackground(settings);
+        }
+    }
+
+    private class ItemFilter extends Filter {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results = new FilterResults();
+            List<Cocktail> newList = new ArrayList<>(cocktails.size());
+
+            for(Cocktail c : cocktails)
+            {
+                if(c.getName().toLowerCase().contains(constraint))
+                    newList.add(c);
+            }
+            results.values = newList;
+            results.count = newList.size();
+            return results;
+        }
+
+        @SuppressWarnings("unchecked")
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            filteredCocktails = (ArrayList<Cocktail>) results.values;
+            notifyDataSetChanged();
         }
     }
 }

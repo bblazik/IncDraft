@@ -2,7 +2,6 @@ package bb.incognito.repositories;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
-
 import java.util.List;
 
 import bb.incognito.AppDatabase;

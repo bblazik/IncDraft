@@ -12,7 +12,6 @@ import bb.incognito.model.Cocktail;
 import bb.incognito.model.Guest;
 import bb.incognito.repositories.CocktailRepository;
 import bb.incognito.view.AddCocktailFragment;
-import bb.incognito.view.adapter.CocktailAdapter;
 
 public class AddCocktailVM extends BaseObservable{
 

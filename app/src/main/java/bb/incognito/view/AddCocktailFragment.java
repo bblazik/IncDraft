@@ -3,7 +3,6 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +13,7 @@ import bb.incognito.R;
 import bb.incognito.databinding.FragmentAddCocktailBinding;
 import bb.incognito.model.Guest;
 import bb.incognito.repositories.CocktailRepository;
-import bb.incognito.view.adapter.CocktailAdapter;
 import bb.incognito.viewModel.AddCocktailVM;
-
-import com.google.android.gms.plus.PlusOneButton;
 
 public class AddCocktailFragment extends DialogFragment {
 

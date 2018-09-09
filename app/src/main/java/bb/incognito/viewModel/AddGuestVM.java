@@ -1,15 +1,12 @@
 package bb.incognito.viewModel;
 
 import android.databinding.BaseObservable;
-import android.databinding.Bindable;
 import android.view.View;
-import android.widget.SeekBar;
 import android.widget.Toast;
 
 import bb.incognito.model.Guest;
 import bb.incognito.repositories.GuestRepository;
 import bb.incognito.view.AddGuestFragment;
-import bb.incognito.view.adapter.GuestAdapter;
 
 public class AddGuestVM extends BaseObservable {
 

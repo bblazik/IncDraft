@@ -2,7 +2,6 @@ package bb.incognito;
 
 import android.app.Application;
 import android.app.FragmentManager;
-import android.arch.persistence.room.Room;
 import android.content.Context;
 
 import bb.incognito.injection.component.ApplicationComponent;
@@ -42,15 +41,6 @@ public class MyApp extends Application {
     // Needed to replace the component with a test specific one
     public void setComponent(ApplicationComponent applicationComponent) {
         mApplicationComponent = applicationComponent;
-    }
-
-    public static void setFragmentManager(FragmentManager fragmentManager) {
-        MyApp.fragmentManager = fragmentManager;
-    }
-
-    public static FragmentManager getFragmentManager()
-    {
-        return getFragmentManager();
     }
 
     public Scheduler subscribeScheduler() {

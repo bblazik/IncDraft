@@ -3,7 +3,6 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +12,7 @@ import android.view.inputmethod.InputMethodManager;
 import bb.incognito.R;
 import bb.incognito.databinding.FragmentAddGuestBinding;
 import bb.incognito.repositories.GuestRepository;
-import bb.incognito.view.adapter.GuestAdapter;
 import bb.incognito.viewModel.AddGuestVM;
-
-import com.google.android.gms.plus.PlusOneButton;
 
 public class AddGuestFragment extends DialogFragment {
 

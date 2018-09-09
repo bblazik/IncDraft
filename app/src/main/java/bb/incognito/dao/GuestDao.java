@@ -16,10 +16,10 @@ public interface GuestDao {
     LiveData<List<Guest>> allGuests();
 
     @Query("SELECT * FROM Guest WHERE id = :id")
-    public LiveData<Guest> getGuest(int id);
+    LiveData<Guest> getGuest(int id);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public long insertGuest(Guest guest);
+    long insertGuest(Guest guest);
 
     @Query("DELETE FROM guest")
     void deleteAll();

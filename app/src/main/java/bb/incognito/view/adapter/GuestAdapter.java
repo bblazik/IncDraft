@@ -6,22 +6,27 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import bb.incognito.R;
-import bb.incognito.model.Cocktail;
 import bb.incognito.model.Guest;
 import bb.incognito.model.GuestWithCocktails;
 import bb.incognito.viewModel.GuestRowVM;
 import bb.incognito.databinding.GuestRowBinding;
 
-public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHolder>{
+public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHolder> implements Filterable{
     private List<GuestWithCocktails> guests;
+    private List<GuestWithCocktails> filteredGuests;
+    private ItemFilter filter = new ItemFilter();
 
     public void setGuests(List<GuestWithCocktails> guests) {
         this.guests = guests;
+        this.filteredGuests = guests;
         notifyDataSetChanged();
     }
 
@@ -36,7 +41,7 @@ public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHol
     @Override
     public void onBindViewHolder(GuestViewHolder holder, int position) {
         if (guests != null) {
-            holder.bindCard(guests.get(position));
+            holder.bindCard(filteredGuests.get(position));
         } else {
             holder.bindCard(new GuestWithCocktails(new Guest("Nie ma gości :(")));
         }
@@ -44,14 +49,13 @@ public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHol
 
     @Override
     public int getItemCount() {
-        if (guests != null) {
-            return guests.size();
-        } else {
-            return 0;
-        }
+        return filteredGuests != null ? filteredGuests.size() : 0;
     }
 
-
+    @Override
+    public Filter getFilter() {
+        return filter;
+    }
 
     class GuestViewHolder extends RecyclerView.ViewHolder {
         GuestRowBinding guestRowBinding;
@@ -77,6 +81,30 @@ public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHol
 
         public void onItemClear() {
             itemView.setBackground(settings);
+        }
+    }
+
+    private class ItemFilter extends Filter {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results = new FilterResults();
+            List<GuestWithCocktails> newList = new ArrayList<>(guests.size());
+
+            for(GuestWithCocktails g : guests)
+            {
+                if(g.getName().toLowerCase().contains(constraint))
+                    newList.add(g);
+            }
+            results.values = newList;
+            results.count = newList.size();
+            return results;
+        }
+
+        @SuppressWarnings("unchecked")
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            filteredGuests = (ArrayList<GuestWithCocktails>) results.values;
+            notifyDataSetChanged();
         }
     }
 }

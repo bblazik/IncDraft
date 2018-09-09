@@ -16,7 +16,7 @@ public class GuestWithCocktails implements Parcelable {
         this.guest = guest;
     }
 
-    public String getName() { return guest.getName(); };
+    public String getName() { return guest.getName(); }
 
     @Override
     public int describeContents() {

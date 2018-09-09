@@ -11,5 +11,5 @@ import bb.incognito.model.GuestWithCocktails;
 @Dao
 public interface GuestWithCocktailsDao {
     @Query("SELECT * FROM Guest")
-    public LiveData<List<GuestWithCocktails>> loadGuestsAndCocktails();
+    LiveData<List<GuestWithCocktails>> loadGuestsAndCocktails();
 }

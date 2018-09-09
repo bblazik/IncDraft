@@ -1,7 +1,5 @@
 package bb.incognito.viewModel;
 
-import android.databinding.BaseObservable;
-
 import bb.incognito.model.Cocktail;
 
 public class CocktailRowVM {

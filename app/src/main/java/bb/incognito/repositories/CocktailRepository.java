@@ -9,7 +9,6 @@ import java.util.List;
 import bb.incognito.AppDatabase;
 import bb.incognito.dao.CocktailDao;
 import bb.incognito.model.Cocktail;
-import bb.incognito.model.Guest;
 
 public class CocktailRepository {
     private CocktailDao cocktailDao;

@@ -9,7 +9,6 @@ import android.arch.persistence.room.Query;
 import java.util.List;
 
 import bb.incognito.model.Cocktail;
-import bb.incognito.model.Guest;
 
 @Dao
 public interface CocktailDao {
@@ -17,5 +16,5 @@ public interface CocktailDao {
     LiveData<List<Cocktail>> getCocktailsForGuest(int guest_id);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public void insertCocktail(Cocktail cocktail);
+    void insertCocktail(Cocktail cocktail);
 }

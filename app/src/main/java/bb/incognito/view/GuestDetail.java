@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.widget.SearchView;
 
 import bb.incognito.R;
 import bb.incognito.databinding.GuestDetailBinding;
@@ -15,18 +16,18 @@ import bb.incognito.repositories.CocktailRepository;
 import bb.incognito.view.adapter.CocktailAdapter;
 import bb.incognito.viewModel.GuestDetailVM;
 
-public class GuestDetail extends AppCompatActivity {
+public class GuestDetail extends AppCompatActivity implements SearchView.OnQueryTextListener{
 
     GuestDetailBinding guestDetailBinding;
     GuestDetailVM guestDetailViewModel;
     CocktailAdapter cocktailAdapter;
     CocktailRepository cocktailRepository;
+    private SearchView sv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.guest_detail);
-
         initDataBinding();
     }
 
@@ -37,6 +38,8 @@ public class GuestDetail extends AppCompatActivity {
         setupAdapter(guest);
         guestDetailViewModel = new GuestDetailVM(guest, getFragmentManager(), cocktailRepository);
         guestDetailBinding.setViewModel(guestDetailViewModel);
+        sv = guestDetailBinding.search;
+        sv.setOnQueryTextListener(this);
     }
     public static Intent launchDetail(Context context, GuestWithCocktails guest) {
         Intent intent = new Intent(context, GuestDetail.class);
@@ -49,5 +52,17 @@ public class GuestDetail extends AppCompatActivity {
         cocktailAdapter.setCocktailList(guest.getCocktailList());
         guestDetailBinding.list.setAdapter(cocktailAdapter);
         guestDetailBinding.list.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        cocktailAdapter.getFilter().filter(s);
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        cocktailAdapter.getFilter().filter(s);
+        return false;
     }
 }
