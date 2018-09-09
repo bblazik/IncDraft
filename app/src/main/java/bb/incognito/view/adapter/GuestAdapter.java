@@ -40,7 +40,7 @@ public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHol
 
     @Override
     public void onBindViewHolder(GuestViewHolder holder, int position) {
-        if (guests != null) {
+        if (filteredGuests != null) {
             holder.bindCard(filteredGuests.get(position));
         } else {
             holder.bindCard(new GuestWithCocktails(new Guest("Nie ma gości :(")));

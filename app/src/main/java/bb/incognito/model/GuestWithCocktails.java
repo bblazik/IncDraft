@@ -18,6 +18,8 @@ public class GuestWithCocktails implements Parcelable {
 
     public String getName() { return guest.getName(); }
 
+    public void setName(String s){guest.setName(s);}
+
     @Override
     public int describeContents() {
         return 0;
