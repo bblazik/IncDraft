@@ -7,13 +7,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 
-import bb.incognito.MyApp;
 import bb.incognito.R;
 import bb.incognito.databinding.GuestDetailBinding;
 import bb.incognito.model.Guest;
+import bb.incognito.model.GuestWithCocktails;
 import bb.incognito.repositories.CocktailRepository;
 import bb.incognito.view.adapter.CocktailAdapter;
-import bb.incognito.view.adapter.GuestAdapter;
 import bb.incognito.viewModel.GuestDetailVM;
 
 public class GuestDetail extends AppCompatActivity {
@@ -39,7 +38,7 @@ public class GuestDetail extends AppCompatActivity {
         guestDetailViewModel = new GuestDetailVM(guest, getFragmentManager(), cocktailRepository);
         guestDetailBinding.setViewModel(guestDetailViewModel);
     }
-    public static Intent launchDetail(Context context, Guest guest) {
+    public static Intent launchDetail(Context context, GuestWithCocktails guest) {
         Intent intent = new Intent(context, GuestDetail.class);
         intent.putExtra("GUEST", guest);
         return intent;

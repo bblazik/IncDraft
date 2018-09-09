@@ -14,6 +14,7 @@ import bb.incognito.MyApp;
 import bb.incognito.R;
 import bb.incognito.databinding.ActivityMainBinding;
 import bb.incognito.model.Guest;
+import bb.incognito.model.GuestWithCocktails;
 import bb.incognito.view.adapter.GuestAdapter;
 import bb.incognito.viewModel.MainActivityVM;
 
@@ -37,14 +38,12 @@ public class MainActivity extends AppCompatActivity {
         mainActivityBinding.list.setLayoutManager(new LinearLayoutManager(this));
 
 
-        mainActivityViewModel.getAllGuests().observe(this, new Observer<List<Guest>>() {
+        mainActivityViewModel.getAllGuests().observe(this, new Observer<List<GuestWithCocktails>>() {
             @Override
-            public void onChanged(@Nullable List<Guest> guests) {
-                guestAdapter.setGuests(guests);
+            public void onChanged(@Nullable List<GuestWithCocktails> guestWithCocktails) {
+                guestAdapter.setGuests(guestWithCocktails);
             }
         });
-
-
     }
 
 
