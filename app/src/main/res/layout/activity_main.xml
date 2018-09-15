@@ -41,44 +41,45 @@
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="bb.myapplication.view.MainActivity"
-        android:descendantFocusability="beforeDescendants"
-        android:layout_below="@+id/appBarLayout">
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/addGuest"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginBottom="26dp"
-            android:layout_marginEnd="22dp"
-            android:clickable="true"
-            app:srcCompat="@android:drawable/ic_input_add"
-            android:onClick="@{viewModel::onClick}"/>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/list"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
+            android:layout_below="@+id/appBarLayout"
+            android:background="@color/material_grey_200"
             android:descendantFocusability="beforeDescendants"
-            android:paddingBottom="15dp"
-            tools:listitem="@layout/guest_row">
+            tools:context="bb.myapplication.view.MainActivity">
 
-        </android.support.v7.widget.RecyclerView>
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/addGuest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="26dp"
+                android:layout_marginEnd="22dp"
+                android:clickable="true"
+                android:onClick="@{viewModel::onClick}"
+                app:srcCompat="@android:drawable/ic_input_add" />
 
-        <!--<ProgressBar-->
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:descendantFocusability="beforeDescendants"
+                android:paddingBottom="15dp"
+                tools:listitem="@layout/guest_row">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <!--<ProgressBar-->
             <!--android:id="@+id/progressBar"-->
             <!--style="?android:attr/progressBarStyle"-->
             <!--android:layout_width="wrap_content"-->
             <!--android:layout_height="wrap_content"-->
             <!--android:layout_centerInParent="true"/>-->
             <!--android:visibility="@{viewModel.progressBarVisible ? View.VISIBLE : View.GONE  }" -->
-    </RelativeLayout>
+        </RelativeLayout>
     </RelativeLayout>
 </layout>

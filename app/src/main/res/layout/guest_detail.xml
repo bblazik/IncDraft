@@ -63,36 +63,82 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/material_grey_200"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/name"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{viewModel.name}" />
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/discount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@{viewModel.discount}" />
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    app:srcCompat="@drawable/round_face_black_48" />
 
-            <TextView
-                android:id="@+id/notes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="notes"
-                android:text="@{viewModel.notes}" />
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/list"
+                <TextView
+                    android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_alignParentStart="true"
-                    android:descendantFocusability="beforeDescendants"
-                    tools:listitem="@layout/cocktail_row">
+                    android:layout_weight="1"
+                    android:text="@{viewModel.name}"
+                    android:textSize="24sp" />
+            </LinearLayout>
 
-                </android.support.v7.widget.RecyclerView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    app:srcCompat="@drawable/round_money_off_black_48" />
+
+                <TextView
+                    android:id="@+id/discount"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.discount}"
+                    android:textSize="24sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    app:srcCompat="@drawable/round_edit_black_48" />
+
+                <TextView
+                    android:id="@+id/notes"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="notes"
+                    android:text="@{viewModel.notes}"
+                    android:textSize="24sp" />
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:descendantFocusability="beforeDescendants"
+                tools:listitem="@layout/cocktail_row">
+
+            </android.support.v7.widget.RecyclerView>
         </LinearLayout>
     </RelativeLayout>
     </RelativeLayout>

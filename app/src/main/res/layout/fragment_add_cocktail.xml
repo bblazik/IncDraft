@@ -9,56 +9,77 @@
         android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/dialogDescription"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="desc"
-            android:gravity="center"/>
+            android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/newName"
-            style="@android:style/Widget.Material.EditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@={viewModel.name}"
-            tools:ignore="LabelFor"
-            android:hint="Name"
-            android:gravity="center"/>
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/newName"
+                style="@android:style/Widget.Material.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:hint="Name"
+                android:singleLine="true"
+                android:text="@={viewModel.name}"
+                android:textSize="24sp"
+                tools:ignore="LabelFor" />
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:id="@+id/newTags"
-            style="@android:style/Widget.Material.EditText"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@={viewModel.tags}"
-            tools:ignore="LabelFor"
-            android:hint="Tags"
-            android:gravity="center"/>
+            android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/newNotes"
-            style="@android:style/Widget.Material.EditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textMultiLine"
-            android:text="@={viewModel.notes}"
-            tools:ignore="LabelFor"
-            android:hint="Notes"
-            android:gravity="center"/>
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/newTags"
+                style="@android:style/Widget.Material.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:hint="Tags"
+                android:singleLine="true"
+                android:text="@={viewModel.tags}"
+                android:textSize="24sp"
+                tools:ignore="LabelFor" />
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:id="@+id/newOthers"
-            style="@android:style/Widget.Material.EditText"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textMultiLine"
-            android:text="@={viewModel.others}"
-            tools:ignore="LabelFor"
-            android:hint="Others"
-            android:gravity="center"/>
+            android:layout_height="match_parent">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/newNotes"
+                style="@android:style/Widget.Material.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="Notes"
+                android:inputType="textMultiLine"
+                android:singleLine="true"
+                android:text="@={viewModel.notes}"
+                android:textSize="24sp"
+                tools:ignore="LabelFor" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/newOthers"
+                style="@android:style/Widget.Material.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="Others"
+                android:inputType="textMultiLine"
+                android:singleLine="true"
+                android:text="@={viewModel.others}"
+                android:textSize="24sp"
+                tools:ignore="LabelFor" />
+        </android.support.design.widget.TextInputLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -67,21 +88,21 @@
 
             <Button
                 android:id="@+id/cancelButton"
-                style="@android:style/Widget.Material.Light.Button.Borderless"
+                style="@android:style/Widget.Material.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="cancel button"
-                android:onClick="@{viewModel.closeButton}"/>
+                android:onClick="@{viewModel.closeButton}"
+                android:text="cancel button" />
 
             <Button
                 android:id="@+id/acceptButton"
-                style="@android:style/Widget.Material.Button.Inset"
+                style="@android:style/Widget.Material.Button.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="accept button"
-                android:onClick="@{viewModel.acceptButton}"/>
+                android:onClick="@{viewModel.acceptButton}"
+                android:text="accept button" />
         </LinearLayout>
     </LinearLayout>
 </layout>
