@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Filter;
@@ -29,6 +30,28 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.Cockta
         notifyDataSetChanged();
     }
 
+    private ItemTouchHelper.Callback callback = new ItemTouchHelper.Callback() {
+        @Override
+        public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+            final int dragFlags = 0;//ItemTouchHelper.UP | ItemTouchHelper.DOWN;
+            final int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
+            return makeMovementFlags(dragFlags, swipeFlags);
+        }
+
+        @Override
+        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+            return true;
+        }
+
+        @Override
+        public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+            Cocktail g =  filteredCocktails.get(viewHolder.getAdapterPosition());
+            // delete item with id from repository.
+        }
+    };
+
+    public ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
+
     @Override
     public CocktailAdapter.CocktailViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         CocktailRowBinding cardRowBinding =
@@ -40,6 +63,10 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.Cockta
     @Override
     public void onBindViewHolder(CocktailAdapter.CocktailViewHolder holder, int position) {
         holder.bindCard(filteredCocktails.get(position));
+        holder.itemView.setOnContextClickListener(view -> {
+            itemTouchHelper.startSwipe(holder);
+            return false;
+        });
     }
 
     @Override

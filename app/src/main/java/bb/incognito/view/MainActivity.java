@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         mainActivityBinding.setLifecycleOwner(this);
 
         guestAdapter= new GuestAdapter();
+        guestAdapter.itemTouchHelper.attachToRecyclerView(mainActivityBinding.list);
         mainActivityBinding.list.setAdapter(guestAdapter);
         mainActivityBinding.list.setLayoutManager(new LinearLayoutManager(this));
         sv = mainActivityBinding.search;

@@ -1,6 +1,7 @@
 package bb.incognito.viewModel;
 
 import android.databinding.BaseObservable;
+import android.view.View;
 
 import bb.incognito.model.Cocktail;
 
@@ -22,5 +23,10 @@ public class CocktailRowVM extends BaseObservable{
     public void setCocktail(Cocktail cocktail) {
         this.cocktail = cocktail;
         notifyChange();
+    }
+
+    public boolean onLongClick(View view)
+    {
+        return true;
     }
 }

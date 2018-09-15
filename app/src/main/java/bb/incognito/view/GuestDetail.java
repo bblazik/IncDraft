@@ -50,6 +50,7 @@ public class GuestDetail extends AppCompatActivity implements SearchView.OnQuery
     private void setupAdapter(Guest guest){
         cocktailAdapter= new CocktailAdapter(); //get data of cocktails. from guest
         cocktailAdapter.setCocktailList(guest.getCocktailList());
+        cocktailAdapter.itemTouchHelper.attachToRecyclerView(guestDetailBinding.list);
         guestDetailBinding.list.setAdapter(cocktailAdapter);
         guestDetailBinding.list.setLayoutManager(new LinearLayoutManager(this));
     }
