@@ -30,6 +30,12 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.Cockta
         notifyDataSetChanged();
     }
 
+    public List<Cocktail> getCocktailList() { return cocktails; }
+
+    public void restoreItem(int removedPosition, Cocktail removedCocktail) {
+        cocktails.add(removedPosition, removedCocktail);
+    }
+
     public void removeAt(int position) {
         filteredCocktails.remove(position);
         notifyItemRemoved(position);
