@@ -47,7 +47,6 @@ public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHol
         @Override
         public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
             GuestWithCocktails g =  filteredGuests.get(viewHolder.getAdapterPosition());
-
         }
     };
 
