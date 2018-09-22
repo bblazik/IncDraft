@@ -21,10 +21,12 @@ import java.util.stream.Collectors;
 import bb.incognito.R;
 import bb.incognito.model.Guest;
 import bb.incognito.model.GuestWithCocktails;
+import bb.incognito.repositories.GuestWithCocktailsRepository;
 import bb.incognito.viewModel.GuestRowVM;
 import bb.incognito.databinding.GuestRowBinding;
 
-public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHolder> implements Filterable{
+public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHolder> implements Filterable {
+    private GuestWithCocktailsRepository guestWithCocktailsRepository;
     private List<GuestWithCocktails> guests;
     private List<GuestWithCocktails> filteredGuests;
     private ItemFilter filter = new ItemFilter();
@@ -45,7 +47,6 @@ public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHol
         @Override
         public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
             GuestWithCocktails g =  filteredGuests.get(viewHolder.getAdapterPosition());
-            // delete item with id from repository.
         }
     };
 

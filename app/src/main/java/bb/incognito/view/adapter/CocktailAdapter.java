@@ -30,27 +30,10 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.Cockta
         notifyDataSetChanged();
     }
 
-    private ItemTouchHelper.Callback callback = new ItemTouchHelper.Callback() {
-        @Override
-        public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-            final int dragFlags = 0;//ItemTouchHelper.UP | ItemTouchHelper.DOWN;
-            final int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
-            return makeMovementFlags(dragFlags, swipeFlags);
-        }
-
-        @Override
-        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-            return true;
-        }
-
-        @Override
-        public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-            Cocktail g =  filteredCocktails.get(viewHolder.getAdapterPosition());
-            // delete item with id from repository.
-        }
-    };
-
-    public ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
+    public void removeAt(int position) {
+        filteredCocktails.remove(position);
+        notifyItemRemoved(position);
+    }
 
     @Override
     public CocktailAdapter.CocktailViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

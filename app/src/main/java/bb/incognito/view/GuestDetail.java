@@ -6,6 +6,8 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.widget.SearchView;
 
 import bb.incognito.R;
@@ -13,6 +15,7 @@ import bb.incognito.databinding.GuestDetailBinding;
 import bb.incognito.model.Guest;
 import bb.incognito.model.GuestWithCocktails;
 import bb.incognito.repositories.CocktailRepository;
+import bb.incognito.utils.SwipeToDeleteCallback;
 import bb.incognito.view.adapter.CocktailAdapter;
 import bb.incognito.viewModel.GuestDetailVM;
 
@@ -50,7 +53,14 @@ public class GuestDetail extends AppCompatActivity implements SearchView.OnQuery
     private void setupAdapter(Guest guest){
         cocktailAdapter= new CocktailAdapter(); //get data of cocktails. from guest
         cocktailAdapter.setCocktailList(guest.getCocktailList());
-        cocktailAdapter.itemTouchHelper.attachToRecyclerView(guestDetailBinding.list);
+        SwipeToDeleteCallback swipeHandler = new SwipeToDeleteCallback(getApplicationContext()) {
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                cocktailAdapter.removeAt(viewHolder.getAdapterPosition());
+            }
+        };
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeHandler);
+        itemTouchHelper.attachToRecyclerView(guestDetailBinding.list);
         guestDetailBinding.list.setAdapter(cocktailAdapter);
         guestDetailBinding.list.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -66,4 +76,6 @@ public class GuestDetail extends AppCompatActivity implements SearchView.OnQuery
         cocktailAdapter.getFilter().filter(s);
         return false;
     }
+
+
 }
