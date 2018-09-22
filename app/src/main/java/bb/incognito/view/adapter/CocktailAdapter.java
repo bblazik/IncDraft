@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Filter;
@@ -27,6 +28,11 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.Cockta
         cocktails = cocktailList;
         filteredCocktails = cocktailList;
         notifyDataSetChanged();
+    }
+
+    public void removeAt(int position) {
+        filteredCocktails.remove(position);
+        notifyItemRemoved(position);
     }
 
     @Override

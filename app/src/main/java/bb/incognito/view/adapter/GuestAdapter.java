@@ -1,11 +1,16 @@
 package bb.incognito.view.adapter;
 
 import android.databinding.DataBindingUtil;
+import android.databinding.adapters.AdapterViewBindingAdapter;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Filter;
 import android.widget.Filterable;
 
@@ -16,13 +21,37 @@ import java.util.stream.Collectors;
 import bb.incognito.R;
 import bb.incognito.model.Guest;
 import bb.incognito.model.GuestWithCocktails;
+import bb.incognito.repositories.GuestWithCocktailsRepository;
 import bb.incognito.viewModel.GuestRowVM;
 import bb.incognito.databinding.GuestRowBinding;
 
-public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHolder> implements Filterable{
+public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHolder> implements Filterable {
+    private GuestWithCocktailsRepository guestWithCocktailsRepository;
     private List<GuestWithCocktails> guests;
     private List<GuestWithCocktails> filteredGuests;
     private ItemFilter filter = new ItemFilter();
+
+    private ItemTouchHelper.Callback callback = new ItemTouchHelper.Callback() {
+        @Override
+        public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+            final int dragFlags = 0;//ItemTouchHelper.UP | ItemTouchHelper.DOWN;
+            final int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
+            return makeMovementFlags(dragFlags, swipeFlags);
+        }
+
+        @Override
+        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+            return true;
+        }
+
+        @Override
+        public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+            GuestWithCocktails g =  filteredGuests.get(viewHolder.getAdapterPosition());
+
+        }
+    };
+
+    public ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
 
     public void setGuests(List<GuestWithCocktails> guests) {
         this.guests = guests;
@@ -40,9 +69,16 @@ public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHol
 
     @Override
     public void onBindViewHolder(GuestViewHolder holder, int position) {
-        if (filteredGuests != null) {
+        if (filteredGuests != null)
+        {
             holder.bindCard(filteredGuests.get(position));
-        } else {
+            holder.itemView.setOnContextClickListener(view -> {
+                itemTouchHelper.startSwipe(holder);
+                return false;
+            });
+        }
+        else
+        {
             holder.bindCard(new GuestWithCocktails(new Guest("Nie ma gości :(")));
         }
     }
@@ -57,9 +93,9 @@ public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHol
         return filter;
     }
 
-    class GuestViewHolder extends RecyclerView.ViewHolder {
+    class GuestViewHolder extends RecyclerView.ViewHolder{
         GuestRowBinding guestRowBinding;
-        Drawable settings;
+
 
         public GuestViewHolder(GuestRowBinding guestRowBinding) {
             super(guestRowBinding.guestRow);
@@ -73,14 +109,6 @@ public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHol
             } else {
                 guestRowBinding.getViewModel().setGuest(guest);
             }
-        }
-        public void onItemSelected() {
-            settings = itemView.getBackground();
-            itemView.setBackgroundColor(Color.LTGRAY);
-        }
-
-        public void onItemClear() {
-            itemView.setBackground(settings);
         }
     }
 
