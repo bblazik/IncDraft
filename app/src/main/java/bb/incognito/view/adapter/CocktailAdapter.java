@@ -34,6 +34,7 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.Cockta
 
     public void restoreItem(int removedPosition, Cocktail removedCocktail) {
         cocktails.add(removedPosition, removedCocktail);
+        notifyItemInserted(removedPosition);
     }
 
     public void removeAt(int position) {
