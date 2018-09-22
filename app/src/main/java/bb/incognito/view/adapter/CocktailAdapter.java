@@ -46,10 +46,6 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.Cockta
     @Override
     public void onBindViewHolder(CocktailAdapter.CocktailViewHolder holder, int position) {
         holder.bindCard(filteredCocktails.get(position));
-        holder.itemView.setOnContextClickListener(view -> {
-            itemTouchHelper.startSwipe(holder);
-            return false;
-        });
     }
 
     @Override
