@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.LinearLayoutManager;
 import android.widget.SearchView;
 
@@ -22,6 +23,11 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     private MainActivityVM mainActivityViewModel;
     private GuestAdapter guestAdapter;
     private SearchView sv;
+
+    static {
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
