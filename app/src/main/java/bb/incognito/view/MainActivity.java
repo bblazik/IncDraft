@@ -2,9 +2,11 @@ package bb.incognito.view;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.LinearLayoutManager;
@@ -52,7 +54,24 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         mainActivityBinding.list.setAdapter(guestAdapter);
         mainActivityBinding.list.setLayoutManager(new LinearLayoutManager(this));
         sv = mainActivityBinding.search;
+
+        mainActivityBinding.tabLayout.addOnTabSelectedListener(t);
     }
+
+    TabLayout.OnTabSelectedListener t = new TabLayout.OnTabSelectedListener() {
+        @Override
+        public void onTabSelected(TabLayout.Tab tab) {
+            switch (tab.getPosition())
+            {
+                case 0: return;
+                case 1:  getBaseContext().startActivity(new Intent(getBaseContext(), CocktailListActivity.class));
+            }
+        }
+        @Override
+        public void onTabUnselected(TabLayout.Tab tab) {}
+        @Override
+        public void onTabReselected(TabLayout.Tab tab) {}
+    };
 
     @Override
     public boolean onQueryTextSubmit(String s) {

@@ -99,6 +99,4 @@ public class GuestDetail extends AppCompatActivity implements SearchView.OnQuery
         cocktailAdapter.getFilter().filter(s);
         return false;
     }
-
-
 }
