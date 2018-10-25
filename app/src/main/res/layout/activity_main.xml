@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <variable name="viewModel" type="bb.incognito.viewModel.MainActivityVM" />
         <import type="android.view.View" />
     </data>
     <RelativeLayout
@@ -52,38 +51,11 @@
 
         </android.support.design.widget.TabLayout>
 
-        <RelativeLayout
+        <FrameLayout
+            android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/tabLayout"
-            android:background="@color/material_grey_200"
-            android:descendantFocusability="beforeDescendants"
-            tools:context="bb.myapplication.view.MainActivity">
-
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/addGuest"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginBottom="26dp"
-                android:layout_marginEnd="22dp"
-                android:clickable="true"
-                android:onClick="@{viewModel::onClick}"
-                app:backgroundTint="@color/colorAccent"
-                app:srcCompat="@drawable/ic_add_white_24dp" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:descendantFocusability="beforeDescendants"
-                android:paddingBottom="15dp"
-                tools:listitem="@layout/guest_row">
-
-            </android.support.v7.widget.RecyclerView>
-        </RelativeLayout>
+            android:layout_below="@id/tabLayout">
+        </FrameLayout>
     </RelativeLayout>
 </layout>

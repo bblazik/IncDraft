@@ -1,5 +1,5 @@
 package bb.incognito.view;
-import android.app.DialogFragment;
+import android.support.v4.app.DialogFragment;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;

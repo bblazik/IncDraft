@@ -30,7 +30,6 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity android:name=".view.GuestDetail" />
-        <activity android:name=".view.CocktailListActivity"></activity>
     </application>
 
 </manifest>

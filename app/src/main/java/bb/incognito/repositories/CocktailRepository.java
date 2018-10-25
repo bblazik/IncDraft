@@ -16,13 +16,20 @@ public class CocktailRepository {
     public LiveData<List<Cocktail>> getCocktailsForGuest() {
         return cocktailsForGuest;
     }
-
+    public LiveData<List<Cocktail>> getAllCocktails() { return allCocktails;}
     private LiveData<List<Cocktail>> cocktailsForGuest;
+    private LiveData<List<Cocktail>> allCocktails;
 
     public CocktailRepository(Application application, int guest_id) {
         AppDatabase db = AppDatabase.getDatabase(application);
         cocktailDao = db.cocktailDao();
         cocktailsForGuest = cocktailDao.getCocktailsForGuest(guest_id);
+    }
+
+    public CocktailRepository(Application application){
+        AppDatabase db = AppDatabase.getDatabase(application);
+        cocktailDao = db.cocktailDao();
+        allCocktails = cocktailDao.getAll();
     }
 
     public void insert(Cocktail cocktail) {

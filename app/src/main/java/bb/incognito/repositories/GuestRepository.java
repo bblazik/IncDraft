@@ -42,6 +42,4 @@ public class GuestRepository {
             return null;
         }
     }
-
-
 }

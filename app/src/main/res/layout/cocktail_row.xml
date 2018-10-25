@@ -9,11 +9,11 @@
         android:id="@+id/cocktail_row"
         android:layout_width="match_parent"
         android:layout_height="@dimen/material_list_two_line_normal_height"
-        android:layout_marginBottom="@dimen/material_card_gutter"
         android:layout_marginStart="@dimen/material_list_text_first_position_margin_start"
         android:layout_marginEnd="@dimen/material_list_text_last_position_margin_end"
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
+        android:layout_marginTop="8dp"
         android:orientation="vertical"
         android:onLongClick="@{viewModel.onLongClick}">
 
