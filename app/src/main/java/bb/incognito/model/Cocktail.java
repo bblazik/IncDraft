@@ -27,6 +27,7 @@ public class Cocktail implements Parcelable {
         this.id = id;
     }
 
+    @ColumnInfo(name = "cocktail_id")
     @PrimaryKey(autoGenerate = true)
     private int id;
 

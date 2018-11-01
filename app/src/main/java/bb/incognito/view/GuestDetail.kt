@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.app.AppCompatDelegate
 import bb.incognito.R
-import bb.incognito.model.Guest
+import bb.incognito.model.GuestWithCocktails
 
 class GuestDetail : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,9 +18,9 @@ class GuestDetail : AppCompatActivity() {
         init {
             AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
         }
-        fun launchDetail(context: Context, guest: Guest): Intent {
+        fun launchDetail(context: Context, guestWithCocktails: GuestWithCocktails): Intent {
             val intent = Intent(context, GuestDetail::class.java)
-            intent.putExtra("GUEST", guest)
+            intent.putExtra("GUEST", guestWithCocktails)
             return intent
         }
     }

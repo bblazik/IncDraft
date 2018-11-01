@@ -17,7 +17,7 @@ public interface CocktailDao {
     @Query("SELECT * FROM Cocktail GROUP BY name")
     LiveData<List<Cocktail>> getAll();
 
-    @Query("SELECT * FROM Cocktail WHERE id IN (:cocktailIds)")
+    @Query("SELECT * FROM Cocktail WHERE cocktail_id IN (:cocktailIds)")
     LiveData<List<Cocktail>> getCocktailsForGuest(List<Integer> cocktailIds);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

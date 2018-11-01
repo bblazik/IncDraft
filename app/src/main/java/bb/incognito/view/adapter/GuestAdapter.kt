@@ -14,12 +14,12 @@ import bb.incognito.R
 import bb.incognito.model.Guest
 import bb.incognito.viewModel.GuestRowVM
 import bb.incognito.databinding.GuestRowBinding
+import bb.incognito.model.GuestWithCocktails
 import bb.incognito.repositories.GuestRepository
 
 class GuestAdapter : RecyclerView.Adapter<GuestAdapter.GuestViewHolder>(), Filterable {
-    private val guestRepository: GuestRepository? = null
-    private var guests: List<Guest>? = null
-    private var filteredGuests: List<Guest>? = null
+    private var guests: List<GuestWithCocktails>? = null
+    private var filteredGuests: List<GuestWithCocktails>? = null
     private val filter = ItemFilter()
 
     private val callback = object : ItemTouchHelper.Callback() {
@@ -40,7 +40,7 @@ class GuestAdapter : RecyclerView.Adapter<GuestAdapter.GuestViewHolder>(), Filte
 
     var itemTouchHelper = ItemTouchHelper(callback)
 
-    fun setGuests(guests: List<Guest>?) {
+    fun setGuests(guests: List<GuestWithCocktails>?) {
         this.guests = guests
         this.filteredGuests = guests
         notifyDataSetChanged()
@@ -60,7 +60,7 @@ class GuestAdapter : RecyclerView.Adapter<GuestAdapter.GuestViewHolder>(), Filte
                 false
             }
         } else {
-            holder.bindCard(Guest("Nie ma gości :("))
+            holder.bindCard(GuestWithCocktails(Guest("Nie ma gości :(")))
         }
     }
 
@@ -74,7 +74,7 @@ class GuestAdapter : RecyclerView.Adapter<GuestAdapter.GuestViewHolder>(), Filte
 
     inner class GuestViewHolder(var guestRowBinding: GuestRowBinding) : RecyclerView.ViewHolder(guestRowBinding.guestRow) {
 
-        fun bindCard(guest: Guest) {
+        fun bindCard(guest: GuestWithCocktails) {
             if (guestRowBinding.viewModel == null) {
                 guestRowBinding.viewModel = GuestRowVM(guest)
             } else {
@@ -86,7 +86,7 @@ class GuestAdapter : RecyclerView.Adapter<GuestAdapter.GuestViewHolder>(), Filte
     private inner class ItemFilter : Filter() {
         override fun performFiltering(constraint: CharSequence): Filter.FilterResults {
             val results = Filter.FilterResults()
-            val newList = ArrayList<Guest>(guests!!.size)
+            val newList = ArrayList<GuestWithCocktails>(guests!!.size)
 
             for (g in guests!!) {
                 if (g.name.toLowerCase().contains(constraint))
@@ -98,7 +98,7 @@ class GuestAdapter : RecyclerView.Adapter<GuestAdapter.GuestViewHolder>(), Filte
         }
 
         override fun publishResults(constraint: CharSequence, results: Filter.FilterResults) {
-            filteredGuests = results.values as ArrayList<Guest>
+            filteredGuests = results.values as ArrayList<GuestWithCocktails>
             notifyDataSetChanged()
         }
     }

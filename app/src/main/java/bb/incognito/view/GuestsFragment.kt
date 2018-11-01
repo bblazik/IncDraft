@@ -16,6 +16,7 @@ import bb.incognito.view.adapter.GuestAdapter
 import bb.incognito.viewModel.GuestsViewModel
 import bb.incognito.databinding.GuestsFragmentBinding
 import bb.incognito.model.Guest
+import bb.incognito.model.GuestWithCocktails
 
 class GuestsFragment : Fragment(), SearchView.OnQueryTextListener {
 
@@ -33,7 +34,7 @@ class GuestsFragment : Fragment(), SearchView.OnQueryTextListener {
 
         setBinding()
         guestsViewModel!!.allGuests.observe(this,
-                Observer<List<Guest>> { guestsWithCocktails -> guestAdapter!!.setGuests(guestsWithCocktails) })
+                Observer<List<GuestWithCocktails>> { guestsWithCocktails -> guestAdapter!!.setGuests(guestsWithCocktails) })
         sv!!.setOnQueryTextListener(this)
         return guestFragmentBinding!!.root
     }

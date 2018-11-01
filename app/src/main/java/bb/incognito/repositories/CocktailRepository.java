@@ -28,16 +28,6 @@ public class CocktailRepository {
         allCocktails = cocktailDao.getAll();
     }
 
-    public LiveData<List<Cocktail>> getCocktailsForGuest(Guest guest)
-    {
-        List<Integer> cocktailIds = new ArrayList<>();
-        for (Cocktail cocktail : guest.getCocktailList())
-        {
-            cocktailIds.add( cocktail.getId());
-        }
-        return cocktailDao.getCocktailsForGuest(cocktailIds);
-    }
-
     public void insert(Cocktail cocktail) {
         new insertAsyncTask(cocktailDao).execute(cocktail);
     }

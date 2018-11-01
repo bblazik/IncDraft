@@ -16,6 +16,7 @@ import android.widget.SearchView
 import bb.incognito.R
 import bb.incognito.databinding.GuestDetailFragmentBinding
 import bb.incognito.model.Guest
+import bb.incognito.model.GuestWithCocktails
 import bb.incognito.repositories.CocktailRepository
 import bb.incognito.utils.SwipeToDeleteCallback
 import bb.incognito.view.adapter.CocktailAdapter
@@ -37,11 +38,8 @@ class GuestDetailFragment : Fragment(), SearchView.OnQueryTextListener{
     }
 
     fun initDataBinding() {
-        val guest =  activity.intent.extras.getParcelable("GUEST") as Guest
-        cocktailRepository = CocktailRepository(activity.application, guest.id)
-        var x = cocktailRepository?.getCocktailsForGuest(guest)?.value
-        if(x != null)
-            guest.cocktailList.addAll(x)
+        var guest =  activity.intent.extras.getParcelable("GUEST") as GuestWithCocktails
+        cocktailRepository = CocktailRepository(activity.application)
 
         setupAdapter(guest)
         guestDetailViewModel = GuestDetailVM(guest, activity.supportFragmentManager, cocktailRepository)
@@ -51,7 +49,7 @@ class GuestDetailFragment : Fragment(), SearchView.OnQueryTextListener{
         sv!!.setOnQueryTextListener(this)
     }
 
-    private fun setupAdapter(guest: Guest) {
+    private fun setupAdapter(guest: GuestWithCocktails) {
         cocktailAdapter = CocktailAdapter() //get data of cocktails. from guest
         cocktailAdapter!!.setCocktailList(guest.cocktailList)
         val swipeHandler = object : SwipeToDeleteCallback(context) {

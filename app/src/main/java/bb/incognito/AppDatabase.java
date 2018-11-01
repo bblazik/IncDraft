@@ -10,13 +10,15 @@ import android.support.annotation.NonNull;
 
 import bb.incognito.dao.CocktailDao;
 import bb.incognito.dao.GuestDao;
+import bb.incognito.dao.GuestWithCocktailsDao;
 import bb.incognito.model.Cocktail;
 import bb.incognito.model.Guest;
 
-@Database(entities = {Guest.class, Cocktail.class}, version = 7, exportSchema = false)
+@Database(entities = {Guest.class, Cocktail.class}, version = 8, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract GuestDao guestDao();
     public abstract CocktailDao cocktailDao();
+    public abstract GuestWithCocktailsDao guestWithCocktailsDao();
 
     private static AppDatabase INSTANCE;
 
