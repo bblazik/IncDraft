@@ -14,11 +14,12 @@ import bb.incognito.R
 import bb.incognito.model.Guest
 import bb.incognito.viewModel.GuestRowVM
 import bb.incognito.databinding.GuestRowBinding
+import bb.incognito.repositories.GuestRepository
 
 class GuestAdapter : RecyclerView.Adapter<GuestAdapter.GuestViewHolder>(), Filterable {
-    private val guestWithCocktailsRepository: GuestWithCocktailsRepository? = null
-    private var guests: List<GuestWithCocktails>? = null
-    private var filteredGuests: List<GuestWithCocktails>? = null
+    private val guestRepository: GuestRepository? = null
+    private var guests: List<Guest>? = null
+    private var filteredGuests: List<Guest>? = null
     private val filter = ItemFilter()
 
     private val callback = object : ItemTouchHelper.Callback() {
@@ -39,15 +40,13 @@ class GuestAdapter : RecyclerView.Adapter<GuestAdapter.GuestViewHolder>(), Filte
 
     var itemTouchHelper = ItemTouchHelper(callback)
 
-    fun setGuests(guests: List<GuestWithCocktails>?) {
+    fun setGuests(guests: List<Guest>?) {
         this.guests = guests
         this.filteredGuests = guests
         notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GuestViewHolder {
-
-
         val cardRowBinding = DataBindingUtil.inflate<GuestRowBinding>(LayoutInflater.from(parent.context), R.layout.guest_row,
                 parent, false)
         return GuestViewHolder(cardRowBinding)
@@ -61,7 +60,7 @@ class GuestAdapter : RecyclerView.Adapter<GuestAdapter.GuestViewHolder>(), Filte
                 false
             }
         } else {
-            holder.bindCard(GuestWithCocktails(Guest("Nie ma gości :(")))
+            holder.bindCard(Guest("Nie ma gości :("))
         }
     }
 
@@ -75,7 +74,7 @@ class GuestAdapter : RecyclerView.Adapter<GuestAdapter.GuestViewHolder>(), Filte
 
     inner class GuestViewHolder(var guestRowBinding: GuestRowBinding) : RecyclerView.ViewHolder(guestRowBinding.guestRow) {
 
-        fun bindCard(guest: GuestWithCocktails) {
+        fun bindCard(guest: Guest) {
             if (guestRowBinding.viewModel == null) {
                 guestRowBinding.viewModel = GuestRowVM(guest)
             } else {
@@ -87,7 +86,7 @@ class GuestAdapter : RecyclerView.Adapter<GuestAdapter.GuestViewHolder>(), Filte
     private inner class ItemFilter : Filter() {
         override fun performFiltering(constraint: CharSequence): Filter.FilterResults {
             val results = Filter.FilterResults()
-            val newList = ArrayList<GuestWithCocktails>(guests!!.size)
+            val newList = ArrayList<Guest>(guests!!.size)
 
             for (g in guests!!) {
                 if (g.name.toLowerCase().contains(constraint))
@@ -99,7 +98,7 @@ class GuestAdapter : RecyclerView.Adapter<GuestAdapter.GuestViewHolder>(), Filte
         }
 
         override fun publishResults(constraint: CharSequence, results: Filter.FilterResults) {
-            filteredGuests = results.values as ArrayList<GuestWithCocktails>
+            filteredGuests = results.values as ArrayList<Guest>
             notifyDataSetChanged()
         }
     }

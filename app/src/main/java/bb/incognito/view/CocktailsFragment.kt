@@ -45,15 +45,12 @@ class CocktailsFragment : Fragment(), SearchView.OnQueryTextListener {
         cocktailFragmentBinding!!.list.layoutManager = LinearLayoutManager(context)
         sv = activity.findViewById(R.id.search)
     }
-
     override fun onQueryTextSubmit(s: String): Boolean {
         adapter!!.filter.filter(s)
         return false
     }
-
     override fun onQueryTextChange(s: String): Boolean {
         adapter!!.filter.filter(s)
         return false
     }
-
 }

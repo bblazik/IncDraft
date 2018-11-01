@@ -12,10 +12,10 @@ import android.view.ViewGroup
 import android.widget.SearchView
 
 import bb.incognito.R
-import bb.incognito.databinding.GuestDetailBinding
 import bb.incognito.view.adapter.GuestAdapter
 import bb.incognito.viewModel.GuestsViewModel
 import bb.incognito.databinding.GuestsFragmentBinding
+import bb.incognito.model.Guest
 
 class GuestsFragment : Fragment(), SearchView.OnQueryTextListener {
 
@@ -23,7 +23,6 @@ class GuestsFragment : Fragment(), SearchView.OnQueryTextListener {
     private var guestAdapter: GuestAdapter? = null
     private var sv: SearchView? = null
     internal var guestFragmentBinding: GuestsFragmentBinding? = null
-    var g : GuestDetailBinding? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -34,7 +33,7 @@ class GuestsFragment : Fragment(), SearchView.OnQueryTextListener {
 
         setBinding()
         guestsViewModel!!.allGuests.observe(this,
-                Observer<List<GuestWithCocktails>> { guestsWithCocktails -> guestAdapter!!.setGuests(guestsWithCocktails) })
+                Observer<List<Guest>> { guestsWithCocktails -> guestAdapter!!.setGuests(guestsWithCocktails) })
         sv!!.setOnQueryTextListener(this)
         return guestFragmentBinding!!.root
     }

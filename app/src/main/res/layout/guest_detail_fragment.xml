@@ -7,7 +7,6 @@
     <data>
         <import type="android.view.View" />
         <variable name="viewModel" type="bb.incognito.viewModel.GuestDetailVM" />
-        <variable name="cocktailViewModel" type="bb.incognito.viewModel.CocktailRowVM" />
     </data>
 
     <RelativeLayout

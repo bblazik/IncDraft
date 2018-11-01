@@ -4,11 +4,13 @@ import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import bb.incognito.AppDatabase;
 import bb.incognito.dao.CocktailDao;
 import bb.incognito.model.Cocktail;
+import bb.incognito.model.Guest;
 
 public class CocktailRepository {
     private CocktailDao cocktailDao;
@@ -26,9 +28,20 @@ public class CocktailRepository {
         allCocktails = cocktailDao.getAll();
     }
 
+    public LiveData<List<Cocktail>> getCocktailsForGuest(Guest guest)
+    {
+        List<Integer> cocktailIds = new ArrayList<>();
+        for (Cocktail cocktail : guest.getCocktailList())
+        {
+            cocktailIds.add( cocktail.getId());
+        }
+        return cocktailDao.getCocktailsForGuest(cocktailIds);
+    }
+
     public void insert(Cocktail cocktail) {
         new insertAsyncTask(cocktailDao).execute(cocktail);
     }
+
 
     private static class insertAsyncTask extends AsyncTask<Cocktail, Void, Void> {
         private CocktailDao cocktailDao;
@@ -39,7 +52,7 @@ public class CocktailRepository {
 
         @Override
         protected Void doInBackground(final Cocktail... params) {
-            //cocktailDao.insertCocktail(params[0]);
+            cocktailDao.insertCocktail(params[0]);
             return null;
         }
     }

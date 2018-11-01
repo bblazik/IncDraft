@@ -4,13 +4,14 @@ import android.databinding.BaseObservable;
 import android.view.View;
 import android.widget.Toast;
 
+import bb.incognito.model.Guest;
 import bb.incognito.view.GuestDetail;
 
 public class GuestRowVM extends BaseObservable
 {
-    private GuestWithCocktails guest;
+    private Guest guest;
 
-    public GuestRowVM(GuestWithCocktails guest) {
+    public GuestRowVM(Guest guest) {
         this.guest = guest;
     }
 
@@ -18,7 +19,7 @@ public class GuestRowVM extends BaseObservable
 
     public void setName(String s){guest.setName(s);}
 
-    public void setGuest(GuestWithCocktails guest) {
+    public void setGuest(Guest guest) {
         this.guest = guest;
         notifyChange();
     }

@@ -24,7 +24,6 @@ class AddCocktailFragment : Fragment(), SearchView.OnQueryTextListener {
     internal var fragmentAddCocktailBinding: FragmentAddCocktailBinding? = null
     var cocktailAdapter: CocktailAdapter? = null
     var cocktailRepository : CocktailRepository? = null
-    var guest : Guest? = null
     private var sv: SearchView? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +34,7 @@ class AddCocktailFragment : Fragment(), SearchView.OnQueryTextListener {
 
         var viewModel = ViewModelProviders.of(this).get(CocktailsViewModel::class.java)
         cocktailAdapter = CocktailAdapter() //get data of cocktails. from guest
-        cocktailAdapter?.setCheckable(true);
+        cocktailAdapter?.setCheckable(true)
         fragmentAddCocktailBinding!!.list.adapter = cocktailAdapter
         fragmentAddCocktailBinding!!.list.layoutManager = LinearLayoutManager(context)
 
@@ -48,10 +47,10 @@ class AddCocktailFragment : Fragment(), SearchView.OnQueryTextListener {
         }
 
         fragmentAddCocktailBinding?.acceptButton?.setOnClickListener {
-            var repository = GuestRepository(activity.application)
-            guest?.cocktailList?.addAll(cocktailAdapter!!.checkedCocktails)
-            repository.insert(guest)
-
+            var guestRepository = GuestRepository(activity.application)
+            var checkedCocktails = cocktailAdapter!!.checkedCocktails
+            guest?.cocktailList!!.addAll(checkedCocktails)
+            guestRepository.insert(guest)
             fragmentManager.popBackStack()
         }
 
@@ -61,19 +60,19 @@ class AddCocktailFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     override fun onQueryTextSubmit(s: String): Boolean {
-        cocktailAdapter!!.getFilter().filter(s)
+        cocktailAdapter!!.filter.filter(s)
         return false
     }
 
     override fun onQueryTextChange(s: String): Boolean {
-        cocktailAdapter!!.getFilter().filter(s)
+        cocktailAdapter!!.filter.filter(s)
         return false
     }
 
     companion object {
-        var guest : Guest? = null;
+        var guest : Guest? = null
         fun launch(g: Guest) : Fragment{
-            guest = g;
+            guest = g
             return AddCocktailFragment()
         }
     }

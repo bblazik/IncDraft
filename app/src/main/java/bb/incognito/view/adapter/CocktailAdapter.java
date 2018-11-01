@@ -56,7 +56,7 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.Cockta
     @Override
     public CocktailAdapter.CocktailViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         CocktailRowBinding cardRowBinding =
-                DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),R.layout.cocktail_row,
+                DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.cocktail_row,
                         parent, false);
         if (checkable)
         {

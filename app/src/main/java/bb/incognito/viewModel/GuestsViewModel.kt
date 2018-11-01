@@ -5,14 +5,17 @@ import android.support.v4.app.FragmentManager
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
 import android.view.View
+import bb.incognito.model.Cocktail
+import bb.incognito.model.Guest
+import bb.incognito.repositories.CocktailRepository
 
 import bb.incognito.repositories.GuestRepository
 import bb.incognito.view.AddGuestFragment
 
 class GuestsViewModel(application: Application) : AndroidViewModel(application) {
     private val guestRepository: GuestRepository
-    private val guestWithCocktailsRepository: GuestWithCocktailsRepository
-    val allGuests: LiveData<List<GuestWithCocktails>>
+    private val cocktailRepository: CocktailRepository
+    val allGuests: LiveData<List<Guest>>
     private var fragmentManager: FragmentManager? = null
 
     fun setFragmentManager(fragmentManager: FragmentManager) {
@@ -21,8 +24,15 @@ class GuestsViewModel(application: Application) : AndroidViewModel(application) 
 
     init {
         guestRepository = GuestRepository(application)
-        guestWithCocktailsRepository = GuestWithCocktailsRepository(application)
-        allGuests = guestWithCocktailsRepository.allGuests
+        cocktailRepository = CocktailRepository(application)
+        allGuests = guestRepository.allGuests
+
+        if (allGuests.value != null){
+            for( guest in allGuests.value!!)
+            {
+                guest.cocktailList = cocktailRepository.getCocktailsForGuest(guest).value
+            }
+        }
     }
 
     fun onClick(view: View) {

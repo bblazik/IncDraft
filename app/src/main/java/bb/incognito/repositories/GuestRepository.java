@@ -25,6 +25,10 @@ public class GuestRepository {
         return allGuests;
     }
 
+    public void update(Guest guest){
+        new updateAsyncTask(guestDao).execute(guest);
+    }
+
     public void insert(Guest guest) {
         new insertAsyncTask(guestDao).execute(guest);
     }
@@ -38,7 +42,21 @@ public class GuestRepository {
 
         @Override
         protected Void doInBackground(final Guest... params) {
-            //guestDao.insertGuest(params[0]);
+            guestDao.insertGuest(params[0]);
+            return null;
+        }
+    }
+
+    private static class updateAsyncTask extends AsyncTask<Guest, Void, Void> {
+        private GuestDao guestDao;
+
+        updateAsyncTask(GuestDao guestDao) {
+            this.guestDao = guestDao;
+        }
+
+        @Override
+        protected Void doInBackground(final Guest... params) {
+            guestDao.update(params[0]);
             return null;
         }
     }

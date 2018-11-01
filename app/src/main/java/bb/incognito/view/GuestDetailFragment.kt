@@ -33,18 +33,21 @@ class GuestDetailFragment : Fragment(), SearchView.OnQueryTextListener{
                               savedInstanceState: Bundle?): View? {
         guestDetailFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.guest_detail_fragment, container, false)
         initDataBinding()
-
         return guestDetailFragmentBinding!!.root
     }
 
     fun initDataBinding() {
         val guest =  activity.intent.extras.getParcelable("GUEST") as Guest
-        cocktailRepository = CocktailRepository(activity.application, guest.getId())
+        cocktailRepository = CocktailRepository(activity.application, guest.id)
+        var x = cocktailRepository?.getCocktailsForGuest(guest)?.value
+        if(x != null)
+            guest.cocktailList.addAll(x)
+
         setupAdapter(guest)
         guestDetailViewModel = GuestDetailVM(guest, activity.supportFragmentManager, cocktailRepository)
         guestDetailFragmentBinding!!.viewModel = guestDetailViewModel
 
-        sv = activity.findViewById(R.id.search);
+        sv = activity.findViewById(R.id.search)
         sv!!.setOnQueryTextListener(this)
     }
 
@@ -59,7 +62,7 @@ class GuestDetailFragment : Fragment(), SearchView.OnQueryTextListener{
 
                 cocktailAdapter!!.removeAt(viewHolder.adapterPosition)
 
-                val snackbar = Snackbar.make(guestDetailFragmentBinding!!.getRoot(), "Removed cocktail: " + removedCocktail.getName(), Snackbar.LENGTH_LONG)
+                val snackbar = Snackbar.make(guestDetailFragmentBinding!!.getRoot(), "Removed cocktail: " + removedCocktail.name, Snackbar.LENGTH_LONG)
                 snackbar.setAction("UNDO") { cocktailAdapter!!.restoreItem(removedPosition, removedCocktail) }
                 snackbar.setActionTextColor(Color.YELLOW)
                 snackbar.show()
@@ -72,12 +75,12 @@ class GuestDetailFragment : Fragment(), SearchView.OnQueryTextListener{
     }
 
     override fun onQueryTextSubmit(s: String): Boolean {
-        cocktailAdapter!!.getFilter().filter(s)
+        cocktailAdapter!!.filter.filter(s)
         return false
     }
 
     override fun onQueryTextChange(s: String): Boolean {
-        cocktailAdapter!!.getFilter().filter(s)
+        cocktailAdapter!!.filter.filter(s)
         return false
     }
 }

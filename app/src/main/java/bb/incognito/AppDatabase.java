@@ -13,7 +13,7 @@ import bb.incognito.dao.GuestDao;
 import bb.incognito.model.Cocktail;
 import bb.incognito.model.Guest;
 
-@Database(entities = {Guest.class, Cocktail.class}, version = 6, exportSchema = false)
+@Database(entities = {Guest.class, Cocktail.class}, version = 7, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract GuestDao guestDao();
     public abstract CocktailDao cocktailDao();
@@ -55,15 +55,15 @@ public abstract class AppDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(final Void... params) {
-//            guestDao.deleteAll();
-//            Guest guest = new Guest("Dupa 1");
-//            guest.setId((int) guestDao.insertGuest(guest));
-//            guest = new Guest("Dupa 2");
-//            guest.setId((int) guestDao.insertGuest(guest));
-//
-//            Cocktail cocktail = new Cocktail("Mohito");
-//            cocktail.setId((int) cocktailDao.insertCocktail(cocktail));
-//
+            guestDao.deleteAll();
+            Guest guest = new Guest("Dupa 1");
+            guest.setId((int) guestDao.insertGuest(guest));
+            guest = new Guest("Dupa 2");
+            guest.setId((int) guestDao.insertGuest(guest));
+
+            cocktailDao.deleteAll();
+            Cocktail cocktail = new Cocktail("Mohito");
+            cocktail.setId((int) cocktailDao.insertCocktail(cocktail));
             return null;
         }
     }

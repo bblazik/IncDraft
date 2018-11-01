@@ -17,7 +17,7 @@
         android:paddingRight="4dp"
         android:longClickable="true"
         android:onClick="@{viewModel::onItemClick}"
-        android:onLongClick="@{viewModel.onLongClick}">
+        android:onLongClick="@{viewModel::onLongClick}">
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -4,6 +4,7 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverter;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -41,11 +42,20 @@ public class Guest implements Parcelable {
         this.cocktailList = cocktailList;
     }
 
+    @Ignore
     public Guest(String name) {
         this.name = name;
     }
 
     @Ignore
+    public Guest(Guest guest) {
+        this.id = guest.id;
+        this.name = guest.name;
+        this.discount = guest.discount;
+        this.notes = guest.notes;
+        this.cocktailList = guest.cocktailList;
+    }
+
     public Guest(String name, float discount, String notes) {
         this.name = name;
         this.discount = discount;

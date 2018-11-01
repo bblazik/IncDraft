@@ -27,7 +27,6 @@ public class Cocktail implements Parcelable {
         this.id = id;
     }
 
-    @ColumnInfo(name = "cocktail_id")
     @PrimaryKey(autoGenerate = true)
     private int id;
 
@@ -54,12 +53,17 @@ public class Cocktail implements Parcelable {
         this.notes = notes;
         this.other = other;
     }
+
     @Ignore
+    public Cocktail(int id)
+    {
+        this.id = id;
+    }
+
     public Cocktail(String name)
     {
         this.name = name;
     }
-
 
     public String getName() {
         return name;
@@ -92,7 +96,6 @@ public class Cocktail implements Parcelable {
     public void setOther(String other) {
         this.other = other;
     }
-
 
     protected Cocktail(Parcel in) {
         name = in.readString();
