@@ -38,7 +38,7 @@ public class GuestRepository {
 
         @Override
         protected Void doInBackground(final Guest... params) {
-            guestDao.insertGuest(params[0]);
+            //guestDao.insertGuest(params[0]);
             return null;
         }
     }

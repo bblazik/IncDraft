@@ -16,15 +16,7 @@ import java.util.List;
 
 import static android.arch.persistence.room.ForeignKey.CASCADE;
 
-@Entity(
-        foreignKeys = @ForeignKey(
-                entity = Guest.class,
-                parentColumns = "id",
-                childColumns = "guest_id",
-                onDelete = CASCADE
-        ),
-        indices = {@Index("guest_id")}
-)
+@Entity
 public class Cocktail implements Parcelable {
 
     public int getId() {
@@ -35,11 +27,9 @@ public class Cocktail implements Parcelable {
         this.id = id;
     }
 
+    @ColumnInfo(name = "cocktail_id")
     @PrimaryKey(autoGenerate = true)
     private int id;
-
-    @ColumnInfo(name = "guest_id")
-    public int guestId;
 
     @ColumnInfo(name = "name")
     @SerializedName("name")
@@ -64,11 +54,12 @@ public class Cocktail implements Parcelable {
         this.notes = notes;
         this.other = other;
     }
-
-    public Cocktail(String name, Integer guestId) {
+    @Ignore
+    public Cocktail(String name)
+    {
         this.name = name;
-        this.guestId = guestId;
     }
+
 
     public String getName() {
         return name;

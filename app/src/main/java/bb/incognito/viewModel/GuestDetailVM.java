@@ -1,11 +1,12 @@
 package bb.incognito.viewModel;
 
 import android.app.DialogFragment;
-import android.app.FragmentManager;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 
 import java.util.List;
 
+import bb.incognito.R;
 import bb.incognito.model.Cocktail;
 import bb.incognito.model.Guest;
 import bb.incognito.repositories.CocktailRepository;
@@ -37,7 +38,6 @@ public class GuestDetailVM {
     }
 
     public void onClick(View view) {
-        DialogFragment newFragment = AddCocktailFragment.newInstance(false,-1, cocktailRepository, guest);
-        newFragment.show(fragmentManager, "New dialog");
+        fragmentManager.beginTransaction().replace(R.id.container2, AddCocktailFragment.Companion.launch(guest)).addToBackStack(null).commit();
     }
 }

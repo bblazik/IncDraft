@@ -12,7 +12,7 @@ import android.view.ViewGroup
 import android.widget.SearchView
 
 import bb.incognito.R
-import bb.incognito.model.GuestWithCocktails
+import bb.incognito.databinding.GuestDetailBinding
 import bb.incognito.view.adapter.GuestAdapter
 import bb.incognito.viewModel.GuestsViewModel
 import bb.incognito.databinding.GuestsFragmentBinding
@@ -23,6 +23,7 @@ class GuestsFragment : Fragment(), SearchView.OnQueryTextListener {
     private var guestAdapter: GuestAdapter? = null
     private var sv: SearchView? = null
     internal var guestFragmentBinding: GuestsFragmentBinding? = null
+    var g : GuestDetailBinding? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

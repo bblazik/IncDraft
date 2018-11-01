@@ -10,15 +10,13 @@ import android.support.annotation.NonNull;
 
 import bb.incognito.dao.CocktailDao;
 import bb.incognito.dao.GuestDao;
-import bb.incognito.dao.GuestWithCocktailsDao;
 import bb.incognito.model.Cocktail;
 import bb.incognito.model.Guest;
 
-@Database(entities = {Guest.class, Cocktail.class}, version = 3, exportSchema = false)
+@Database(entities = {Guest.class, Cocktail.class}, version = 6, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract GuestDao guestDao();
     public abstract CocktailDao cocktailDao();
-    public abstract GuestWithCocktailsDao guestWithCocktailsDao();
 
     private static AppDatabase INSTANCE;
 
@@ -47,19 +45,25 @@ public abstract class AppDatabase extends RoomDatabase {
 
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
 
-        private final GuestDao mDao;
+        private final GuestDao guestDao;
+        private final CocktailDao cocktailDao;
 
         PopulateDbAsync(AppDatabase db) {
-            mDao = db.guestDao();
+            guestDao = db.guestDao();
+            cocktailDao = db.cocktailDao();
         }
 
         @Override
         protected Void doInBackground(final Void... params) {
-            mDao.deleteAll();
-            Guest guest = new Guest("Dupa 1");
-            guest.setId((int) mDao.insertGuest(guest));
-            guest = new Guest("Dupa 2");
-            mDao.insertGuest(guest);
+//            guestDao.deleteAll();
+//            Guest guest = new Guest("Dupa 1");
+//            guest.setId((int) guestDao.insertGuest(guest));
+//            guest = new Guest("Dupa 2");
+//            guest.setId((int) guestDao.insertGuest(guest));
+//
+//            Cocktail cocktail = new Cocktail("Mohito");
+//            cocktail.setId((int) cocktailDao.insertCocktail(cocktail));
+//
             return null;
         }
     }

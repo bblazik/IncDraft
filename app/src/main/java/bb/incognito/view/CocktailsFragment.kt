@@ -14,10 +14,8 @@ import android.widget.SearchView
 import bb.incognito.R
 import bb.incognito.databinding.FragmentCocktailsBinding
 import bb.incognito.model.Cocktail
-import bb.incognito.model.GuestWithCocktails
 import bb.incognito.view.adapter.CocktailAdapter
 import bb.incognito.viewModel.CocktailsViewModel
-import bb.incognito.viewModel.GuestsViewModel
 
 class CocktailsFragment : Fragment(), SearchView.OnQueryTextListener {
 
@@ -33,7 +31,7 @@ class CocktailsFragment : Fragment(), SearchView.OnQueryTextListener {
 
         setBinding()
         viewModel!!.allCocktails.observe(this,
-                Observer<List<Cocktail>> { cocktails -> adapter!!.setCocktailList(cocktails) })
+                Observer<List<Cocktail>> { cocktails -> adapter!!.cocktailList = cocktails })
         sv!!.setOnQueryTextListener(this)
         return cocktailFragmentBinding!!.root
     }

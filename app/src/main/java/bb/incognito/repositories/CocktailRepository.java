@@ -12,18 +12,12 @@ import bb.incognito.model.Cocktail;
 
 public class CocktailRepository {
     private CocktailDao cocktailDao;
-
-    public LiveData<List<Cocktail>> getCocktailsForGuest() {
-        return cocktailsForGuest;
-    }
     public LiveData<List<Cocktail>> getAllCocktails() { return allCocktails;}
-    private LiveData<List<Cocktail>> cocktailsForGuest;
     private LiveData<List<Cocktail>> allCocktails;
 
     public CocktailRepository(Application application, int guest_id) {
         AppDatabase db = AppDatabase.getDatabase(application);
         cocktailDao = db.cocktailDao();
-        cocktailsForGuest = cocktailDao.getCocktailsForGuest(guest_id);
     }
 
     public CocktailRepository(Application application){
@@ -45,7 +39,7 @@ public class CocktailRepository {
 
         @Override
         protected Void doInBackground(final Cocktail... params) {
-            cocktailDao.insertCocktail(params[0]);
+            //cocktailDao.insertCocktail(params[0]);
             return null;
         }
     }
