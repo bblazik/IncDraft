@@ -9,16 +9,19 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
 import bb.incognito.dao.CocktailDao;
+import bb.incognito.dao.GuestCocktailJoinDao;
 import bb.incognito.dao.GuestDao;
 import bb.incognito.dao.GuestWithCocktailsDao;
 import bb.incognito.model.Cocktail;
 import bb.incognito.model.Guest;
+import bb.incognito.model.GuestCocktailJoin;
 
-@Database(entities = {Guest.class, Cocktail.class}, version = 8, exportSchema = false)
+@Database(entities = {Guest.class, Cocktail.class, GuestCocktailJoin.class}, version = 9, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract GuestDao guestDao();
     public abstract CocktailDao cocktailDao();
     public abstract GuestWithCocktailsDao guestWithCocktailsDao();
+    public abstract GuestCocktailJoinDao guestCocktailJoinDao();
 
     private static AppDatabase INSTANCE;
 
@@ -49,23 +52,31 @@ public abstract class AppDatabase extends RoomDatabase {
 
         private final GuestDao guestDao;
         private final CocktailDao cocktailDao;
+        private final GuestCocktailJoinDao guestCocktailJoinDao;
 
         PopulateDbAsync(AppDatabase db) {
             guestDao = db.guestDao();
             cocktailDao = db.cocktailDao();
+            guestCocktailJoinDao = db.guestCocktailJoinDao();
         }
 
         @Override
         protected Void doInBackground(final Void... params) {
+
+            guestCocktailJoinDao.deleteAll();
+            cocktailDao.deleteAll();
             guestDao.deleteAll();
             Guest guest = new Guest("Dupa 1");
             guest.setId((int) guestDao.insertGuest(guest));
             guest = new Guest("Dupa 2");
             guest.setId((int) guestDao.insertGuest(guest));
 
-            cocktailDao.deleteAll();
+
             Cocktail cocktail = new Cocktail("Mohito");
             cocktail.setId((int) cocktailDao.insertCocktail(cocktail));
+
+            guestCocktailJoinDao.insert( new GuestCocktailJoin(guest.getId(), cocktail.getId()) );
+
             return null;
         }
     }

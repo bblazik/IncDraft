@@ -13,9 +13,9 @@ import bb.incognito.repositories.GuestWithCocktailsRepository
 import bb.incognito.view.AddGuestFragment
 
 class GuestsViewModel(application: Application) : AndroidViewModel(application) {
-    private val guestWithCocktailsRepository: GuestWithCocktailsRepository
-    private val guestRepository : GuestRepository
-    private val cocktailRepository: CocktailRepository
+    private val guestWithCocktailsRepository: GuestWithCocktailsRepository = GuestWithCocktailsRepository(application)
+    private val guestRepository : GuestRepository = GuestRepository(application)
+
     val allGuests: LiveData<List<GuestWithCocktails>>
     private var fragmentManager: FragmentManager? = null
 
@@ -24,9 +24,6 @@ class GuestsViewModel(application: Application) : AndroidViewModel(application) 
     }
 
     init {
-        guestWithCocktailsRepository = GuestWithCocktailsRepository(application)
-        cocktailRepository = CocktailRepository(application)
-        guestRepository = GuestRepository(application)
         allGuests = guestWithCocktailsRepository.allGuests
     }
 

@@ -39,6 +39,6 @@ public class GuestDetailVM {
     }
 
     public void onClick(View view) {
-        fragmentManager.beginTransaction().replace(R.id.container2, AddCocktailFragment.Companion.launch(guest.guest)).addToBackStack(null).commit();
+        fragmentManager.beginTransaction().replace(R.id.container2, AddCocktailFragment.Companion.launch(guest)).addToBackStack(null).commit();
     }
 }

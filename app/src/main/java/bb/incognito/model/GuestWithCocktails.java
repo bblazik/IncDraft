@@ -1,6 +1,8 @@
 package bb.incognito.model;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Embedded;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.Relation;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -9,8 +11,9 @@ import java.util.List;
 
 public class GuestWithCocktails implements Parcelable {
     @Embedded public Guest guest;
-    @Relation(parentColumn = "id", entityColumn = "cocktail_id", entity = Cocktail.class)
-    public List<Cocktail> cocktailList;
+    //@Relation(parentColumn = "id", entityColumn = "cocktail_id", entity = Cocktail.class)
+    @Ignore
+    public LiveData<List<Cocktail>> cocktailList;
 
     public GuestWithCocktails(Guest guest) {
         this.guest = guest;
@@ -27,7 +30,7 @@ public class GuestWithCocktails implements Parcelable {
 
     protected GuestWithCocktails(Parcel in) {
         guest = new Guest(in.readInt(), in.readString(), in.readFloat(), in.readString(), in.readArrayList(Cocktail.class.getClassLoader()));
-        cocktailList = in.readArrayList(Cocktail.class.getClassLoader());
+        //cocktailList = in.readArrayList(Cocktail.class.getClassLoader());
     }
 
     @Override
@@ -36,7 +39,7 @@ public class GuestWithCocktails implements Parcelable {
         parcel.writeString(guest.getName());
         parcel.writeFloat(guest.getDiscount());
         parcel.writeString(guest.getNotes());
-        parcel.writeList(cocktailList);
+        //parcel.writeList(cocktailList);
     }
 
     public static final Parcelable.Creator<GuestWithCocktails> CREATOR

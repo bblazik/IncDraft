@@ -14,8 +14,10 @@ import bb.incognito.R
 import bb.incognito.databinding.FragmentAddCocktailBinding
 import bb.incognito.model.Cocktail
 import bb.incognito.model.Guest
+import bb.incognito.model.GuestWithCocktails
 import bb.incognito.repositories.CocktailRepository
 import bb.incognito.repositories.GuestRepository
+import bb.incognito.repositories.GuestWithCocktailsRepository
 import bb.incognito.view.adapter.CocktailAdapter
 import bb.incognito.viewModel.CocktailsViewModel
 
@@ -47,10 +49,12 @@ class AddCocktailFragment : Fragment(), SearchView.OnQueryTextListener {
         }
 
         fragmentAddCocktailBinding?.acceptButton?.setOnClickListener {
+            var guestWithCocktailRepository = GuestWithCocktailsRepository(activity.application)
             var guestRepository = GuestRepository(activity.application)
             var checkedCocktails = cocktailAdapter!!.checkedCocktails
-            guest?.cocktailList!!.addAll(checkedCocktails)
-            guestRepository.insert(guest)
+
+            //guestRepository.insert(guest)
+            //guestWithCocktailRepository.insert(guest)
             fragmentManager.popBackStack()
         }
 
@@ -70,8 +74,8 @@ class AddCocktailFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     companion object {
-        var guest : Guest? = null
-        fun launch(g: Guest) : Fragment{
+        var guest : GuestWithCocktails? = null
+        fun launch(g: GuestWithCocktails) : Fragment{
             guest = g
             return AddCocktailFragment()
         }
