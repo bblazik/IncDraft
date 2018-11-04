@@ -4,6 +4,8 @@ import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +33,6 @@ public class CocktailRepository {
     public void insert(Cocktail cocktail) {
         new insertAsyncTask(cocktailDao).execute(cocktail);
     }
-
 
     private static class insertAsyncTask extends AsyncTask<Cocktail, Void, Void> {
         private CocktailDao cocktailDao;

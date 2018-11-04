@@ -14,12 +14,13 @@ import bb.incognito.R
 import bb.incognito.model.Guest
 import bb.incognito.viewModel.GuestRowVM
 import bb.incognito.databinding.GuestRowBinding
+import bb.incognito.model.Cocktail
 import bb.incognito.model.GuestWithCocktails
 import bb.incognito.repositories.GuestRepository
 
 class GuestAdapter : RecyclerView.Adapter<GuestAdapter.GuestViewHolder>(), Filterable {
-    private var guests: List<GuestWithCocktails>? = null
-    private var filteredGuests: List<GuestWithCocktails>? = null
+    private var guests: MutableList<GuestWithCocktails>? = null
+    private var filteredGuests: MutableList<GuestWithCocktails>? = null
     private val filter = ItemFilter()
 
     private val callback = object : ItemTouchHelper.Callback() {
@@ -40,10 +41,23 @@ class GuestAdapter : RecyclerView.Adapter<GuestAdapter.GuestViewHolder>(), Filte
 
     var itemTouchHelper = ItemTouchHelper(callback)
 
-    fun setGuests(guests: List<GuestWithCocktails>?) {
+    fun getGuests(): MutableList<GuestWithCocktails> {
+        return guests!!
+    }
+    fun setGuests(guests: MutableList<GuestWithCocktails>?) {
         this.guests = guests
         this.filteredGuests = guests
         notifyDataSetChanged()
+    }
+
+    fun restoreItem(removedPosition: Int, guestWithCocktails: GuestWithCocktails) {
+        guests!!.add(removedPosition, guestWithCocktails)
+        notifyItemInserted(removedPosition)
+    }
+
+    fun removeAt(position: Int) {
+        guests!!.removeAt(position)
+        notifyItemRemoved(position)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GuestViewHolder {

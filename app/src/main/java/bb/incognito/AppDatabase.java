@@ -16,7 +16,7 @@ import bb.incognito.model.Cocktail;
 import bb.incognito.model.Guest;
 import bb.incognito.model.GuestCocktailJoin;
 
-@Database(entities = {Guest.class, Cocktail.class, GuestCocktailJoin.class}, version = 9, exportSchema = false)
+@Database(entities = {Guest.class, Cocktail.class, GuestCocktailJoin.class}, version = 11, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract GuestDao guestDao();
     public abstract CocktailDao cocktailDao();

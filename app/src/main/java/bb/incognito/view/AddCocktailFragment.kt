@@ -13,7 +13,6 @@ import android.widget.SearchView
 import bb.incognito.R
 import bb.incognito.databinding.FragmentAddCocktailBinding
 import bb.incognito.model.Cocktail
-import bb.incognito.model.Guest
 import bb.incognito.model.GuestCocktailJoin
 import bb.incognito.model.GuestWithCocktails
 import bb.incognito.repositories.CocktailRepository
@@ -37,12 +36,12 @@ class AddCocktailFragment : Fragment(), SearchView.OnQueryTextListener {
 
         var viewModel = ViewModelProviders.of(this).get(CocktailsViewModel::class.java)
         cocktailAdapter = CocktailAdapter() //get data of cocktails. from guest
-        cocktailAdapter?.setCheckable(true)
+        cocktailAdapter?.checkable = true
         fragmentAddCocktailBinding!!.list.adapter = cocktailAdapter
         fragmentAddCocktailBinding!!.list.layoutManager = LinearLayoutManager(context)
 
         viewModel.allCocktails.observe(this,
-                Observer<List<Cocktail>> { cocktails -> cocktailAdapter!!.cocktailList = cocktails })
+                Observer<MutableList<Cocktail>> { cocktails -> cocktailAdapter!!.cocktailList = cocktails!! })
         sv = activity.findViewById(R.id.search)
 
         fragmentAddCocktailBinding?.cancelButton?.setOnClickListener {
@@ -51,14 +50,10 @@ class AddCocktailFragment : Fragment(), SearchView.OnQueryTextListener {
 
         fragmentAddCocktailBinding?.acceptButton?.setOnClickListener {
             var guestWithCocktailRepository = GuestWithCocktailsRepository(activity.application)
-            var guestRepository = GuestRepository(activity.application)
             var checkedCocktails = cocktailAdapter!!.checkedCocktails
 
             for(cocktail in checkedCocktails)
                 guestWithCocktailRepository.insertRelation(GuestCocktailJoin(guest!!.guest.id, cocktail.id))
-
-            //guestRepository.insert(guest)
-            //guestWithCocktailRepository.insert(guest)
             fragmentManager.popBackStack()
         }
 

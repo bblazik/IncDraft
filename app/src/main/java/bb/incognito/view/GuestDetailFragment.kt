@@ -1,7 +1,6 @@
 package bb.incognito.view
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.graphics.Color
 import android.os.Bundle
@@ -16,19 +15,15 @@ import android.view.ViewGroup
 import android.widget.SearchView
 
 import bb.incognito.R
-import bb.incognito.dao.GuestCocktailJoinDao
 import bb.incognito.databinding.GuestDetailFragmentBinding
 import bb.incognito.model.Cocktail
-import bb.incognito.model.Guest
 import bb.incognito.model.GuestCocktailJoin
 import bb.incognito.model.GuestWithCocktails
 import bb.incognito.repositories.CocktailRepository
 import bb.incognito.repositories.GuestWithCocktailsRepository
 import bb.incognito.utils.SwipeToDeleteCallback
 import bb.incognito.view.adapter.CocktailAdapter
-import bb.incognito.viewModel.CocktailsViewModel
 import bb.incognito.viewModel.GuestDetailVM
-import bb.incognito.viewModel.GuestsViewModel
 
 class GuestDetailFragment : Fragment(), SearchView.OnQueryTextListener{
 
@@ -37,7 +32,6 @@ class GuestDetailFragment : Fragment(), SearchView.OnQueryTextListener{
     var cocktailAdapter: CocktailAdapter? = null
     var cocktailRepository: CocktailRepository? = null
     var guestWithCocktailsRepository: GuestWithCocktailsRepository? = null
-    var cocktailsViewModel : CocktailsViewModel? = null
     private var sv: SearchView? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -53,8 +47,6 @@ class GuestDetailFragment : Fragment(), SearchView.OnQueryTextListener{
         cocktailRepository = CocktailRepository(activity.application)
         guest.cocktailList = guestWithCocktailsRepository?.getCocktails(guest.guest.id)
 
-        cocktailsViewModel = ViewModelProviders.of(this).get(CocktailsViewModel::class.java)
-
         setupAdapter(guest)
         guestDetailViewModel = GuestDetailVM(guest, activity.supportFragmentManager, cocktailRepository)
         guestDetailFragmentBinding!!.viewModel = guestDetailViewModel
@@ -65,19 +57,21 @@ class GuestDetailFragment : Fragment(), SearchView.OnQueryTextListener{
 
     private fun setupAdapter(guest: GuestWithCocktails) {
         cocktailAdapter = CocktailAdapter() //get data of cocktails. from guest
-        guest!!.cocktailList.observe(this,
-                Observer<List<Cocktail>> { cocktails -> cocktailAdapter!!.setCocktailList(cocktails) })
+        guest!!.cocktailList!!.observe(this,
+                Observer<MutableList<Cocktail>> { cocktails -> cocktailAdapter!!.cocktailList = cocktails!! })
 
         val swipeHandler = object : SwipeToDeleteCallback(context) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
 
-                val removedCocktail = cocktailAdapter!!.getCocktailList().get(viewHolder.adapterPosition)
+                val removedCocktail = cocktailAdapter!!.cocktailList.get(viewHolder.adapterPosition)
                 val removedPosition = viewHolder.adapterPosition
 
                 cocktailAdapter!!.removeAt(viewHolder.adapterPosition)
+                guestWithCocktailsRepository!!.removeRelation(GuestCocktailJoin(guest.guest.id, removedCocktail.id))
+
 
                 val snackbar = Snackbar.make(guestDetailFragmentBinding!!.getRoot(), "Removed cocktail: " + removedCocktail.name, Snackbar.LENGTH_LONG)
-                snackbar.setAction("UNDO") { cocktailAdapter!!.restoreItem(removedPosition, removedCocktail) }
+                snackbar.setAction("UNDO") { cocktailAdapter!!.restoreItem(removedPosition, removedCocktail); guestWithCocktailsRepository!!.insertRelation(GuestCocktailJoin(guest.guest.id, removedCocktail.id)) }
                 snackbar.setActionTextColor(Color.YELLOW)
                 snackbar.show()
             }

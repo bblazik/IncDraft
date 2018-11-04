@@ -29,13 +29,15 @@ public class GuestDetailVM {
     {
         return guest.getName();
     }
-    public String getDiscount(){ return String.valueOf(guest.guest.getDiscount());}
-    public void setDiscount(String discount){guest.guest.setDiscount(Float.valueOf(discount));}
-    public String getNotes(){return guest.guest.getNotes();}
-    public void setNotes(String note) {guest.guest.setNotes(note);}
+    public String getDiscount(){ return String.valueOf(guest.getGuest().getDiscount());}
+    public void setDiscount(String discount){
+        guest.getGuest().setDiscount(Float.valueOf(discount));}
+    public String getNotes(){return guest.getGuest().getNotes();}
+    public void setNotes(String note) {
+        guest.getGuest().setNotes(note);}
     public List<Cocktail> getCocktailList()
     {
-        return guest.guest.getCocktailList();
+        return guest.getGuest().getCocktailList();
     }
 
     public void onClick(View view) {

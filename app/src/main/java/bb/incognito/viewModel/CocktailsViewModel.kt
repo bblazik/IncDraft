@@ -14,7 +14,7 @@ import bb.incognito.view.AddCocktailFragment.Companion.guest
 class CocktailsViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: CocktailRepository
     private val guestWithCocktailsRepository : GuestWithCocktailsRepository
-    val allCocktails: LiveData<List<Cocktail>>
+    val allCocktails: LiveData<MutableList<Cocktail>>
     //val cocktailsForGuest : LiveData<List<Cocktail>>
     init {
         repository = CocktailRepository(application)

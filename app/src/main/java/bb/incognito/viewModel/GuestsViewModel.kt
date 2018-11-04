@@ -16,7 +16,7 @@ class GuestsViewModel(application: Application) : AndroidViewModel(application) 
     private val guestWithCocktailsRepository: GuestWithCocktailsRepository = GuestWithCocktailsRepository(application)
     private val guestRepository : GuestRepository = GuestRepository(application)
 
-    val allGuests: LiveData<List<GuestWithCocktails>>
+    val allGuests: LiveData<MutableList<GuestWithCocktails>>
     private var fragmentManager: FragmentManager? = null
 
     fun setFragmentManager(fragmentManager: FragmentManager) {

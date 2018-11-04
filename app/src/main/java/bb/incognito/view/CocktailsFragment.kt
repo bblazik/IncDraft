@@ -31,7 +31,7 @@ class CocktailsFragment : Fragment(), SearchView.OnQueryTextListener {
 
         setBinding()
         viewModel!!.allCocktails.observe(this,
-                Observer<List<Cocktail>> { cocktails -> adapter!!.cocktailList = cocktails })
+                Observer<MutableList<Cocktail>> { cocktails -> adapter!!.cocktailList = cocktails!! })
         sv!!.setOnQueryTextListener(this)
         return cocktailFragmentBinding!!.root
     }

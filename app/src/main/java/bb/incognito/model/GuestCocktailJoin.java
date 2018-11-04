@@ -4,12 +4,15 @@ package bb.incognito.model;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 
+import static android.arch.persistence.room.ForeignKey.CASCADE;
+
 @Entity(tableName = "guest_cocktail_join",
         primaryKeys = { "guestId", "cocktailId" },
         foreignKeys = {
                 @ForeignKey(entity = Guest.class,
                         parentColumns = "id",
-                        childColumns = "guestId"),
+                        childColumns = "guestId",
+                        onDelete = CASCADE),
                 @ForeignKey(entity = Cocktail.class,
                         parentColumns = "cocktail_id",
                         childColumns = "cocktailId")

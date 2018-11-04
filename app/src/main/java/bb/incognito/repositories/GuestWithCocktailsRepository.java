@@ -42,6 +42,11 @@ public class GuestWithCocktailsRepository {
         new GuestWithCocktailsRepository.insertAsyncTask(guestCocktailJoinDao).execute(guestCocktailJoin);
     }
 
+    public void removeRelation(GuestCocktailJoin guestCocktailJoin)
+    {
+        new GuestWithCocktailsRepository.deleteAsyncTask(guestCocktailJoinDao).execute(guestCocktailJoin);
+    }
+
     private static class insertAsyncTask extends AsyncTask<GuestCocktailJoin, Void, Void> {
         private GuestCocktailJoinDao guestCocktailJoinDao;
 
@@ -56,4 +61,17 @@ public class GuestWithCocktailsRepository {
         }
     }
 
+    private static class deleteAsyncTask extends AsyncTask<GuestCocktailJoin, Void, Void> {
+        private GuestCocktailJoinDao guestCocktailJoinDao;
+
+        deleteAsyncTask(GuestCocktailJoinDao guestCocktailJoinDao) {
+            this.guestCocktailJoinDao = guestCocktailJoinDao;
+        }
+
+        @Override
+        protected Void doInBackground(final GuestCocktailJoin... params) {
+            guestCocktailJoinDao.delete(params[0]);
+            return null;
+        }
+    }
 }
