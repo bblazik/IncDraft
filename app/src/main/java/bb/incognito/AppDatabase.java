@@ -75,6 +75,12 @@ public abstract class AppDatabase extends RoomDatabase {
             Cocktail cocktail = new Cocktail("Mohito");
             cocktail.setId((int) cocktailDao.insertCocktail(cocktail));
 
+            cocktail = new Cocktail("Dajkiłe");
+            cocktail.setId((int) cocktailDao.insertCocktail(cocktail));
+
+            cocktail = new Cocktail("ManHatAn");
+            cocktail.setId((int) cocktailDao.insertCocktail(cocktail));
+
             guestCocktailJoinDao.insert( new GuestCocktailJoin(guest.getId(), cocktail.getId()) );
 
             return null;
