@@ -4,6 +4,7 @@ package bb.incognito.dao;
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
 import java.util.List;
@@ -14,7 +15,7 @@ import bb.incognito.model.GuestCocktailJoin;
 
 @Dao
 public interface GuestCocktailJoinDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(GuestCocktailJoin guestCocktailJoin);
 
     @Query("SELECT * FROM Guest " +
@@ -23,7 +24,7 @@ public interface GuestCocktailJoinDao {
     List<Guest> getUsersForCocktail(final int cocktailId);
 
     @Query("SELECT * FROM cocktail" +
-            " INNER JOIN guest_cocktail_join ON cocktail.cocktail_id=guest_cocktail_join.guestId " +
+            " INNER JOIN guest_cocktail_join ON cocktail.cocktail_id=guest_cocktail_join.cocktailId " +
             "WHERE guest_cocktail_join.guestId=:guestId")
     LiveData<List<Cocktail>> getCocktailsForUsers(final int guestId);
 

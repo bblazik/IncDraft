@@ -7,14 +7,20 @@ import android.view.View
 import bb.incognito.R
 import bb.incognito.model.Cocktail
 import bb.incognito.repositories.CocktailRepository
+import bb.incognito.repositories.GuestWithCocktailsRepository
 import bb.incognito.view.AddCocktailFragment
 import bb.incognito.view.AddCocktailFragment.Companion.guest
 
 class CocktailsViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: CocktailRepository
+    private val guestWithCocktailsRepository : GuestWithCocktailsRepository
     val allCocktails: LiveData<List<Cocktail>>
+    //val cocktailsForGuest : LiveData<List<Cocktail>>
     init {
         repository = CocktailRepository(application)
+        guestWithCocktailsRepository = GuestWithCocktailsRepository(application)
+
+        //cocktailsForGuest = guestWithCocktailsRepository.getCocktails()
         allCocktails = repository.allCocktails
     }
 

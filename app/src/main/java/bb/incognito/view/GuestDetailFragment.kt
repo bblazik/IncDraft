@@ -65,7 +65,7 @@ class GuestDetailFragment : Fragment(), SearchView.OnQueryTextListener{
 
     private fun setupAdapter(guest: GuestWithCocktails) {
         cocktailAdapter = CocktailAdapter() //get data of cocktails. from guest
-        cocktailsViewModel!!.allCocktails.observe(this,
+        guest!!.cocktailList.observe(this,
                 Observer<List<Cocktail>> { cocktails -> cocktailAdapter!!.setCocktailList(cocktails) })
 
         val swipeHandler = object : SwipeToDeleteCallback(context) {

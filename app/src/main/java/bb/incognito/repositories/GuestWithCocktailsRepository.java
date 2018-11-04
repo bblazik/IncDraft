@@ -8,8 +8,10 @@ import java.util.List;
 
 import bb.incognito.AppDatabase;
 import bb.incognito.dao.GuestCocktailJoinDao;
+import bb.incognito.dao.GuestDao;
 import bb.incognito.dao.GuestWithCocktailsDao;
 import bb.incognito.model.Cocktail;
+import bb.incognito.model.Guest;
 import bb.incognito.model.GuestCocktailJoin;
 import bb.incognito.model.GuestWithCocktails;
 
@@ -34,4 +36,24 @@ public class GuestWithCocktailsRepository {
     {
         return guestCocktailJoinDao.getCocktailsForUsers(guestId);
     }
+
+    public void insertRelation(GuestCocktailJoin guestCocktailJoin)
+    {
+        new GuestWithCocktailsRepository.insertAsyncTask(guestCocktailJoinDao).execute(guestCocktailJoin);
+    }
+
+    private static class insertAsyncTask extends AsyncTask<GuestCocktailJoin, Void, Void> {
+        private GuestCocktailJoinDao guestCocktailJoinDao;
+
+        insertAsyncTask(GuestCocktailJoinDao guestCocktailJoinDao) {
+            this.guestCocktailJoinDao = guestCocktailJoinDao;
+        }
+
+        @Override
+        protected Void doInBackground(final GuestCocktailJoin... params) {
+            guestCocktailJoinDao.insert(params[0]);
+            return null;
+        }
+    }
+
 }

@@ -14,6 +14,7 @@ import bb.incognito.R
 import bb.incognito.databinding.FragmentAddCocktailBinding
 import bb.incognito.model.Cocktail
 import bb.incognito.model.Guest
+import bb.incognito.model.GuestCocktailJoin
 import bb.incognito.model.GuestWithCocktails
 import bb.incognito.repositories.CocktailRepository
 import bb.incognito.repositories.GuestRepository
@@ -52,6 +53,9 @@ class AddCocktailFragment : Fragment(), SearchView.OnQueryTextListener {
             var guestWithCocktailRepository = GuestWithCocktailsRepository(activity.application)
             var guestRepository = GuestRepository(activity.application)
             var checkedCocktails = cocktailAdapter!!.checkedCocktails
+
+            for(cocktail in checkedCocktails)
+                guestWithCocktailRepository.insertRelation(GuestCocktailJoin(guest!!.guest.id, cocktail.id))
 
             //guestRepository.insert(guest)
             //guestWithCocktailRepository.insert(guest)
