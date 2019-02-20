@@ -9,6 +9,7 @@ import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
 import java.util.List;
+import java.util.UUID;
 
 import bb.incognito.model.Guest;
 
@@ -21,7 +22,7 @@ public interface GuestDao {
     LiveData<Guest> getGuest(int id);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    long insertGuest(Guest guest);
+    void insertGuest(Guest guest);
 
     @Query("DELETE FROM guest")
     void deleteAll();

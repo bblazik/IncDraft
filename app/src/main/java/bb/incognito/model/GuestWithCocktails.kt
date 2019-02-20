@@ -3,14 +3,13 @@ package bb.incognito.model
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Embedded
 import android.arch.persistence.room.Ignore
-import android.arch.persistence.room.Relation
 import android.os.Parcel
 import android.os.Parcelable
+import java.util.*
 
 class GuestWithCocktails : Parcelable {
     @Embedded
     var guest: Guest
-    //@Relation(parentColumn = "id", entityColumn = "cocktail_id", entity = Cocktail.class)
     @Ignore
     var cocktailList: LiveData<MutableList<Cocktail>>? = null
 
@@ -27,16 +26,14 @@ class GuestWithCocktails : Parcelable {
     }
 
     protected constructor(`in`: Parcel) {
-        guest = Guest(`in`.readInt(), `in`.readString(), `in`.readFloat(), `in`.readString(), null)
-        //cocktailList = in.readArrayList(Cocktail.class.getClassLoader());
+        guest = Guest(UUID.fromString(`in`.readString()), `in`.readString(), `in`.readFloat(), `in`.readString(), null)
     }
 
     override fun writeToParcel(parcel: Parcel, i: Int) {
-        parcel.writeInt(guest.id)
+        parcel.writeString(guest.id.toString())
         parcel.writeString(guest.getName())
         parcel.writeFloat(guest.getDiscount())
         parcel.writeString(guest.getNotes())
-        //parcel.writeList(cocktailList);
     }
 
     companion object CREATOR : Parcelable.Creator<GuestWithCocktails> {

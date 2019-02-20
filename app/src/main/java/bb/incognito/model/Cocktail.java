@@ -2,32 +2,34 @@ package bb.incognito.model;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
-import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 public class Cocktail implements Parcelable {
 
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
     @ColumnInfo(name = "cocktail_id")
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+    @PrimaryKey
+    @NotNull
+    private UUID id;
 
     @ColumnInfo(name = "name")
     @SerializedName("name")
@@ -54,13 +56,14 @@ public class Cocktail implements Parcelable {
     }
 
     @Ignore
-    public Cocktail(int id)
+    public Cocktail(UUID id)
     {
         this.id = id;
     }
 
     public Cocktail(String name)
     {
+        id = UUID.randomUUID();
         this.name = name;
     }
 

@@ -19,11 +19,6 @@ public class CocktailRepository {
     public LiveData<List<Cocktail>> getAllCocktails() { return allCocktails;}
     private LiveData<List<Cocktail>> allCocktails;
 
-    public CocktailRepository(Application application, int guest_id) {
-        AppDatabase db = AppDatabase.getDatabase(application);
-        cocktailDao = db.cocktailDao();
-    }
-
     public CocktailRepository(Application application){
         AppDatabase db = AppDatabase.getDatabase(application);
         cocktailDao = db.cocktailDao();
@@ -37,8 +32,8 @@ public class CocktailRepository {
     private static class insertAsyncTask extends AsyncTask<Cocktail, Void, Void> {
         private CocktailDao cocktailDao;
 
-        insertAsyncTask(CocktailDao guestDao) {
-            this.cocktailDao = guestDao;
+        insertAsyncTask(CocktailDao cocktailDao) {
+            this.cocktailDao = cocktailDao;
         }
 
         @Override

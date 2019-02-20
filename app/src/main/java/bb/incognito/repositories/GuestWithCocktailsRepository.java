@@ -5,6 +5,7 @@ import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
 import java.util.List;
+import java.util.UUID;
 
 import bb.incognito.AppDatabase;
 import bb.incognito.dao.GuestCocktailJoinDao;
@@ -32,7 +33,7 @@ public class GuestWithCocktailsRepository {
         return allGuests;
     }
 
-    public LiveData<List<Cocktail>> getCocktails(int guestId)
+    public LiveData<List<Cocktail>> getCocktails(UUID guestId)
     {
         return guestCocktailJoinDao.getCocktailsForUsers(guestId);
     }

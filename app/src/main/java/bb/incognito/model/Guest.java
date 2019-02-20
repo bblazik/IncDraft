@@ -10,13 +10,17 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 public class Guest implements Parcelable {
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+
+    @PrimaryKey @NotNull
+    private UUID id;
 
     @ColumnInfo(name = "name")
     @SerializedName("name")
@@ -34,7 +38,7 @@ public class Guest implements Parcelable {
     @SerializedName("cocktailList")
     List<Cocktail> cocktailList = new ArrayList<>();
 
-    public Guest(int id, String name, float discount, String notes, List<Cocktail> cocktailList) {
+    public Guest(UUID id, String name, float discount, String notes, List<Cocktail> cocktailList) {
         this.id = id;
         this.name = name;
         this.discount = discount;
@@ -44,6 +48,7 @@ public class Guest implements Parcelable {
 
     @Ignore
     public Guest(String name) {
+        id = UUID.randomUUID();
         this.name = name;
     }
 
@@ -100,16 +105,16 @@ public class Guest implements Parcelable {
     }
 
 
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
     protected Guest(Parcel in) {
-        id = in.readInt();
+        id = UUID.fromString(in.readString());
         name = in.readString();
         discount = in.readFloat();
         notes = in.readString();
@@ -123,7 +128,7 @@ public class Guest implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(id);
+        parcel.writeString(id.toString());
         parcel.writeString(name);
         parcel.writeFloat(discount);
         parcel.writeString(notes);

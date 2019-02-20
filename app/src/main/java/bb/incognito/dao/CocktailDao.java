@@ -7,6 +7,7 @@ import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
 import java.util.List;
+import java.util.UUID;
 
 import bb.incognito.model.Cocktail;
 import bb.incognito.model.Guest;
@@ -21,7 +22,7 @@ public interface CocktailDao {
     LiveData<List<Cocktail>> getCocktailsForGuest(List<Integer> cocktailIds);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    long insertCocktail(Cocktail cocktail);
+    void insertCocktail(Cocktail cocktail);
 
     @Query("DELETE FROM cocktail")
     void deleteAll();

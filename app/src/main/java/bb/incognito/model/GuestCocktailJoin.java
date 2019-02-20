@@ -4,6 +4,10 @@ package bb.incognito.model;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.UUID;
+
 import static android.arch.persistence.room.ForeignKey.CASCADE;
 
 @Entity(tableName = "guest_cocktail_join",
@@ -18,10 +22,12 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
                         childColumns = "cocktailId")
         })
 public class GuestCocktailJoin {
-    public final int guestId;
-    public final int cocktailId;
+    @NotNull
+    public final UUID guestId;
+    @NotNull
+    public final UUID cocktailId;
 
-    public GuestCocktailJoin(int guestId, int cocktailId) {
+    public GuestCocktailJoin(UUID guestId, UUID cocktailId) {
         this.guestId = guestId;
         this.cocktailId = cocktailId;
     }
