@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import bb.incognito.utils.UUIDTypeConverter;
+
 @Entity
 public class Cocktail implements Parcelable {
 
@@ -29,6 +31,7 @@ public class Cocktail implements Parcelable {
     @ColumnInfo(name = "cocktail_id")
     @PrimaryKey
     @NotNull
+    @SerializedName("uuid")
     private UUID id;
 
     @ColumnInfo(name = "name")
@@ -41,11 +44,45 @@ public class Cocktail implements Parcelable {
 
     @ColumnInfo(name = "notes")
     @SerializedName("notes")
+    @Ignore
     String notes;
 
     @ColumnInfo(name = "other")
     @SerializedName("other")
+    @Ignore
     String other;
+
+    @SerializedName("ingredients")
+    @Ignore
+    String ingredients;
+
+    @SerializedName("glassware")
+    @Ignore
+    String glassware;
+
+    @SerializedName("technique")
+    @Ignore
+    String technique;
+
+    @SerializedName("signature")
+    @Ignore
+    Boolean signature;
+
+    @SerializedName("created_at")
+    @Ignore
+    String created_at;
+
+    @SerializedName("updated_at")
+    @Ignore
+    String updated_at;
+
+    @SerializedName("url")
+    @Ignore
+    String url;
+
+    @SerializedName("id")
+    @Ignore
+    Integer cocktail_id;
 
     @Ignore
     public Cocktail(String name, List<String> tags, String notes, String other) {
@@ -53,6 +90,32 @@ public class Cocktail implements Parcelable {
         this.tags = tags;
         this.notes = notes;
         this.other = other;
+    }
+
+    @Ignore
+    public Cocktail(@NotNull UUID id, String name, String ingredients, String glassware, String technique, Boolean signature, String created_at, String updated_at, String url) {
+        this.id = id;
+        this.name = name;
+        this.ingredients = ingredients;
+        this.glassware = glassware;
+        this.technique = technique;
+        this.signature = signature;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
+        this.url = url;
+    }
+
+    @Ignore
+    public Cocktail(String id, String name, String ingredients, String glassware, String technique, Boolean signature, String created_at, String updated_at, String url) {
+        this.id = UUID.fromString(id);
+        this.name = name;
+        this.ingredients = ingredients;
+        this.glassware = glassware;
+        this.technique = technique;
+        this.signature = signature;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
+        this.url = url;
     }
 
     @Ignore

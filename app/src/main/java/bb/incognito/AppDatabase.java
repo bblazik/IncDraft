@@ -8,8 +8,12 @@ import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.google.android.gms.common.api.Api;
+
+import java.io.IOException;
+import java.util.List;
 
 import bb.incognito.dao.CocktailDao;
 import bb.incognito.dao.GuestCocktailJoinDao;
@@ -19,9 +23,10 @@ import bb.incognito.model.Cocktail;
 import bb.incognito.model.Guest;
 import bb.incognito.model.GuestCocktailJoin;
 import bb.incognito.utils.UUIDTypeConverter;
+import okhttp3.ResponseBody;
 import retrofit2.Response;
 
-@Database(entities = {Guest.class, Cocktail.class, GuestCocktailJoin.class}, version = 13, exportSchema = false)
+@Database(entities = {Guest.class, Cocktail.class, GuestCocktailJoin.class}, version = 14, exportSchema = false)
 @TypeConverters({UUIDTypeConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
     public abstract GuestDao guestDao();
@@ -68,6 +73,14 @@ public abstract class AppDatabase extends RoomDatabase {
         @Override
         protected Void doInBackground(final Void... params) {
 
+            List<Cocktail> cocktailList = null;
+            Service service = API.getClient();
+            try {
+                cocktailList = service.getCocktails().execute().body();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
             guestCocktailJoinDao.deleteAll();
             cocktailDao.deleteAll();
             guestDao.deleteAll();
@@ -77,16 +90,21 @@ public abstract class AppDatabase extends RoomDatabase {
             guestDao.insertGuest(guest);
 
 
-            Cocktail cocktail = new Cocktail("Mohito");
-            cocktailDao.insertCocktail(cocktail);
+            for(Cocktail cocktail: cocktailList)
+            {
+                cocktailDao.insertCocktail(cocktail);
+            }
 
-            cocktail = new Cocktail("Dajkiłe");
-            cocktailDao.insertCocktail(cocktail);
+//            Cocktail cocktail = new Cocktail("Mohito");
+//            cocktailDao.insertCocktail(cocktail);
+//
+//            cocktail = new Cocktail("Dajkiłe");
+//            cocktailDao.insertCocktail(cocktail);
+//
+//            cocktail = new Cocktail("ManHatAn");
+//            cocktailDao.insertCocktail(cocktail);
 
-            cocktail = new Cocktail("ManHatAn");
-            cocktailDao.insertCocktail(cocktail);
-
-            guestCocktailJoinDao.insert( new GuestCocktailJoin(guest.getId(), cocktail.getId()) );
+//            guestCocktailJoinDao.insert( new GuestCocktailJoin(guest.getId(), cocktail.getId()) );
 
             return null;
         }

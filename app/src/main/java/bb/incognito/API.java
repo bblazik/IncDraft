@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class API {
     private static String url = "http://frelia.org:3000";
-    public bb.incognito.Service getClient() {
+    public static bb.incognito.Service getClient() {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(
                         chain -> {
