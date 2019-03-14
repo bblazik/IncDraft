@@ -53,19 +53,15 @@ public class Cocktail implements Parcelable {
     String other;
 
     @SerializedName("ingredients")
-    @Ignore
     String ingredients;
 
     @SerializedName("glassware")
-    @Ignore
     String glassware;
 
     @SerializedName("technique")
-    @Ignore
     String technique;
 
     @SerializedName("signature")
-    @Ignore
     Boolean signature;
 
     @SerializedName("created_at")
@@ -82,7 +78,48 @@ public class Cocktail implements Parcelable {
 
     @SerializedName("id")
     @Ignore
-    Integer cocktail_id;
+    Integer cocktail_idx;
+
+    public String getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(String ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public String getGlassware() {
+        return glassware;
+    }
+
+    public void setGlassware(String glassware) {
+        this.glassware = glassware;
+    }
+
+    public String getTechnique() {
+        return technique;
+    }
+
+    public void setTechnique(String technique) {
+        this.technique = technique;
+    }
+
+    public Boolean getSignature() {
+        return signature;
+    }
+
+    public void setSignature(Boolean signature) {
+        this.signature = signature;
+    }
+
+    public Cocktail(@NotNull UUID id, String name, String ingredients, String glassware, String technique, Boolean signature) {
+        this.id = id;
+        this.name = name;
+        this.ingredients = ingredients;
+        this.glassware = glassware;
+        this.technique = technique;
+        this.signature = signature;
+    }
 
     @Ignore
     public Cocktail(String name, List<String> tags, String notes, String other) {
@@ -124,10 +161,15 @@ public class Cocktail implements Parcelable {
         this.id = id;
     }
 
-    public Cocktail(String name)
+    @Ignore
+    public Cocktail(String name,String ingredients, String glassware, String technique, Boolean signature)
     {
         id = UUID.randomUUID();
         this.name = name;
+        this.ingredients = ingredients;
+        this.glassware = glassware;
+        this.technique = technique;
+        this.signature = signature;
     }
 
     public String getName() {
@@ -167,6 +209,10 @@ public class Cocktail implements Parcelable {
         tags = in.readArrayList(Cocktail.class.getClassLoader());
         notes = in.readString();
         other = in.readString();
+        ingredients = in.readString();
+        glassware = in.readString();
+        technique = in.readString();
+        signature = Boolean.valueOf(in.readString());
     }
 
     @Override
@@ -180,6 +226,10 @@ public class Cocktail implements Parcelable {
         parcel.writeList(tags);
         parcel.writeString(notes);
         parcel.writeString(other);
+        parcel.writeString(ingredients);
+        parcel.writeString(glassware);
+        parcel.writeString(technique);
+        parcel.writeString(Boolean.toString(signature));
     }
 
     public static final Parcelable.Creator<Cocktail> CREATOR

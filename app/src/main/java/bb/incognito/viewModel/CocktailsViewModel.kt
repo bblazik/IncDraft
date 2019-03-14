@@ -15,13 +15,11 @@ class CocktailsViewModel(application: Application) : AndroidViewModel(applicatio
     private val repository: CocktailRepository
     private val guestWithCocktailsRepository : GuestWithCocktailsRepository
     val allCocktails: LiveData<MutableList<Cocktail>>
-    //val cocktailsForGuest : LiveData<List<Cocktail>>
     init {
         repository = CocktailRepository(application)
         guestWithCocktailsRepository = GuestWithCocktailsRepository(application)
-
-        //cocktailsForGuest = guestWithCocktailsRepository.getCocktails()
         allCocktails = repository.allCocktails
+        print("dupa")
     }
 
     fun onClick(view: View) {

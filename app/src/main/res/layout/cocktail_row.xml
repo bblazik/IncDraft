@@ -2,25 +2,23 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <import type="android.view.View" />
+        <import type="android.view.ViewGroup.LayoutParams" />
         <variable name="viewModel" type="bb.incognito.viewModel.CocktailRowVM" />
     </data>
 
     <android.support.v7.widget.CardView
         android:id="@+id/cocktail_row"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/material_list_two_line_normal_height"
+        android:minHeight="@dimen/material_list_two_line_normal_height"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/material_list_text_first_position_margin_start"
         android:layout_marginEnd="@dimen/material_list_text_last_position_margin_end"
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
         android:layout_marginTop="8dp"
         android:orientation="vertical"
+        android:onClick="@{viewModel::onItemClick}"
         android:onLongClick="@{viewModel::onLongClick}">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -28,27 +26,102 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/material_list_text_first_position_margin_start"
                 android:layout_marginEnd="@dimen/material_list_text_last_position_margin_end"
-                android:gravity="center"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/cocktailName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:gravity="center"
+                    android:layout_gravity="center"
                     android:text="@{viewModel.name}"
-                    android:textSize="@dimen/material_list_normal_primary_text_size" />
+                    android:textSize="@dimen/material_grid_list_header_footer_title_text_size_standard"
+                    android:layout_marginBottom="@dimen/material_card_divider_inset_padding_horizontal"/>
 
                 <TextView
-                    android:id="@+id/cocktailTags"
+                    android:id="@+id/textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@{viewModel.tags}"
-                    android:textSize="@dimen/material_list_normal_secondary_text_size" />
+                    android:visibility="@{viewModel.extended? View.VISIBLE: View.GONE}"
+                    android:textSize="@dimen/material_list_normal_primary_text_size"
+                    android:text="Ingredients" />
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:visibility="@{viewModel.extended? View.VISIBLE: View.GONE}"
+                    android:background="?android:attr/listDivider" />
+
+                <TextView
+                    android:id="@+id/ing"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/material_card_divider_inset_padding_horizontal"
+                    android:text="@{viewModel.ingredients}"
+                    android:visibility="@{viewModel.extended? View.VISIBLE: View.GONE}"
+                    android:textSize="@dimen/material_list_normal_primary_text_size"/>
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="@{viewModel.extended? View.VISIBLE: View.GONE}"
+                    android:textSize="@dimen/material_list_normal_primary_text_size"
+                    android:text="Glass" />
+
+                <View
+                    android:id="@+id/divider2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:visibility="@{viewModel.extended? View.VISIBLE: View.GONE}"
+                    android:background="?android:attr/listDivider" />
+
+                <TextView
+                    android:id="@+id/glass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/material_card_divider_inset_padding_horizontal"
+                    android:text="@{viewModel.glassware}"
+                    android:textSize="@dimen/material_list_normal_primary_text_size"
+                    android:visibility="@{viewModel.extended? View.VISIBLE: View.GONE}"/>
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="@{viewModel.extended? View.VISIBLE: View.GONE}"
+                    android:textSize="@dimen/material_list_normal_primary_text_size"
+                    android:text="Technique" />
+
+                <View
+                    android:id="@+id/divider3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:visibility="@{viewModel.extended? View.VISIBLE: View.GONE}"
+                    android:background="?android:attr/listDivider"
+                    />
+
+                <!--to concat string use ``-->
+
+                <TextView
+                    android:id="@+id/technique"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/material_card_divider_inset_padding_horizontal"
+                    android:text="@{viewModel.technique}"
+                    android:textSize="@dimen/material_list_normal_primary_text_size"
+                    android:visibility="@{viewModel.extended? View.VISIBLE: View.GONE}"/>
+
+                <!--<TextView-->
+                    <!--android:id="@+id/author"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="@{viewModel.getSignatureDescription? `This is author cocktail`: `This is not author cocktail`}"-->
+                    <!--android:textSize="@dimen/material_list_normal_primary_text_size"-->
+                    <!--android:visibility="@{viewModel.extended? View.VISIBLE: View.GONE}"/>-->
 
             </LinearLayout>
 
@@ -59,7 +132,6 @@
                 android:layout_weight="6"
                 android:visibility="gone" />
 
-        </LinearLayout>
-
     </android.support.v7.widget.CardView>
+
 </layout>
