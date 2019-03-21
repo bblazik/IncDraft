@@ -97,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="@{viewModel.closeButton}"
-                android:text="cancel button" />
+                android:text="@string/cancel" />
 
             <Button
                 android:id="@+id/acceptButton"
@@ -107,7 +107,7 @@
                 android:layout_weight="1"
                 android:onClick="@{viewModel.acceptButton}"
                 android:backgroundTint="@color/colorAccent"
-                android:text="accept button" />
+                android:text="@string/add_guest_button" />
         </LinearLayout>
     </LinearLayout>
 </layout>

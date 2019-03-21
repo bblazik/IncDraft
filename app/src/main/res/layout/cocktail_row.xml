@@ -46,7 +46,7 @@
                     android:layout_height="wrap_content"
                     android:visibility="@{viewModel.extended? View.VISIBLE: View.GONE}"
                     android:textSize="@dimen/material_list_normal_primary_text_size"
-                    android:text="Ingredients" />
+                    android:text="@string/ingredients" />
 
                 <View
                     android:id="@+id/divider"
@@ -70,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:visibility="@{viewModel.extended? View.VISIBLE: View.GONE}"
                     android:textSize="@dimen/material_list_normal_primary_text_size"
-                    android:text="Glass" />
+                    android:text="@string/glass" />
 
                 <View
                     android:id="@+id/divider2"
@@ -94,7 +94,7 @@
                     android:layout_height="wrap_content"
                     android:visibility="@{viewModel.extended? View.VISIBLE: View.GONE}"
                     android:textSize="@dimen/material_list_normal_primary_text_size"
-                    android:text="Technique" />
+                    android:text="@string/technique" />
 
                 <View
                     android:id="@+id/divider3"

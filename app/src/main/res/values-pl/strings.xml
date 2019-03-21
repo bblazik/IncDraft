@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Incognito</string>
+    <string name="app_label">Incognito</string>
+    <string name="discount">Zniżka: %1$s %%</string>
+    <string name="guests">Goście</string>
+    <string name="cocktails">Koktajle</string>
+    <string name="ingredients">Składniki</string>
+    <string name="glass">Szkło</string>
+    <string name="technique">Technika</string>
+    <string name="add_cocktail">Dodaj koktajl</string>
+    <string name="cancel">Anuluj</string>
+    <string name="add_guest_button">Dodaj gościa</string>
+    <string name="action_settings">Ustawienia</string>
+</resources>
