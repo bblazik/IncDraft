@@ -29,6 +29,7 @@ public class CocktailRowVM extends BaseObservable{
 
     public String getIngredients(){return cocktail.getIngredients();}
     public String getGlassware() { return cocktail.getGlassware(); }
+    public String getGarnish() { return cocktail.getGarnish(); }
     public String getTechnique() {
         return cocktail.getTechnique();
     }

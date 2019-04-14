@@ -80,6 +80,33 @@ public class Cocktail implements Parcelable {
     @Ignore
     Integer cocktail_idx;
 
+    @SerializedName("garnish")
+    String garnish;
+
+    @SerializedName("menu")
+    @Ignore
+    boolean menu;
+
+    public String getGarnish() {
+        return garnish;
+    }
+
+    public void setGarnish(String garnish) {
+        this.garnish = garnish;
+    }
+
+    public boolean isMenu() {
+        return menu;
+    }
+
+    public void setMenu(boolean menu) {
+        this.menu = menu;
+    }
+
+    public boolean getMenu() {
+        return menu;
+    }
+
     public String getIngredients() {
         return ingredients;
     }

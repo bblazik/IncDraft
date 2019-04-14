@@ -22,6 +22,7 @@ class CocktailsFragment : Fragment(), SearchView.OnQueryTextListener {
     private var viewModel: CocktailsViewModel? = null
     private var adapter: CocktailAdapter? = null
     private var sv: SearchView? = null
+    var menu = false
     internal var cocktailFragmentBinding: FragmentCocktailsBinding? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -31,7 +32,9 @@ class CocktailsFragment : Fragment(), SearchView.OnQueryTextListener {
 
         setBinding()
         viewModel!!.allCocktails.observe(this,
-                Observer<MutableList<Cocktail>> { cocktails -> adapter!!.cocktailList = cocktails!! })
+                Observer<MutableList<Cocktail>> { cocktails ->
+                    if (menu) adapter!!.cocktailList = cocktails!!.filter { cocktail -> cocktail.menu.equals(true) }.toMutableList()
+                    else adapter!!.cocktailList = cocktails!!})
         sv!!.setOnQueryTextListener(this)
         return cocktailFragmentBinding!!.root
     }

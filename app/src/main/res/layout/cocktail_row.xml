@@ -115,6 +115,31 @@
                     android:textSize="@dimen/material_list_normal_primary_text_size"
                     android:visibility="@{viewModel.extended? View.VISIBLE: View.GONE}"/>
 
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="@{viewModel.extended? View.VISIBLE: View.GONE}"
+                    android:textSize="@dimen/material_list_normal_primary_text_size"
+                    android:text="@string/garnish" />
+
+                <View
+                    android:id="@+id/divider4"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:visibility="@{viewModel.extended? View.VISIBLE: View.GONE}"
+                    android:background="?android:attr/listDivider"
+                    />
+
+                <TextView
+                    android:id="@+id/garnish"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/material_card_divider_inset_padding_horizontal"
+                    android:text="@{viewModel.garnish}"
+                    android:textSize="@dimen/material_list_normal_primary_text_size"
+                    android:visibility="@{viewModel.extended? View.VISIBLE: View.GONE}"/>
+
                 <!--<TextView-->
                     <!--android:id="@+id/author"-->
                     <!--android:layout_width="match_parent"-->
