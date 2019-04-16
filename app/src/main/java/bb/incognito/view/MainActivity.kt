@@ -22,14 +22,13 @@ class MainActivity : AppCompatActivity() {
             var transaction = supportFragmentManager.beginTransaction()
             when (tab.position) {
                 0 -> transaction.replace(R.id.container, CocktailsFragment()).commit()
-                1 -> transaction.replace(R.id.container, GuestsFragment()).commit()
-                2 ->
+                1 ->
                 {
                     var x = CocktailsFragment()
                     x.menu = true
                     transaction.replace(R.id.container, x).commit()
                 }
-
+                2 -> transaction.replace(R.id.container, GuestsFragment()).commit()
             }
         }
         override fun onTabUnselected(tab: TabLayout.Tab) {}
