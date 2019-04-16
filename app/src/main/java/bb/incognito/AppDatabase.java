@@ -26,7 +26,7 @@ import bb.incognito.utils.UUIDTypeConverter;
 import okhttp3.ResponseBody;
 import retrofit2.Response;
 
-@Database(entities = {Guest.class, Cocktail.class, GuestCocktailJoin.class}, version = 17, exportSchema = false)
+@Database(entities = {Guest.class, Cocktail.class, GuestCocktailJoin.class}, version = 18, exportSchema = false)
 @TypeConverters({UUIDTypeConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
     public abstract GuestDao guestDao();

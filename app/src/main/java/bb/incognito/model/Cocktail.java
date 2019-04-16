@@ -84,7 +84,6 @@ public class Cocktail implements Parcelable {
     String garnish;
 
     @SerializedName("menu")
-    @Ignore
     boolean menu;
 
     public String getGarnish() {
@@ -95,6 +94,7 @@ public class Cocktail implements Parcelable {
         this.garnish = garnish;
     }
 
+    @Ignore
     public boolean isMenu() {
         return menu;
     }
@@ -139,13 +139,14 @@ public class Cocktail implements Parcelable {
         this.signature = signature;
     }
 
-    public Cocktail(@NotNull UUID id, String name, String ingredients, String glassware, String technique, Boolean signature) {
+    public Cocktail(@NotNull UUID id, String name, String ingredients, String glassware, String technique, Boolean signature, Boolean menu) {
         this.id = id;
         this.name = name;
         this.ingredients = ingredients;
         this.glassware = glassware;
         this.technique = technique;
         this.signature = signature;
+        this.menu = menu;
     }
 
     @Ignore
@@ -240,6 +241,7 @@ public class Cocktail implements Parcelable {
         glassware = in.readString();
         technique = in.readString();
         signature = Boolean.valueOf(in.readString());
+        menu = signature = Boolean.valueOf(in.readString());
     }
 
     @Override
@@ -257,6 +259,7 @@ public class Cocktail implements Parcelable {
         parcel.writeString(glassware);
         parcel.writeString(technique);
         parcel.writeString(Boolean.toString(signature));
+        parcel.writeString(Boolean.toString(menu));
     }
 
     public static final Parcelable.Creator<Cocktail> CREATOR
