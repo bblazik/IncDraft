@@ -19,8 +19,6 @@ import bb.incognito.R
 import bb.incognito.view.adapter.GuestAdapter
 import bb.incognito.viewModel.GuestsViewModel
 import bb.incognito.databinding.GuestsFragmentBinding
-import bb.incognito.model.Guest
-import bb.incognito.model.GuestCocktailJoin
 import bb.incognito.model.GuestWithCocktails
 import bb.incognito.repositories.CocktailRepository
 import bb.incognito.repositories.GuestRepository

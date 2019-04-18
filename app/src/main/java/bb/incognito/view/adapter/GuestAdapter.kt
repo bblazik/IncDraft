@@ -11,12 +11,10 @@ import android.widget.Filterable
 import java.util.ArrayList
 
 import bb.incognito.R
-import bb.incognito.model.Guest
 import bb.incognito.viewModel.GuestRowVM
 import bb.incognito.databinding.GuestRowBinding
-import bb.incognito.model.Cocktail
+import bb.incognito.model.Guest
 import bb.incognito.model.GuestWithCocktails
-import bb.incognito.repositories.GuestRepository
 
 class GuestAdapter : RecyclerView.Adapter<GuestAdapter.GuestViewHolder>(), Filterable {
     private var guests: MutableList<GuestWithCocktails>? = null
