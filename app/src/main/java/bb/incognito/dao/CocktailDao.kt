@@ -14,7 +14,7 @@ import bb.incognito.model.Guest
 interface CocktailDao {
 
     @get:Query("SELECT * FROM Cocktail GROUP BY name")
-    val all: LiveData<List<Cocktail>>
+    val all: LiveData<MutableList<Cocktail>>
 
     @Query("SELECT * FROM Cocktail WHERE cocktail_id IN (:cocktailIds)")
     fun getCocktailsForGuest(cocktailIds: List<Int>): LiveData<List<Cocktail>>

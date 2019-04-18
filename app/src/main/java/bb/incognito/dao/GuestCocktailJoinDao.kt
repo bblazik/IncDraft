@@ -26,7 +26,7 @@ interface GuestCocktailJoinDao {
     @Query("SELECT * FROM cocktail" +
             " INNER JOIN guest_cocktail_join ON cocktail.cocktail_id=guest_cocktail_join.cocktailId " +
             "WHERE guest_cocktail_join.guestId=:guestId")
-    fun getCocktailsForUsers(guestId: UUID): LiveData<List<Cocktail>>
+    fun getCocktailsForUsers(guestId: UUID): LiveData<MutableList<Cocktail>>
 
     @Query("DELETE FROM guest_cocktail_join")
     fun deleteAll()

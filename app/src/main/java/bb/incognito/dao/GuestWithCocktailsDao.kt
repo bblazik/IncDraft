@@ -13,6 +13,6 @@ import bb.incognito.model.GuestWithCocktails
 @Dao
 interface GuestWithCocktailsDao {
     @Query("SELECT * FROM Guest")
-    fun loadGuestsAndCocktails(): LiveData<List<GuestWithCocktails>>
+    fun loadGuestsAndCocktails(): LiveData<MutableList<GuestWithCocktails>>
 }
 

@@ -12,14 +12,12 @@ import bb.incognito.view.AddCocktailFragment
 import bb.incognito.view.AddCocktailFragment.Companion.guest
 
 class CocktailsViewModel(application: Application) : AndroidViewModel(application) {
-    private val repository: CocktailRepository
+    private val repository: CocktailRepository = CocktailRepository(application)
     private val guestWithCocktailsRepository : GuestWithCocktailsRepository
     val allCocktails: LiveData<MutableList<Cocktail>>
     init {
-        repository = CocktailRepository(application)
         guestWithCocktailsRepository = GuestWithCocktailsRepository(application)
         allCocktails = repository.allCocktails
-        print("dupa")
     }
 
     fun onClick(view: View) {
