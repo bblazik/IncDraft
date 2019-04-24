@@ -6,7 +6,7 @@
 
     <data>
         <import type="android.view.View" />
-        <variable name="viewModel" type="bb.incognito.viewModel.GuestDetailVM" />
+        <variable name="viewModel" type="com.koktajlbar.incognitobook.viewModel.GuestDetailVM" />
     </data>
 
     <RelativeLayout

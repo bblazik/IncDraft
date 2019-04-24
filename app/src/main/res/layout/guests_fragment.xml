@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="viewModel" type="bb.incognito.viewModel.GuestsViewModel" />
+        <variable name="viewModel" type="com.koktajlbar.incognitobook.viewModel.GuestsViewModel" />
         <import type="android.view.View" />
     </data>
 
