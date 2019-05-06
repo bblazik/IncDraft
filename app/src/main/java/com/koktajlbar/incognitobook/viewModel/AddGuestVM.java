@@ -39,7 +39,7 @@ public class AddGuestVM extends BaseObservable {
         @Override
         public void onClick(View v) {
             if(fieldsNotEmpty()) {
-                Guest newGuest = new Guest(name);
+                Guest newGuest = new Guest(name, discount, notes);
                 guestRepository.insert(newGuest);
                 df.dismiss();
             }else {

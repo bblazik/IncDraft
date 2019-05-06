@@ -62,7 +62,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="@{@string/discount(viewModel.discount)}"
+                        android:text="@{viewModel.discount}"
                         android:textSize="@dimen/material_card_title_block_subtitle_text_size" />
 
                     <TextView
@@ -74,7 +74,6 @@
                         android:text="@{viewModel.notes}"
                         android:paddingTop="@dimen/material_card_supporting_text_padding_top"
                         android:paddingBottom="@dimen/material_card_supporting_text_padding_bottom"
-                        android:paddingHorizontal="@dimen/material_card_supporting_text_padding_horizontal"
                         android:textSize="@dimen/material_card_supporting_text_text_size" />
                 </LinearLayout>
 

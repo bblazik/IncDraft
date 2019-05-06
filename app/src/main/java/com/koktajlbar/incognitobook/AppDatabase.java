@@ -78,11 +78,11 @@ public abstract class AppDatabase extends RoomDatabase {
 
             guestCocktailJoinDao.deleteAll();
             cocktailDao.deleteAll();
-            guestDao.deleteAll();
-            Guest guest = new Guest("Dupa 1");
-            guestDao.insertGuest(guest);
-            guest = new Guest("Dupa 2");
-            guestDao.insertGuest(guest);
+//            guestDao.deleteAll();
+//            Guest guest = new Guest("Dupa 1");
+//            guestDao.insertGuest(guest);
+//            guest = new Guest("Dupa 2");
+//            guestDao.insertGuest(guest);
 
 
             for(Cocktail cocktail: cocktailList)

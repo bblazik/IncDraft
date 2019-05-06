@@ -65,7 +65,7 @@ class CocktailAdapter : RecyclerView.Adapter<CocktailAdapter.CocktailViewHolder>
             if (b)
                 checkedCocktails.add(cocktails[position])
             else
-                checkedCocktails.removeAt(position)
+                checkedCocktails.remove(cocktails[position])
         }
     }
 

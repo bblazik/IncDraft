@@ -61,6 +61,7 @@ public class Guest implements Parcelable {
     }
 
     public Guest(String name, float discount, String notes) {
+        id = UUID.randomUUID();
         this.name = name;
         this.discount = discount;
         this.notes = notes;

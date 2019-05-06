@@ -33,10 +33,6 @@ public class GuestDetailVM {
     public String getNotes(){return guest.getGuest().getNotes();}
     public void setNotes(String note) {
         guest.getGuest().setNotes(note);}
-    public List<Cocktail> getCocktailList()
-    {
-        return guest.getGuest().getCocktailList();
-    }
 
     public void onClick(View view) {
         fragmentManager.beginTransaction().replace(R.id.container2, AddCocktailFragment.Companion.launch(guest)).addToBackStack(null).commit();
