@@ -12,4 +12,5 @@
     <string name="cancel">Anuluj</string>
     <string name="add_guest_button">Dodaj gościa</string>
     <string name="action_settings">Ustawienia</string>
+    <string name="InternetError">Host nie został odnaleziony, sprawdź połączenie z internetem</string>
 </resources>

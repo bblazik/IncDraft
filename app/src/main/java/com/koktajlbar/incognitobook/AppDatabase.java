@@ -8,6 +8,7 @@ import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,6 +22,9 @@ import com.koktajlbar.incognitobook.model.Guest;
 import com.koktajlbar.incognitobook.model.GuestCocktailJoin;
 import com.koktajlbar.incognitobook.utils.UUIDTypeConverter;
 
+import retrofit2.Response;
+import retrofit2.Retrofit;
+
 @Database(entities = {Guest.class, Cocktail.class, GuestCocktailJoin.class}, version = 19, exportSchema = false)
 @TypeConverters({UUIDTypeConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
@@ -30,8 +34,10 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract GuestCocktailJoinDao guestCocktailJoinDao();
 
     private static AppDatabase INSTANCE;
+    private static Context mcontext;
 
     public static AppDatabase getDatabase(final Context context) {
+        mcontext = context;
         if (INSTANCE == null) {
             synchronized (AppDatabase.class) {
                 if (INSTANCE == null) {
@@ -54,7 +60,7 @@ public abstract class AppDatabase extends RoomDatabase {
         }
     };
 
-    private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
+    private static class PopulateDbAsync extends AsyncTask<Void, Void, Boolean> {
         private final GuestDao guestDao;
         private final CocktailDao cocktailDao;
         private final GuestCocktailJoinDao guestCocktailJoinDao;
@@ -66,42 +72,32 @@ public abstract class AppDatabase extends RoomDatabase {
         }
 
         @Override
-        protected Void doInBackground(final Void... params) {
+        protected Boolean doInBackground(final Void... params) {
 
             List<Cocktail> cocktailList = null;
             Service service = API.getClient();
+
+            guestCocktailJoinDao.deleteAll();
+            cocktailDao.deleteAll();
+
             try {
                 cocktailList = service.getCocktails().execute().body();
             } catch (IOException e) {
                 e.printStackTrace();
+                return false;
             }
 
-            guestCocktailJoinDao.deleteAll();
-            cocktailDao.deleteAll();
-//            guestDao.deleteAll();
-//            Guest guest = new Guest("Dupa 1");
-//            guestDao.insertGuest(guest);
-//            guest = new Guest("Dupa 2");
-//            guestDao.insertGuest(guest);
-
-
-            for(Cocktail cocktail: cocktailList)
-            {
+            for(Cocktail cocktail: cocktailList) {
                 cocktailDao.insertCocktail(cocktail);
             }
+            return true;
+        }
 
-//            Cocktail cocktail = new Cocktail("Mohito");
-//            cocktailDao.insertCocktail(cocktail);
-//
-//            cocktail = new Cocktail("Dajkiłe");
-//            cocktailDao.insertCocktail(cocktail);
-//
-//            cocktail = new Cocktail("ManHatAn");
-//            cocktailDao.insertCocktail(cocktail);
-
-//            guestCocktailJoinDao.insert( new GuestCocktailJoin(guest.getId(), cocktail.getId()) );
-
-            return null;
+        @Override
+        protected void onPostExecute(Boolean executedSuccesfully) {
+            super.onPostExecute(executedSuccesfully);
+            if(!executedSuccesfully)
+                Toast.makeText(mcontext, mcontext.getText(R.string.InternetError), Toast.LENGTH_LONG).show();
         }
     }
 }
