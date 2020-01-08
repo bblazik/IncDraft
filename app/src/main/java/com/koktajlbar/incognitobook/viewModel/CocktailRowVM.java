@@ -1,18 +1,60 @@
 package com.koktajlbar.incognitobook.viewModel;
 
 import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
+import androidx.databinding.BindingAdapter;
+
 import android.view.View;
 
 import com.koktajlbar.incognitobook.R;
+import com.koktajlbar.incognitobook.databinding.FragmentCocktailDetailBinding;
 import com.koktajlbar.incognitobook.model.Cocktail;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerCallback;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
-public class CocktailRowVM extends BaseObservable{
+import org.jetbrains.annotations.NotNull;
+
+public class CocktailRowVM extends BaseObservable {
+
+    public boolean extended = false;
+    public boolean hasVideo = false;
 
     private Cocktail cocktail;
-    public boolean extended = false;
+
     public CocktailRowVM(Cocktail cocktail) {
         this.cocktail = cocktail;
+    }
+
+    @BindingAdapter("bind:videoId")
+    public static void setYoutubeLink(YouTubePlayerView youTubePlayerView, String customVideoId) {
+        youTubePlayerView.getYouTubePlayerWhenReady(new YouTubePlayerCallback() {
+            @Override
+            public void onYouTubePlayer(@NotNull YouTubePlayer youTubePlayer) {
+                if(customVideoId != "") {
+                    youTubePlayer.cueVideo(customVideoId, 0);
+                }
+            }
+        });
+    }
+
+    @Bindable
+    public boolean isExtendedAndHasAVideo() {
+        boolean isExtended = this.extended;
+        boolean hasVideo = getYoutubeLink().isEmpty();
+
+        return isExtended && !hasVideo;
+    }
+
+    public String getYoutubeLink() {
+        String videoUrl = cocktail.getYoutubeLink();
+        if(videoUrl == null) {
+            return "";
+        } else {
+            String[] array = cocktail.getYoutubeLink().split("=");
+            return array[array.length - 1];
+        }
     }
 
     public String getName(){ return cocktail.getName();}
@@ -38,13 +80,6 @@ public class CocktailRowVM extends BaseObservable{
     }
     public String getCategory() {
         return cocktail.getCategory();
-    }
-
-    public String getYoutubeLink() { return cocktail.getYoutubeLink(); }
-
-    public String getYoutubeVideoId() {
-        String[] array = getYoutubeLink().split("=");
-        return array[array.length - 1];
     }
 
     public boolean getSignatureDescription() {

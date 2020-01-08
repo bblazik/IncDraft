@@ -31,6 +31,16 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
+                <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                    android:id="@+id/youtube_player_view"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:visibility="@{viewModel.isExtendedAndHasAVideo ? View.VISIBLE : View.GONE}"
+                    app:videoId="@{viewModel.youtubeLink}"
+                    app:autoPlay="false"
+                    app:showFullScreenButton="true"
+                    />
+
                 <TextView
                     android:id="@+id/cocktailName"
                     android:layout_width="match_parent"
@@ -164,15 +174,6 @@
                     android:text="@{viewModel.garnish}"
                     android:textSize="@dimen/material_list_normal_primary_text_size"
                     android:visibility="@{viewModel.extended? View.VISIBLE: View.GONE}"/>
-
-                <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-                    android:id="@+id/youtube_player_view"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    app:videoId="@{viewModel.getYoutubeVideoId}"
-                    app:autoPlay="false"
-                    app:showFullScreenButton="true"
-                    />
 
             </LinearLayout>
 
