@@ -8,9 +8,9 @@ android {
     defaultConfig {
         applicationId "com.koktajlbar.incognitobook"
         minSdkVersion 23
-        targetSdkVersion 26
-        versionCode 3
-        versionName "0.0.2"
+        targetSdkVersion 28
+        versionCode 4
+        versionName "0.0.3"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
