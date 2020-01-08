@@ -19,14 +19,13 @@ class AddGuestFragment : DialogFragment() {
 
     internal lateinit var fragmentAddGuestBinding: FragmentAddGuestBinding
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         fragmentAddGuestBinding = DataBindingUtil.inflate(inflater!!,
                 R.layout.fragment_add_guest, container, false)
 
-        val pos = arguments.getInt("pos")
-        val edit = arguments.getBoolean("edit")
+        val pos = arguments!!.getInt("pos")
+        val edit = arguments!!.getBoolean("edit")
 
         fragmentAddGuestBinding.viewModel = AddGuestVM(this, edit, pos, guestRepository)
         return fragmentAddGuestBinding.root

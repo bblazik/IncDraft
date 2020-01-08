@@ -38,7 +38,7 @@ class GuestsFragment : Fragment(), SearchView.OnQueryTextListener {
                               savedInstanceState: Bundle?): View? {
 
         guestsViewModel = ViewModelProviders.of(this).get(GuestsViewModel::class.java)
-        guestsViewModel!!.setFragmentManager(this.fragmentManager)
+        guestsViewModel!!.setFragmentManager(this.fragmentManager!!)
         guestFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.guests_fragment, container, false)
 
         setBinding()
@@ -53,11 +53,11 @@ class GuestsFragment : Fragment(), SearchView.OnQueryTextListener {
         guestFragmentBinding!!.setLifecycleOwner(this)
 
         guestAdapter = GuestAdapter()
-        guestRepository = GuestRepository(activity.application)
-        guestWithCocktailsRepository = GuestWithCocktailsRepository(activity.application)
-        var cocktailRepository = CocktailRepository(activity.application)
+        guestRepository = GuestRepository(activity!!.application)
+        guestWithCocktailsRepository = GuestWithCocktailsRepository(activity!!.application)
+        var cocktailRepository = CocktailRepository(activity!!.application)
 
-        val swipeHandler = object : SwipeToDeleteCallback(context) {
+        val swipeHandler = object : SwipeToDeleteCallback(context!!) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
 
                 val removedGuest = guestAdapter!!.getGuests().get(viewHolder.adapterPosition)
@@ -75,7 +75,7 @@ class GuestsFragment : Fragment(), SearchView.OnQueryTextListener {
         itemTouchHelper.attachToRecyclerView(guestFragmentBinding!!.list)
         guestFragmentBinding!!.list.adapter = guestAdapter
         guestFragmentBinding!!.list.layoutManager = LinearLayoutManager(context)
-        sv = activity.findViewById(R.id.search)
+        sv = activity!!.findViewById(R.id.search)
     }
 
     override fun onQueryTextSubmit(s: String): Boolean {

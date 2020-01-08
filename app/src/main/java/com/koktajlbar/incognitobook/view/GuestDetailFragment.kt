@@ -42,16 +42,16 @@ class GuestDetailFragment : Fragment(), SearchView.OnQueryTextListener{
     }
 
     fun initDataBinding() {
-        var guest =  activity.intent.extras.getParcelable("GUEST") as GuestWithCocktails
-        guestWithCocktailsRepository = GuestWithCocktailsRepository(activity.application)
-        cocktailRepository = CocktailRepository(activity.application)
+        var guest =  activity!!.intent.extras.getParcelable("GUEST") as GuestWithCocktails
+        guestWithCocktailsRepository = GuestWithCocktailsRepository(activity!!.application)
+        cocktailRepository = CocktailRepository(activity!!.application)
         guest.cocktailList = guestWithCocktailsRepository?.getCocktails(guest.guest.id)
 
         setupAdapter(guest)
-        guestDetailViewModel = GuestDetailVM(guest, activity.supportFragmentManager, cocktailRepository)
+        guestDetailViewModel = GuestDetailVM(guest, activity!!.supportFragmentManager, cocktailRepository)
         guestDetailFragmentBinding!!.viewModel = guestDetailViewModel
 
-        sv = activity.findViewById(R.id.search)
+        sv = activity!!.findViewById(R.id.search)
         sv!!.setOnQueryTextListener(this)
     }
 
@@ -60,7 +60,7 @@ class GuestDetailFragment : Fragment(), SearchView.OnQueryTextListener{
         guest!!.cocktailList!!.observe(this,
                 Observer<MutableList<Cocktail>> { cocktails -> cocktailAdapter!!.cocktailList = cocktails!! })
 
-        val swipeHandler = object : SwipeToDeleteCallback(context) {
+        val swipeHandler = object : SwipeToDeleteCallback(context!!) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
 
                 val removedCocktail = cocktailAdapter!!.cocktailList.get(viewHolder.adapterPosition)

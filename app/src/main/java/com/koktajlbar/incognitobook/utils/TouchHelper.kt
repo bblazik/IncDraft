@@ -46,7 +46,7 @@ class TouchHelper : ItemTouchHelper.Callback() {
         super.onSelectedChanged(viewHolder, actionState)
     }
 
-    override fun clearView(recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder) {
+    override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
         super.clearView(recyclerView, viewHolder)
 
         viewHolder.itemView.alpha = ALPHA_FULL

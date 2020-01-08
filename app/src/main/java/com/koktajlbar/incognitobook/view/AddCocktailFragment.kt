@@ -31,7 +31,7 @@ class AddCocktailFragment : Fragment(), SearchView.OnQueryTextListener {
                               savedInstanceState: Bundle?): View? {
         fragmentAddCocktailBinding = DataBindingUtil.inflate(inflater,
                 R.layout.fragment_add_cocktail, container, false)
-        cocktailRepository = CocktailRepository(activity.application)
+        cocktailRepository = CocktailRepository(activity!!.application)
 
         var viewModel = ViewModelProviders.of(this).get(CocktailsViewModel::class.java)
         cocktailAdapter = CocktailAdapter() //get data of cocktails. from guest
@@ -41,19 +41,19 @@ class AddCocktailFragment : Fragment(), SearchView.OnQueryTextListener {
 
         viewModel.allCocktails.observe(this,
                 Observer<MutableList<Cocktail>> { cocktails -> cocktailAdapter!!.cocktailList = cocktails!! })
-        sv = activity.findViewById(R.id.search)
+        sv = activity!!.findViewById(R.id.search)
 
         fragmentAddCocktailBinding?.cancelButton?.setOnClickListener {
-            fragmentManager.popBackStack()
+            fragmentManager!!.popBackStack()
         }
 
         fragmentAddCocktailBinding?.acceptButton?.setOnClickListener {
-            var guestWithCocktailRepository = GuestWithCocktailsRepository(activity.application)
+            var guestWithCocktailRepository = GuestWithCocktailsRepository(activity!!.application)
             var checkedCocktails = cocktailAdapter!!.checkedCocktails
 
             for(cocktail in checkedCocktails)
                 guestWithCocktailRepository.insertRelation(GuestCocktailJoin(guest!!.guest.id, cocktail.id))
-            fragmentManager.popBackStack()
+            fragmentManager!!.popBackStack()
         }
 
         sv!!.setOnQueryTextListener(this)
