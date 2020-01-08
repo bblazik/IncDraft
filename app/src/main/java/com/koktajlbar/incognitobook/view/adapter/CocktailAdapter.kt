@@ -107,7 +107,7 @@ class CocktailAdapter : RecyclerView.Adapter<CocktailAdapter.CocktailViewHolder>
             val newList = ArrayList<Cocktail>(cocktails.size)
 
             for (c in cocktails) {
-                if (c.name.toLowerCase().contains(constraint))
+                if (c.name.toLowerCase().contains(constraint) || c.category.toLowerCase().contains((constraint)))
                     newList.add(c)
             }
             results.values = newList

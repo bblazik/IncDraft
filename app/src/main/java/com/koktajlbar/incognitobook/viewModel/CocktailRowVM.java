@@ -34,6 +34,9 @@ public class CocktailRowVM extends BaseObservable{
     public String getSignature() {
         return String.valueOf(cocktail.getSignature());
     }
+    public String getCategory() {
+        return cocktail.getCategory();
+    }
 
     public boolean getSignatureDescription() {
         return cocktail.getSignature();

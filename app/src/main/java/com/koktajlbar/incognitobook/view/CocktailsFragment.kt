@@ -10,7 +10,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
+import android.support.v7.widget.SearchView
 import com.koktajlbar.incognitobook.R
 import com.koktajlbar.incognitobook.databinding.FragmentCocktailsBinding
 import com.koktajlbar.incognitobook.model.Cocktail
@@ -22,7 +22,7 @@ class CocktailsFragment : Fragment(), SearchView.OnQueryTextListener {
     private var viewModel: CocktailsViewModel? = null
     private var adapter: CocktailAdapter? = null
     private var sv: SearchView? = null
-    var menu = false
+    var signature = false
     internal var cocktailFragmentBinding: FragmentCocktailsBinding? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -33,7 +33,7 @@ class CocktailsFragment : Fragment(), SearchView.OnQueryTextListener {
         setBinding()
         viewModel!!.allCocktails.observe(this,
                 Observer<MutableList<Cocktail>> { cocktails ->
-                    if (menu) adapter!!.cocktailList = cocktails!!.filter { cocktail -> cocktail.menu.equals(true) }.toMutableList()
+                    if (signature) adapter!!.cocktailList = cocktails!!.filter { cocktail -> cocktail.signature.equals(true) }.toMutableList()
                     else adapter!!.cocktailList = cocktails!!})
         sv!!.setOnQueryTextListener(this)
         return cocktailFragmentBinding!!.root

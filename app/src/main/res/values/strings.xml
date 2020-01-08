@@ -14,5 +14,8 @@
     <string name="add_guest_button">Add guest</string>
     <string name="garnish">Garnish</string>
     <string name="menu">Menu</string>
+    <string name="category">Category</string>
+    <string name="signature">Signature</string>
     <string name="InternetError">Cannot resolve host, check your network connection</string>
+    <string name="search_hint">Search by name or base alcohol</string>
 </resources>

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.app.AppCompatDelegate
+import android.support.v7.widget.SearchView
 import kotlinx.android.synthetic.main.activity_main.*
 
 import com.koktajlbar.incognitobook.R
@@ -13,6 +14,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val sv = findViewById<SearchView>(R.id.search)
+        sv.setMaxWidth(Integer.MAX_VALUE);
+        val queryHint = resources.getString(R.string.search_hint)
+        sv.setQueryHint(queryHint)
         supportFragmentManager.beginTransaction().add(R.id.container, CocktailsFragment()).commit()
         tabLayout.addOnTabSelectedListener(t)
     }
@@ -25,7 +30,7 @@ class MainActivity : AppCompatActivity() {
                 1 ->
                 {
                     var x = CocktailsFragment()
-                    x.menu = true
+                    x.signature = true
                     transaction.replace(R.id.container, x).commit()
                 }
                 2 -> transaction.replace(R.id.container, GuestsFragment()).commit()

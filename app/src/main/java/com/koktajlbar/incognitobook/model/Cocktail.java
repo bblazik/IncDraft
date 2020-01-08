@@ -84,6 +84,33 @@ public class Cocktail implements Parcelable {
     @SerializedName("menu")
     boolean menu;
 
+    @SerializedName("category")
+    String category;
+
+    public String getCategory() {
+        return category;
+    }
+
+    @Ignore
+    public Cocktail(@NotNull UUID id, String name, List<String> tags, String notes, String other, String ingredients, String glassware, String technique, Boolean signature, String created_at, String updated_at, String url, Integer cocktail_idx, String garnish, boolean menu, String category) {
+        this.id = id;
+        this.name = name;
+        this.tags = tags;
+        this.notes = notes;
+        this.other = other;
+        this.ingredients = ingredients;
+        this.glassware = glassware;
+        this.technique = technique;
+        this.signature = signature;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
+        this.url = url;
+        this.cocktail_idx = cocktail_idx;
+        this.garnish = garnish;
+        this.menu = menu;
+        this.category = category;
+    }
+
     public String getGarnish() {
         return garnish;
     }
@@ -137,7 +164,7 @@ public class Cocktail implements Parcelable {
         this.signature = signature;
     }
 
-    public Cocktail(@NotNull UUID id, String name, String ingredients, String glassware, String technique, Boolean signature, Boolean menu) {
+    public Cocktail(@NotNull UUID id, String name, String ingredients, String glassware, String technique, Boolean signature, Boolean menu, String category) {
         this.id = id;
         this.name = name;
         this.ingredients = ingredients;
@@ -145,6 +172,7 @@ public class Cocktail implements Parcelable {
         this.technique = technique;
         this.signature = signature;
         this.menu = menu;
+        this.category = category;
     }
 
     @Ignore
@@ -238,6 +266,7 @@ public class Cocktail implements Parcelable {
         ingredients = in.readString();
         glassware = in.readString();
         technique = in.readString();
+        category = in.readString();
         signature = Boolean.valueOf(in.readString());
         menu = signature = Boolean.valueOf(in.readString());
     }
@@ -256,6 +285,7 @@ public class Cocktail implements Parcelable {
         parcel.writeString(ingredients);
         parcel.writeString(glassware);
         parcel.writeString(technique);
+        parcel.writeString(category);
         parcel.writeString(Boolean.toString(signature));
         parcel.writeString(Boolean.toString(menu));
     }

@@ -25,7 +25,7 @@ import com.koktajlbar.incognitobook.utils.UUIDTypeConverter;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-@Database(entities = {Guest.class, Cocktail.class, GuestCocktailJoin.class}, version = 19, exportSchema = false)
+@Database(entities = {Guest.class, Cocktail.class, GuestCocktailJoin.class}, version = 20, exportSchema = false)
 @TypeConverters({UUIDTypeConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
     public abstract GuestDao guestDao();

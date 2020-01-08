@@ -11,29 +11,12 @@
             android:id="@+id/appBarLayout"
             android:gravity="right">
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
+            <android.support.v7.widget.SearchView
+                android:id="@+id/search"
+                android:queryHint="@string/search_hint"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                android:weightSum="1"
-                app:layout_scrollFlags="scroll|enterAlways|snap"
-                app:popupTheme="@style/AppTheme.PopupOverlay">
-
-                <RelativeLayout
-                    android:id="@+id/not"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.75">
-
-                    <android.widget.SearchView
-                        android:id="@+id/search"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        />
-                </RelativeLayout>
-            </android.support.v7.widget.Toolbar>
+                app:theme="@style/AppTheme.Toolbar" />
 
         </android.support.design.widget.AppBarLayout>
 
@@ -51,12 +34,7 @@
             <android.support.design.widget.TabItem
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/menu" />
-
-            <android.support.design.widget.TabItem
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/guests" />
+                android:text="@string/signature" />
 
         </android.support.design.widget.TabLayout>
 
