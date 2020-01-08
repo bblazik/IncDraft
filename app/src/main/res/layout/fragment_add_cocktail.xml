@@ -6,13 +6,13 @@
         <variable name="viewModel" type="com.koktajlbar.incognitobook.viewModel.CocktailsViewModel" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constrait"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -24,7 +24,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/cocktail_row">
 
-        </android.support.v7.widget.RecyclerView>
+        </androidx.recyclerview.widget.RecyclerView>
 
         <LinearLayout
             android:id="@+id/linearLayout2"
@@ -51,5 +51,5 @@
                 android:backgroundTint="@color/colorAccent"
                 android:text="@string/add_cocktail" />
         </LinearLayout>
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

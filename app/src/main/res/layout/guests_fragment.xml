@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.design.widget.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/addGuest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -25,13 +25,13 @@
             app:backgroundTint="@color/colorAccent"
             app:srcCompat="@drawable/ic_add_white_24dp" />
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingBottom="15dp"
             tools:listitem="@layout/guest_row">
 
-        </android.support.v7.widget.RecyclerView>
+        </androidx.recyclerview.widget.RecyclerView>
     </RelativeLayout>
 </layout>

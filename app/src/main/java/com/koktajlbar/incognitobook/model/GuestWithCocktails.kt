@@ -1,8 +1,8 @@
 package com.koktajlbar.incognitobook.model
 
-import android.arch.lifecycle.LiveData
-import android.arch.persistence.room.Embedded
-import android.arch.persistence.room.Ignore
+import androidx.lifecycle.LiveData
+import androidx.room.Embedded
+import androidx.room.Ignore
 import android.os.Parcel
 import android.os.Parcelable
 import java.util.*

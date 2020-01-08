@@ -1,16 +1,16 @@
 package com.koktajlbar.incognitobook.view
 
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.support.v7.widget.SearchView
+import androidx.appcompat.widget.SearchView
 import com.koktajlbar.incognitobook.R
 import com.koktajlbar.incognitobook.databinding.FragmentCocktailsBinding
 import com.koktajlbar.incognitobook.model.Cocktail

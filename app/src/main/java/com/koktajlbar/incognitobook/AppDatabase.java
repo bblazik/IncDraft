@@ -1,13 +1,13 @@
 package com.koktajlbar.incognitobook;
 
-import android.arch.persistence.db.SupportSQLiteDatabase;
-import android.arch.persistence.room.Database;
-import android.arch.persistence.room.Room;
-import android.arch.persistence.room.RoomDatabase;
-import android.arch.persistence.room.TypeConverters;
+import androidx.sqlite.db.SupportSQLiteDatabase;
+import androidx.room.Database;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -21,9 +21,6 @@ import com.koktajlbar.incognitobook.model.Cocktail;
 import com.koktajlbar.incognitobook.model.Guest;
 import com.koktajlbar.incognitobook.model.GuestCocktailJoin;
 import com.koktajlbar.incognitobook.utils.UUIDTypeConverter;
-
-import retrofit2.Response;
-import retrofit2.Retrofit;
 
 @Database(entities = {Guest.class, Cocktail.class, GuestCocktailJoin.class}, version = 20, exportSchema = false)
 @TypeConverters({UUIDTypeConverter.class})

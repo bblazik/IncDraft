@@ -1,6 +1,6 @@
 package com.koktajlbar.incognitobook.viewModel;
 
-import android.databinding.BaseObservable;
+import androidx.databinding.BaseObservable;
 import android.view.View;
 import android.widget.Toast;
 

@@ -1,12 +1,9 @@
 package com.koktajlbar.incognitobook.viewModel;
 
-import android.support.v4.app.FragmentManager;
+import androidx.fragment.app.FragmentManager;
 import android.view.View;
 
-import java.util.List;
-
 import com.koktajlbar.incognitobook.R;
-import com.koktajlbar.incognitobook.model.Cocktail;
 import com.koktajlbar.incognitobook.model.GuestWithCocktails;
 import com.koktajlbar.incognitobook.repositories.CocktailRepository;
 import com.koktajlbar.incognitobook.view.AddCocktailFragment;

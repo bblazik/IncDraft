@@ -1,14 +1,14 @@
 package com.koktajlbar.incognitobook.model;
 
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.ForeignKey;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
-import static android.arch.persistence.room.ForeignKey.CASCADE;
+import static androidx.room.ForeignKey.CASCADE;
 
 @Entity(tableName = "guest_cocktail_join",
         primaryKeys = { "guestId", "cocktailId" },

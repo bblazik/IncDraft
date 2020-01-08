@@ -1,17 +1,12 @@
 package com.koktajlbar.incognitobook.dao
 
 
-import android.arch.lifecycle.LiveData
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Delete
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.OnConflictStrategy
-import android.arch.persistence.room.Query
-import java.util.UUID
-
+import androidx.lifecycle.LiveData
+import androidx.room.*
 import com.koktajlbar.incognitobook.model.Cocktail
 import com.koktajlbar.incognitobook.model.Guest
 import com.koktajlbar.incognitobook.model.GuestCocktailJoin
+import java.util.*
 
 @Dao
 interface GuestCocktailJoinDao {

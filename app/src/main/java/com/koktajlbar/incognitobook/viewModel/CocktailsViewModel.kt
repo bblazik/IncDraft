@@ -1,8 +1,8 @@
 package com.koktajlbar.incognitobook.viewModel
 
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import android.view.View
 import com.koktajlbar.incognitobook.model.Cocktail
 import com.koktajlbar.incognitobook.repositories.CocktailRepository

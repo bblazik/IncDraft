@@ -1,9 +1,9 @@
 package com.koktajlbar.incognitobook.viewModel
 
 import android.app.Application
-import android.support.v4.app.FragmentManager
-import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.LiveData
+import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import android.view.View
 import com.koktajlbar.incognitobook.model.GuestWithCocktails
 import com.koktajlbar.incognitobook.repositories.GuestRepository

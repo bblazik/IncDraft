@@ -1,8 +1,8 @@
 package com.koktajlbar.incognitobook.view
 
-import android.support.v4.app.DialogFragment
+import androidx.fragment.app.DialogFragment
 import android.content.Context
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -35,11 +35,11 @@ class AddGuestFragment : DialogFragment() {
         super.onResume()
 
         fragmentAddGuestBinding.newName.requestFocus()
-        dialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
+        dialog!!.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
     }
 
     override fun dismiss() {
-        (dialog.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
+        (dialog!!.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
                 .hideSoftInputFromWindow(view!!.windowToken, 0)
         super.dismiss()
     }

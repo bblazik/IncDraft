@@ -6,7 +6,7 @@
         <variable name="viewModel" type="com.koktajlbar.incognitobook.viewModel.CocktailRowVM" />
     </data>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/cocktail_row"
         android:layout_width="match_parent"
         android:minHeight="@dimen/material_list_two_line_normal_height"
@@ -181,6 +181,6 @@
                 android:layout_weight="6"
                 android:visibility="gone" />
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
 </layout>
