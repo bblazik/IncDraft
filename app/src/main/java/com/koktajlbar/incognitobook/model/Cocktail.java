@@ -87,6 +87,33 @@ public class Cocktail implements Parcelable {
     @SerializedName("category")
     String category;
 
+    @SerializedName("youtube_link")
+    String youtube_link;
+
+    public String getYoutubeLink() {
+        return youtube_link;
+    }
+
+    public Cocktail(@NotNull UUID id, String name, List<String> tags, String notes, String other, String ingredients, String glassware, String technique, Boolean signature, String created_at, String updated_at, String url, Integer cocktail_idx, String garnish, boolean menu, String category, String youtube_link) {
+        this.id = id;
+        this.name = name;
+        this.tags = tags;
+        this.notes = notes;
+        this.other = other;
+        this.ingredients = ingredients;
+        this.glassware = glassware;
+        this.technique = technique;
+        this.signature = signature;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
+        this.url = url;
+        this.cocktail_idx = cocktail_idx;
+        this.garnish = garnish;
+        this.menu = menu;
+        this.category = category;
+        this.youtube_link = youtube_link;
+    }
+
     public String getCategory() {
         return category;
     }
@@ -164,7 +191,7 @@ public class Cocktail implements Parcelable {
         this.signature = signature;
     }
 
-    public Cocktail(@NotNull UUID id, String name, String ingredients, String glassware, String technique, Boolean signature, Boolean menu, String category) {
+    public Cocktail(@NotNull UUID id, String name, String ingredients, String glassware, String technique, Boolean signature, Boolean menu, String category, String youtube_link) {
         this.id = id;
         this.name = name;
         this.ingredients = ingredients;
@@ -173,6 +200,7 @@ public class Cocktail implements Parcelable {
         this.signature = signature;
         this.menu = menu;
         this.category = category;
+        this.youtube_link = youtube_link;
     }
 
     @Ignore
@@ -267,6 +295,7 @@ public class Cocktail implements Parcelable {
         glassware = in.readString();
         technique = in.readString();
         category = in.readString();
+        youtube_link = in.readString();
         signature = Boolean.valueOf(in.readString());
         menu = signature = Boolean.valueOf(in.readString());
     }
@@ -286,6 +315,7 @@ public class Cocktail implements Parcelable {
         parcel.writeString(glassware);
         parcel.writeString(technique);
         parcel.writeString(category);
+        parcel.writeString(youtube_link);
         parcel.writeString(Boolean.toString(signature));
         parcel.writeString(Boolean.toString(menu));
     }

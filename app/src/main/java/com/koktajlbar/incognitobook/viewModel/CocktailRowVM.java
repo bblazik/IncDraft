@@ -3,7 +3,9 @@ package com.koktajlbar.incognitobook.viewModel;
 import android.databinding.BaseObservable;
 import android.view.View;
 
+import com.koktajlbar.incognitobook.R;
 import com.koktajlbar.incognitobook.model.Cocktail;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
 public class CocktailRowVM extends BaseObservable{
 
@@ -36,6 +38,13 @@ public class CocktailRowVM extends BaseObservable{
     }
     public String getCategory() {
         return cocktail.getCategory();
+    }
+
+    public String getYoutubeLink() { return cocktail.getYoutubeLink(); }
+
+    public String getYoutubeVideoId() {
+        String[] array = getYoutubeLink().split("=");
+        return array[array.length - 1];
     }
 
     public boolean getSignatureDescription() {
