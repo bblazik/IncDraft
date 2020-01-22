@@ -10,7 +10,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class API {
-    private static String url = "http://frelia.org:3000";
+    private static String url = "https://incognito.frelia.org/api/v1/";
     public static com.koktajlbar.incognitobook.Service getClient() {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(
