@@ -47,6 +47,10 @@ data class Cocktail(
         @SerializedName("youtube_link")
         val youtubeLink: String,
 
+        @ColumnInfo(name = "video_id")
+        @SerializedName("video_id")
+        val videoId: String,
+
         @ColumnInfo(name = "signature")
         @SerializedName("signature")
         val signature: Boolean,

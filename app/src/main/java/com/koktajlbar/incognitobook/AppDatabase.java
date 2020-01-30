@@ -22,7 +22,7 @@ import com.koktajlbar.incognitobook.model.Guest;
 import com.koktajlbar.incognitobook.model.GuestCocktailJoin;
 import com.koktajlbar.incognitobook.utils.UUIDTypeConverter;
 
-@Database(entities = {Guest.class, Cocktail.class, GuestCocktailJoin.class}, version = 21, exportSchema = false)
+@Database(entities = {Guest.class, Cocktail.class, GuestCocktailJoin.class}, version = 23, exportSchema = false)
 @TypeConverters({UUIDTypeConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
     public abstract GuestDao guestDao();
