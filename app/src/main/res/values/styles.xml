@@ -1,18 +1,11 @@
 <resources>
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-    <style name="AppTheme.Toolbar" parent="AppTheme">
-        <item name="android:textColorPrimary">@color/material_color_white_70_percent</item>
-        <item name="android:textColorSecondary">@color/material_color_white_70_percent</item>
-        <item name="android:textColorHint">@color/material_color_white_70_percent</item>
+    
+    <style name="AppTheme.CollapsingToolbarLayout">
+        <item name="android:textColor">@color/material_color_white</item>
     </style>
 </resources>

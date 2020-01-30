@@ -2,7 +2,6 @@ package com.koktajlbar.incognitobook.view
 
 import androidx.lifecycle.Observer
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.lifecycle.ViewModelProvider
 import com.koktajlbar.incognitobook.R
 import com.koktajlbar.incognitobook.databinding.FragmentAddCocktailBinding
 import com.koktajlbar.incognitobook.model.Cocktail
@@ -33,8 +33,8 @@ class AddCocktailFragment : Fragment(), SearchView.OnQueryTextListener {
                 R.layout.fragment_add_cocktail, container, false)
         cocktailRepository = CocktailRepository(activity!!.application)
 
-        var viewModel = ViewModelProviders.of(this).get(CocktailsViewModel::class.java)
-        cocktailAdapter = CocktailAdapter() //get data of cocktails. from guest
+        var viewModel = ViewModelProvider(this).get(CocktailsViewModel::class.java)
+        cocktailAdapter = CocktailAdapter(activity) //get data of cocktails. from guest
         cocktailAdapter?.checkable = true
         fragmentAddCocktailBinding!!.list.adapter = cocktailAdapter
         fragmentAddCocktailBinding!!.list.layoutManager = LinearLayoutManager(context)

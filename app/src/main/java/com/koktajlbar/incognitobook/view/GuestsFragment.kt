@@ -1,7 +1,6 @@
 package com.koktajlbar.incognitobook.view
 
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.databinding.DataBindingUtil
 import android.graphics.Color
 import android.os.Bundle
@@ -14,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.lifecycle.ViewModelProvider
 
 import com.koktajlbar.incognitobook.R
 import com.koktajlbar.incognitobook.view.adapter.GuestAdapter
@@ -37,7 +37,7 @@ class GuestsFragment : Fragment(), SearchView.OnQueryTextListener {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        guestsViewModel = ViewModelProviders.of(this).get(GuestsViewModel::class.java)
+        guestsViewModel = ViewModelProvider(this).get(GuestsViewModel::class.java)
         guestsViewModel!!.setFragmentManager(this.fragmentManager!!)
         guestFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.guests_fragment, container, false)
 

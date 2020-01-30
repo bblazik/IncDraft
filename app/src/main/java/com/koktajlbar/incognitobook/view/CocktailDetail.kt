@@ -27,7 +27,7 @@ class CocktailDetail : AppCompatActivity() {
         var cocktail = intent.extras.getParcelable("Cocktail") as Cocktail
 
         binding = DataBindingUtil.setContentView(this, R.layout.fragment_cocktail_detail)
-        vm = CocktailRowVM(cocktail)
+        vm = CocktailRowVM(cocktail, applicationContext)
         binding!!.vm = vm
     }
 

@@ -19,8 +19,7 @@
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:weightSum="1"
-            app:layout_scrollFlags="scroll|enterAlways|snap"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
+            app:layout_scrollFlags="scroll|enterAlways|snap">
 
             <RelativeLayout
                 android:id="@+id/not"
