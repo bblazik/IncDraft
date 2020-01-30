@@ -7,6 +7,7 @@ import android.os.AsyncTask
 import com.koktajlbar.incognitobook.AppDatabase
 import com.koktajlbar.incognitobook.dao.CocktailDao
 import com.koktajlbar.incognitobook.model.Cocktail
+import java.util.UUID
 
 class CocktailRepository(application: Application) {
     private val cocktailDao: CocktailDao
