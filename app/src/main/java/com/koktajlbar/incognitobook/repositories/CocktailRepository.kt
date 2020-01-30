@@ -18,6 +18,10 @@ class CocktailRepository(application: Application) {
         allCocktails = cocktailDao.all
     }
 
+    fun getCocktail(uuid: UUID): LiveData<Cocktail> {
+        return cocktailDao.find_by_uuid(uuid)
+    }
+
     fun insert(cocktail: Cocktail) {
         insertAsyncTask(cocktailDao).execute(cocktail)
     }

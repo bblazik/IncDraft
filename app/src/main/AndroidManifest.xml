@@ -33,6 +33,7 @@
         </activity>
         <activity android:name="com.koktajlbar.incognitobook.view.GuestDetail" />
         <activity android:name="com.koktajlbar.incognitobook.view.CocktailDetail" />
+        <activity android:name=".view.CocktailDetailsActivity" />
     </application>
 
 </manifest>
