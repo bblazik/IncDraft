@@ -56,7 +56,7 @@ class GuestDetailFragment : Fragment(), SearchView.OnQueryTextListener{
     }
 
     private fun setupAdapter(guest: GuestWithCocktails) {
-        cocktailAdapter = CocktailAdapter() //get data of cocktails. from guest
+        cocktailAdapter = CocktailAdapter(activity) //get data of cocktails. from guest
         guest!!.cocktailList!!.observe(this,
                 Observer<MutableList<Cocktail>> { cocktails -> cocktailAdapter!!.cocktailList = cocktails!! })
 

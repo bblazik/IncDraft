@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import androidx.fragment.app.FragmentActivity
 
 import java.util.ArrayList
 
@@ -17,7 +18,7 @@ import com.koktajlbar.incognitobook.databinding.CocktailRowBinding
 import com.koktajlbar.incognitobook.model.Cocktail
 import com.koktajlbar.incognitobook.viewModel.CocktailRowVM
 
-class CocktailAdapter : RecyclerView.Adapter<CocktailAdapter.CocktailViewHolder>(), Filterable {
+class CocktailAdapter(val activity: FragmentActivity?) : RecyclerView.Adapter<CocktailAdapter.CocktailViewHolder>(), Filterable {
     private var cocktails: MutableList<Cocktail> = ArrayList()
     private var filteredCocktails: MutableList<Cocktail> = ArrayList()
     private val filter = ItemFilter()
@@ -85,7 +86,7 @@ class CocktailAdapter : RecyclerView.Adapter<CocktailAdapter.CocktailViewHolder>
 
         fun bindCard(cocktail: Cocktail) {
             if (cocktailRowBinding.viewModel == null) {
-                cocktailRowBinding.viewModel = CocktailRowVM(cocktail)
+                cocktailRowBinding.viewModel = CocktailRowVM(cocktail, activity)
             } else {
                 cocktailRowBinding!!.viewModel!!.setCocktail(cocktail)
             }
