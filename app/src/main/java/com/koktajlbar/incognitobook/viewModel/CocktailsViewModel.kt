@@ -1,23 +1,25 @@
 package com.koktajlbar.incognitobook.viewModel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import android.view.View
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.koktajlbar.incognitobook.model.Cocktail
-import com.koktajlbar.incognitobook.repositories.CocktailRepository
-import com.koktajlbar.incognitobook.repositories.GuestWithCocktailsRepository
+import com.koktajlbar.incognitobook.repositories.DefaultCocktailRepository
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class CocktailsViewModel(application: Application) : AndroidViewModel(application) {
-    private val repository: CocktailRepository = CocktailRepository(application)
-    private val guestWithCocktailsRepository : GuestWithCocktailsRepository
-    val allCocktails: LiveData<MutableList<Cocktail>>
+class CocktailsViewModel @Inject constructor(private val defaultCocktailRepository: DefaultCocktailRepository) : ViewModel() {
+    private val _cocktails = MutableLiveData<MutableList<Cocktail>>()
+    val cocktails: MutableLiveData<MutableList<Cocktail>> = _cocktails
+
     init {
-        guestWithCocktailsRepository = GuestWithCocktailsRepository(application)
-        allCocktails = repository.allCocktails
+        viewModelScope.launch {
+            setCocktailList(defaultCocktailRepository.allCocktails())
+        }
     }
 
-    fun onClick(view: View) {
-        //fragmentManager.beginTransaction().replace(R.id.container2, AddCocktailFragment.launch(guest)).addToBackStack(null).commit()
+    fun setCocktailList(cocktailList: LiveData<MutableList<Cocktail>>) {
+        this._cocktails.value = cocktailList.value
     }
 }

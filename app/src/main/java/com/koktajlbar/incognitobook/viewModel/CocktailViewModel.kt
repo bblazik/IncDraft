@@ -1,22 +1,23 @@
 package com.koktajlbar.incognitobook.viewModel
 
-import android.app.Application
 import android.util.Log
-import androidx.databinding.Bindable
 import androidx.databinding.BindingAdapter
-import androidx.databinding.ObservableField
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.koktajlbar.incognitobook.model.Cocktail
-import com.koktajlbar.incognitobook.repositories.CocktailRepository
+import com.koktajlbar.incognitobook.repositories.DefaultCocktailRepository
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerCallback
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+import kotlinx.coroutines.launch
 import java.util.*
+import javax.inject.Inject
 
-class CocktailViewModel(application: Application) : AndroidViewModel(application) {
-    private val cocktailRepository: CocktailRepository = CocktailRepository(application)
-    var cocktail: LiveData<Cocktail>? = null
+class CocktailViewModel @Inject constructor(private val defaultCocktailRepository: DefaultCocktailRepository) : ViewModel() {
+    private val _cocktail = MutableLiveData<Cocktail>()
+    val cocktail: LiveData<Cocktail>? = _cocktail
 
     @BindingAdapter("bind:videoId")
     fun setYoutubeLink(youTubePlayerView: YouTubePlayerView, customVideoId: String) {
@@ -41,6 +42,12 @@ class CocktailViewModel(application: Application) : AndroidViewModel(application
     }
 
     fun getCocktail(uuid: UUID) {
-        this.cocktail = cocktailRepository.getCocktail((uuid))
+        viewModelScope.launch {
+            setCocktail(defaultCocktailRepository.getCocktail(uuid))
+        }
+    }
+
+    fun setCocktail(cocktail: LiveData<Cocktail>) {
+        this._cocktail.value = cocktail.value
     }
 }
