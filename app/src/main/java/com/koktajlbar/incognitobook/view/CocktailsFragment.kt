@@ -22,7 +22,6 @@ import javax.inject.Inject
 
 
 class CocktailsFragment : DaggerFragment() {
-
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<CocktailsViewModel> { viewModelFactory }

@@ -10,7 +10,6 @@ import javax.inject.Singleton
 
 @Module
 object ApplicationModule {
-
     @Provides
     @Singleton
     fun provideCocktailsLocalDataSource(database: AppDatabase): CocktailLocalDataSource {
@@ -19,11 +18,10 @@ object ApplicationModule {
 
     @Provides
     @Singleton
-    fun provideDatabase(contex: Context): AppDatabase {
-        return Room.databaseBuilder(
-                contex.applicationContext,
-                AppDatabase::class.java,
-                "app_database"
-        ).build()
+    fun provideDatabase(context: Context): AppDatabase {
+        return Room
+            .databaseBuilder(context.applicationContext, AppDatabase::class.java, "bar_book.db")
+            .fallbackToDestructiveMigration()
+            .build()
     }
 }

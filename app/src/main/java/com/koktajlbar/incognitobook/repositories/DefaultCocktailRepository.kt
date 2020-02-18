@@ -2,20 +2,21 @@ package com.koktajlbar.incognitobook.repositories
 
 import androidx.lifecycle.LiveData
 import com.koktajlbar.incognitobook.datasources.CocktailLocalDataSource
+import com.koktajlbar.incognitobook.datasources.CocktailRemoteDataSource
 import com.koktajlbar.incognitobook.model.Cocktail
 import java.util.*
 import javax.inject.Inject
 
 class DefaultCocktailRepository @Inject constructor(
-        private val cocktailsLocalDataSource: CocktailLocalDataSource
+        private val cocktailsLocalDataSource: CocktailLocalDataSource,
+        private val cocktailsRemoteDataSource: CocktailRemoteDataSource
 ) : CocktailRepository {
 
     override suspend fun allCocktails(): LiveData<MutableList<Cocktail>> {
-        var dupa = cocktailsLocalDataSource.allCocktails()
-        return dupa
+        return cocktailsRemoteDataSource.allCocktails()
     }
 
     override suspend fun getCocktail(uuid: UUID): LiveData<Cocktail> {
-        return cocktailsLocalDataSource.getCocktail(uuid)
+        return cocktailsRemoteDataSource.getCocktail(uuid)
     }
 }

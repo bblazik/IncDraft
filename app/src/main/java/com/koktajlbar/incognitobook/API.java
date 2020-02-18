@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class API {
     private static String url = "https://incognito.frelia.org/api/v1/";
-    public static com.koktajlbar.incognitobook.Service getClient() {
+    public static CocktailApi getClient() {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(
                         chain -> {
@@ -28,7 +28,7 @@ public class API {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(okHttpClient)
                 .build();
-        return client.create(com.koktajlbar.incognitobook.Service.class);
+        return client.create(CocktailApi.class);
     }
 }
 

@@ -6,12 +6,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 import android.content.Context;
-import android.os.AsyncTask;
-import androidx.annotation.NonNull;
-import android.widget.Toast;
 
-import java.io.IOException;
-import java.util.List;
 
 import com.koktajlbar.incognitobook.dao.CocktailDao;
 import com.koktajlbar.incognitobook.dao.GuestCocktailJoinDao;
@@ -41,60 +36,10 @@ public abstract class AppDatabase extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             AppDatabase.class, "app_database")
                             .fallbackToDestructiveMigration()
-                            .addCallback(sRoomDatabaseCallback)
                             .build();
                 }
             }
         }
         return INSTANCE;
-    }
-
-    private static RoomDatabase.Callback sRoomDatabaseCallback = new RoomDatabase.Callback() {
-        @Override
-        public void onOpen (@NonNull SupportSQLiteDatabase db){
-            super.onOpen(db);
-            new PopulateDbAsync(INSTANCE).execute();
-        }
-    };
-
-    private static class PopulateDbAsync extends AsyncTask<Void, Void, Boolean> {
-        private final GuestDao guestDao;
-        private final CocktailDao cocktailDao;
-        private final GuestCocktailJoinDao guestCocktailJoinDao;
-
-        PopulateDbAsync(AppDatabase db) {
-            guestDao = db.guestDao();
-            cocktailDao = db.cocktailDao();
-            guestCocktailJoinDao = db.guestCocktailJoinDao();
-        }
-
-        @Override
-        protected Boolean doInBackground(final Void... params) {
-
-            List<Cocktail> cocktailList = null;
-            Service service = API.getClient();
-
-            guestCocktailJoinDao.deleteAll();
-            cocktailDao.deleteAll();
-
-            try {
-                cocktailList = service.getCocktails().execute().body();
-            } catch (IOException e) {
-                e.printStackTrace();
-                return false;
-            }
-
-            for(Cocktail cocktail: cocktailList) {
-                cocktailDao.insertCocktail(cocktail);
-            }
-            return true;
-        }
-
-        @Override
-        protected void onPostExecute(Boolean executedSuccesfully) {
-            super.onPostExecute(executedSuccesfully);
-            if(!executedSuccesfully)
-                Toast.makeText(mcontext, mcontext.getText(R.string.InternetError), Toast.LENGTH_LONG).show();
-        }
     }
 }
