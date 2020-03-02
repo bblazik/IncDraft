@@ -1,4 +1,4 @@
-package com.koktajlbar.incognitobook.viewModel
+package com.koktajlbar.incognitobook.viewmodels
 
 import android.util.Log
 import androidx.databinding.BindingAdapter
@@ -13,9 +13,8 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.You
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import kotlinx.coroutines.launch
 import java.util.*
-import javax.inject.Inject
 
-class CocktailViewModel @Inject constructor(private val defaultCocktailRepository: DefaultCocktailRepository) : ViewModel() {
+class CocktailViewModel(private val defaultCocktailRepository: DefaultCocktailRepository) : ViewModel() {
     private val _cocktail = MutableLiveData<Cocktail>()
     val cocktail: LiveData<Cocktail>? = _cocktail
 

@@ -1,4 +1,4 @@
-package com.koktajlbar.incognitobook.viewModel;
+package com.koktajlbar.incognitobook.viewmodels;
 
 import androidx.databinding.BaseObservable;
 import android.content.Context;

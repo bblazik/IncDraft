@@ -7,7 +7,7 @@ import com.koktajlbar.incognitobook.model.Cocktail
 import java.util.*
 import javax.inject.Inject
 
-class CocktailRemoteDataSource @Inject constructor(private val cocktailApi: CocktailApi) : CocktailDataSource {
+class CocktailRemoteDataSource(private val cocktailApi: CocktailApi) : CocktailDataSource {
     override suspend fun allCocktails(): LiveData<MutableList<Cocktail>> {
         return MutableLiveData(cocktailApi.allCocktails())
     }

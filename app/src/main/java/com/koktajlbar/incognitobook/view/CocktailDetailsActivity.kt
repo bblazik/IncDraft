@@ -2,30 +2,25 @@ package com.koktajlbar.incognitobook.view
 
 import android.os.Bundle
 import android.view.View
-import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.koktajlbar.incognitobook.R
 import com.koktajlbar.incognitobook.model.Cocktail
-import com.koktajlbar.incognitobook.viewModel.CocktailViewModel
+import com.koktajlbar.incognitobook.viewmodels.CocktailViewModel
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerCallback
-import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.cocktail_details_activity.*
 import java.util.*
-import javax.inject.Inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
-class CocktailDetailsActivity : DaggerAppCompatActivity() {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val viewModel by viewModels<CocktailViewModel> { viewModelFactory }
+class CocktailDetailsActivity : AppCompatActivity() {
+    private val cocktailViewModel: CocktailViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.cocktail_details_activity)
         val uuid: UUID = intent.getSerializableExtra("uuid") as UUID
-        viewModel!!.getCocktail(uuid)
+        cocktailViewModel!!.getCocktail(uuid)
         lifecycle.addObserver(youtube_player_view)
         val cocktailObserver = Observer<Cocktail> { cocktail ->
             collapsingToolbar.title = cocktail.name
@@ -43,6 +38,6 @@ class CocktailDetailsActivity : DaggerAppCompatActivity() {
             cocktailDetailsTechnique.text = cocktail.technique
             cocktailDetailsIngredients.text = cocktail.ingredients
         }
-        viewModel!!.cocktail?.observe(this, cocktailObserver)
+        cocktailViewModel!!.cocktail?.observe(this, cocktailObserver)
     }
 }

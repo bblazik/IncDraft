@@ -6,7 +6,7 @@ import com.koktajlbar.incognitobook.model.Cocktail
 import java.util.*
 import javax.inject.Inject
 
-class CocktailLocalDataSource @Inject constructor(private val database: AppDatabase) : CocktailDataSource {
+class CocktailLocalDataSource(val database: AppDatabase) : CocktailDataSource {
     private val cocktailDao = database.cocktailDao()
 
     override suspend fun allCocktails(): LiveData<MutableList<Cocktail>> {

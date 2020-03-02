@@ -7,7 +7,7 @@ import com.koktajlbar.incognitobook.model.Cocktail
 import java.util.*
 import javax.inject.Inject
 
-class DefaultCocktailRepository @Inject constructor(
+class DefaultCocktailRepository(
         private val cocktailsLocalDataSource: CocktailLocalDataSource,
         private val cocktailsRemoteDataSource: CocktailRemoteDataSource
 ) : CocktailRepository {

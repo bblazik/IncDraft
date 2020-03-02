@@ -1,32 +1,25 @@
 package com.koktajlbar.incognitobook.view
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
-import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.koktajlbar.incognitobook.R
 import com.koktajlbar.incognitobook.databinding.FragmentCocktailsBinding
 import com.koktajlbar.incognitobook.model.Cocktail
 import com.koktajlbar.incognitobook.view.adapter.CocktailAdapter
-import com.koktajlbar.incognitobook.viewModel.CocktailsViewModel
-import dagger.android.support.DaggerFragment
-import javax.inject.Inject
+import com.koktajlbar.incognitobook.viewmodels.CocktailsViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
+class CocktailsFragment : Fragment() {
+    private val cocktailsViewModel: CocktailsViewModel by viewModel()
 
-class CocktailsFragment : DaggerFragment() {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val viewModel by viewModels<CocktailsViewModel> { viewModelFactory }
-
-    private val onQueryTextListener: OnQueryTextListener = object : OnQueryTextListener {
+    private val onQueryTextListener: SearchView.OnQueryTextListener = object : SearchView.OnQueryTextListener {
         override fun onQueryTextSubmit(query: String): Boolean {
             adapter!!.filter.filter(query)
             return false
@@ -49,7 +42,7 @@ class CocktailsFragment : DaggerFragment() {
         cocktailFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_cocktails, container, false)
 
         setBinding()
-        viewModel!!.cocktails.observe(viewLifecycleOwner,
+        cocktailsViewModel!!.cocktails.observe(viewLifecycleOwner,
                 Observer<MutableList<Cocktail>> { cocktails ->
                     if (signature) adapter!!.cocktailList = cocktails.filter { cocktail -> cocktail.signature.equals(true) }.toMutableList()
                     else adapter!!.cocktailList = cocktails})
@@ -59,12 +52,12 @@ class CocktailsFragment : DaggerFragment() {
     }
 
     fun setBinding() {
-        cocktailFragmentBinding!!.viewModel = viewModel
+        cocktailFragmentBinding!!.viewModel = cocktailsViewModel
         cocktailFragmentBinding!!.setLifecycleOwner(this)
 
         adapter = CocktailAdapter(activity)
         cocktailFragmentBinding!!.list.adapter = adapter
         cocktailFragmentBinding!!.list.layoutManager = LinearLayoutManager(context)
-        sv = activity!!.findViewById(R.id.search)
+        sv = requireActivity().findViewById(R.id.search)
     }
 }

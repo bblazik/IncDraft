@@ -1,13 +1,11 @@
-package com.koktajlbar.incognitobook.viewModel
+package com.koktajlbar.incognitobook.viewmodels
 
 import androidx.lifecycle.*
 import com.koktajlbar.incognitobook.model.Cocktail
 import com.koktajlbar.incognitobook.repositories.DefaultCocktailRepository
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-class CocktailsViewModel @Inject constructor(private val defaultCocktailRepository: DefaultCocktailRepository) : ViewModel() {
+class CocktailsViewModel(private val defaultCocktailRepository: DefaultCocktailRepository) : ViewModel() {
     private val _cocktails = MutableLiveData<MutableList<Cocktail>>()
     val cocktails: MutableLiveData<MutableList<Cocktail>> = _cocktails
 
