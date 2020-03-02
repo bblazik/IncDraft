@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <import type="android.view.View" />
-        <variable name="viewModel" type="com.koktajlbar.incognitobook.viewModel.CocktailsViewModel" />
+        <variable name="viewModel" type="com.koktajlbar.incognitobook.viewmodels.CocktailsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

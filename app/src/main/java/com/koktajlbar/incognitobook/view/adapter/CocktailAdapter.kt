@@ -16,7 +16,7 @@ import java.util.ArrayList
 import com.koktajlbar.incognitobook.R
 import com.koktajlbar.incognitobook.databinding.CocktailRowBinding
 import com.koktajlbar.incognitobook.model.Cocktail
-import com.koktajlbar.incognitobook.viewModel.CocktailRowVM
+import com.koktajlbar.incognitobook.viewmodels.CocktailRowVM
 
 class CocktailAdapter(val activity: FragmentActivity?) : RecyclerView.Adapter<CocktailAdapter.CocktailViewHolder>(), Filterable {
     private var cocktails: MutableList<Cocktail> = ArrayList()

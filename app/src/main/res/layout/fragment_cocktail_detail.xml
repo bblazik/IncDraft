@@ -6,7 +6,7 @@
 
     <data>
         <import type="android.view.View" />
-        <variable name="vm" type="com.koktajlbar.incognitobook.viewModel.CocktailRowVM" />
+        <variable name="vm" type="com.koktajlbar.incognitobook.viewmodels.CocktailRowVM" />
     </data>
 
     <LinearLayout

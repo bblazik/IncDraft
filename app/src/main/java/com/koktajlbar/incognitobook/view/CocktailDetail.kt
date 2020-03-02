@@ -9,11 +9,10 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.koktajlbar.incognitobook.R
 import com.koktajlbar.incognitobook.databinding.FragmentCocktailDetailBinding
 import com.koktajlbar.incognitobook.model.Cocktail
-import com.koktajlbar.incognitobook.viewModel.CocktailRowVM
+import com.koktajlbar.incognitobook.viewmodels.CocktailRowVM
 
 
 class CocktailDetail : AppCompatActivity() {
-
     var binding: FragmentCocktailDetailBinding? = null
     var vm: CocktailRowVM? = null
 
