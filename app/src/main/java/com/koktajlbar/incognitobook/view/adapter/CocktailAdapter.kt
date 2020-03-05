@@ -68,7 +68,7 @@ class CocktailAdapter(val activity: FragmentActivity?) : RecyclerView.Adapter<Co
 
         fun bindCard(cocktail: Cocktail) {
             if (cocktailRowBinding.viewModel == null) {
-                cocktailRowBinding.viewModel = CocktailRowVM(cocktail, activity)
+                cocktailRowBinding.viewModel = CocktailRowVM(cocktail)
             } else {
                 cocktailRowBinding.viewModel!!.setCocktail(cocktail)
             }
