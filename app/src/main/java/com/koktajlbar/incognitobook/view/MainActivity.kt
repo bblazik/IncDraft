@@ -1,11 +1,10 @@
 package com.koktajlbar.incognitobook.view
 
 import android.os.Bundle
-import com.google.android.material.tabs.TabLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
-
+import com.google.android.material.tabs.TabLayout
 import com.koktajlbar.incognitobook.R
 import kotlinx.android.synthetic.main.activity_main.*
 

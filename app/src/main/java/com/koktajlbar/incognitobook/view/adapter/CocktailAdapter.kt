@@ -1,29 +1,26 @@
 package com.koktajlbar.incognitobook.view.adapter
 
-import androidx.databinding.DataBindingUtil
-import android.graphics.Color
 import android.graphics.drawable.Drawable
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
-
-import java.util.ArrayList
-
+import androidx.recyclerview.widget.RecyclerView
 import com.koktajlbar.incognitobook.R
 import com.koktajlbar.incognitobook.databinding.CocktailRowBinding
 import com.koktajlbar.incognitobook.model.Cocktail
 import com.koktajlbar.incognitobook.viewmodels.CocktailRowVM
+import java.util.*
 
 class CocktailAdapter(val activity: FragmentActivity?) : RecyclerView.Adapter<CocktailAdapter.CocktailViewHolder>(), Filterable {
     private var cocktails: MutableList<Cocktail> = ArrayList()
     private var filteredCocktails: MutableList<Cocktail> = ArrayList()
     private val filter = ItemFilter()
-    var checkable = false
-    internal var checkedCocktails: MutableList<Cocktail> = ArrayList()
+    private var checkable = false
+    private var checkedCocktails: MutableList<Cocktail> = ArrayList()
 
     var cocktailList: MutableList<Cocktail>
         get() = cocktails
@@ -32,21 +29,8 @@ class CocktailAdapter(val activity: FragmentActivity?) : RecyclerView.Adapter<Co
             filteredCocktails = cocktailList
             notifyDataSetChanged()
         }
-    fun getCheckedCocktails(): List<Cocktail> {
-        return checkedCocktails
-    }
 
-    fun restoreItem(removedPosition: Int, removedCocktail: Cocktail) {
-        cocktails.add(removedPosition, removedCocktail)
-        notifyItemInserted(removedPosition)
-    }
-
-    fun removeAt(position: Int) {
-        filteredCocktails.removeAt(position)
-        notifyItemRemoved(position)
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CocktailAdapter.CocktailViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CocktailViewHolder {
         val cardRowBinding = DataBindingUtil.inflate<CocktailRowBinding>(LayoutInflater.from(parent.context), R.layout.cocktail_row,
                 parent, false)
         if (checkable) {
@@ -60,9 +44,9 @@ class CocktailAdapter(val activity: FragmentActivity?) : RecyclerView.Adapter<Co
         return CocktailViewHolder(cardRowBinding)
     }
 
-    override fun onBindViewHolder(holder: CocktailAdapter.CocktailViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CocktailViewHolder, position: Int) {
         holder.bindCard(filteredCocktails[position])
-        holder.cocktailRowBinding.checkBox.setOnCheckedChangeListener { compoundButton, b ->
+        holder.cocktailRowBinding.checkBox.setOnCheckedChangeListener { _, b ->
             if (b)
                 checkedCocktails.add(cocktails[position])
             else
@@ -81,34 +65,24 @@ class CocktailAdapter(val activity: FragmentActivity?) : RecyclerView.Adapter<Co
     inner class CocktailViewHolder(var cocktailRowBinding: CocktailRowBinding) : RecyclerView.ViewHolder(cocktailRowBinding.cocktailRow) {
         var settings: Drawable? = null
         var position: Int? = 0
-        val isChecked: Boolean
-            get() = cocktailRowBinding.checkBox.isChecked
 
         fun bindCard(cocktail: Cocktail) {
             if (cocktailRowBinding.viewModel == null) {
                 cocktailRowBinding.viewModel = CocktailRowVM(cocktail, activity)
             } else {
-                cocktailRowBinding!!.viewModel!!.setCocktail(cocktail)
+                cocktailRowBinding.viewModel!!.setCocktail(cocktail)
             }
         }
 
-        fun onItemSelected() {
-            settings = itemView.background
-            itemView.setBackgroundColor(Color.LTGRAY)
-        }
-
-        fun onItemClear() {
-            itemView.background = settings
-        }
     }
 
     private inner class ItemFilter : Filter() {
-        override fun performFiltering(constraint: CharSequence): Filter.FilterResults {
-            val results = Filter.FilterResults()
+        override fun performFiltering(constraint: CharSequence): FilterResults {
+            val results = FilterResults()
             val newList = ArrayList<Cocktail>(cocktails.size)
 
             for (c in cocktails) {
-                if (c.name.toLowerCase().contains(constraint) || c.category.toLowerCase().contains((constraint)))
+                if (c.name.toLowerCase(Locale.getDefault()).contains(constraint) || c.category.toLowerCase(Locale.getDefault()).contains((constraint)))
                     newList.add(c)
             }
             results.values = newList
@@ -116,7 +90,7 @@ class CocktailAdapter(val activity: FragmentActivity?) : RecyclerView.Adapter<Co
             return results
         }
 
-        override fun publishResults(constraint: CharSequence, results: Filter.FilterResults) {
+        override fun publishResults(constraint: CharSequence, results: FilterResults) {
             filteredCocktails = results.values as ArrayList<Cocktail>
             notifyDataSetChanged()
         }

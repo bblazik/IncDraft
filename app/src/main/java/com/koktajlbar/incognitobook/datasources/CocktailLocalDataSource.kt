@@ -4,17 +4,15 @@ import androidx.lifecycle.LiveData
 import com.koktajlbar.incognitobook.AppDatabase
 import com.koktajlbar.incognitobook.model.Cocktail
 import java.util.*
-import javax.inject.Inject
 
-class CocktailLocalDataSource(val database: AppDatabase) : CocktailDataSource {
+class CocktailLocalDataSource(database: AppDatabase) : CocktailDataSource {
     private val cocktailDao = database.cocktailDao()
 
     override suspend fun allCocktails(): LiveData<MutableList<Cocktail>> {
-        var all = cocktailDao.all.value
         return cocktailDao.all
     }
 
     override suspend fun getCocktail(uuid: UUID): LiveData<Cocktail> {
-        return cocktailDao.find_by_uuid(uuid)
+        return cocktailDao.findByUuid(uuid)
     }
 }

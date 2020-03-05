@@ -32,7 +32,7 @@ class CocktailViewModel(private val defaultCocktailRepository: DefaultCocktailRe
 
     fun getVideoId(): String {
         Log.d("getVideoId", "Custom video id is: " + cocktail?.value?.videoId!!)
-        return cocktail?.value?.videoId!!
+        return cocktail.value?.videoId!!
     }
 
     fun hasVideo(): Boolean {

@@ -1,17 +1,16 @@
 package com.koktajlbar.incognitobook.viewmodels;
 
-import androidx.databinding.BaseObservable;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
+
+import androidx.databinding.BaseObservable;
+
 import com.koktajlbar.incognitobook.model.Cocktail;
 import com.koktajlbar.incognitobook.view.CocktailDetailsActivity;
 
 
 public class CocktailRowVM extends BaseObservable {
-
-    public boolean extended = false;
-    public boolean hasVideo = false;
 
     private Cocktail cocktail;
     private Context context;
@@ -27,22 +26,6 @@ public class CocktailRowVM extends BaseObservable {
     }
 
     public String getName(){ return cocktail.getName();}
-    public String getIngredients(){ return cocktail.getIngredients();}
-    public String getGlassware() { return cocktail.getGlassware(); }
-    public String getGarnish() { return cocktail.getGarnish(); }
-    public String getTechnique() {
-        return cocktail.getTechnique();
-    }
-    public String getSignature() {
-        return String.valueOf(cocktail.getSignature());
-    }
-    public String getCategory() {
-        return cocktail.getCategory();
-    }
-
-    public boolean getSignatureDescription() {
-        return cocktail.getSignature();
-    }
 
     public void onItemClick(View view) {
         Intent intent = new Intent(context, CocktailDetailsActivity.class);

@@ -10,8 +10,8 @@ import com.koktajlbar.incognitobook.viewmodels.CocktailViewModel
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerCallback
 import kotlinx.android.synthetic.main.cocktail_details_activity.*
-import java.util.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
 
 class CocktailDetailsActivity : AppCompatActivity() {
     private val cocktailViewModel: CocktailViewModel by viewModel()
@@ -20,7 +20,7 @@ class CocktailDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.cocktail_details_activity)
         val uuid: UUID = intent.getSerializableExtra("uuid") as UUID
-        cocktailViewModel!!.getCocktail(uuid)
+        cocktailViewModel.getCocktail(uuid)
         lifecycle.addObserver(youtube_player_view)
         val cocktailObserver = Observer<Cocktail> { cocktail ->
             collapsingToolbar.title = cocktail.name
@@ -38,6 +38,6 @@ class CocktailDetailsActivity : AppCompatActivity() {
             cocktailDetailsTechnique.text = cocktail.technique
             cocktailDetailsIngredients.text = cocktail.ingredients
         }
-        cocktailViewModel!!.cocktail?.observe(this, cocktailObserver)
+        cocktailViewModel.cocktail?.observe(this, cocktailObserver)
     }
 }

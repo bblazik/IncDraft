@@ -34,7 +34,7 @@ class CocktailsFragment : Fragment() {
     private var adapter: CocktailAdapter? = null
     private var sv: SearchView? = null
     var signature = false
-    internal var cocktailFragmentBinding: FragmentCocktailsBinding? = null
+    private var cocktailFragmentBinding: FragmentCocktailsBinding? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -42,18 +42,18 @@ class CocktailsFragment : Fragment() {
         cocktailFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_cocktails, container, false)
 
         setBinding()
-        cocktailsViewModel!!.cocktails.observe(viewLifecycleOwner,
+        cocktailsViewModel.cocktails.observe(viewLifecycleOwner,
                 Observer<MutableList<Cocktail>> { cocktails ->
-                    if (signature) adapter!!.cocktailList = cocktails.filter { cocktail -> cocktail.signature.equals(true) }.toMutableList()
+                    if (signature) adapter!!.cocktailList = cocktails.filter { cocktail -> cocktail.signature }.toMutableList()
                     else adapter!!.cocktailList = cocktails})
 
         sv!!.setOnQueryTextListener(onQueryTextListener)
         return cocktailFragmentBinding!!.root
     }
 
-    fun setBinding() {
+    private fun setBinding() {
         cocktailFragmentBinding!!.viewModel = cocktailsViewModel
-        cocktailFragmentBinding!!.setLifecycleOwner(this)
+        cocktailFragmentBinding!!.lifecycleOwner = this
 
         adapter = CocktailAdapter(activity)
         cocktailFragmentBinding!!.list.adapter = adapter

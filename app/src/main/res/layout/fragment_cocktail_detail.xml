@@ -35,29 +35,6 @@
                     android:layout_height="wrap_content"
                     android:text="@{vm.name}" />
 
-                <TextView
-                    android:id="@+id/ing"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@{vm.ingredients}" />
-
-                <TextView
-                    android:id="@+id/glass"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@{vm.glassware}" />
-
-                <TextView
-                    android:id="@+id/technique"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@{vm.technique}" />
-
-                <TextView
-                    android:id="@+id/author"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@{vm.signature}" />
             </LinearLayout>
 
 

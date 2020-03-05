@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import com.koktajlbar.incognitobook.CocktailApi
 import com.koktajlbar.incognitobook.model.Cocktail
 import java.util.*
-import javax.inject.Inject
 
 class CocktailRemoteDataSource(private val cocktailApi: CocktailApi) : CocktailDataSource {
     override suspend fun allCocktails(): LiveData<MutableList<Cocktail>> {

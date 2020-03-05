@@ -1,8 +1,8 @@
 package com.koktajlbar.incognitobook.utils
 
 import android.graphics.Canvas
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 
 class TouchHelper : ItemTouchHelper.Callback() {
 

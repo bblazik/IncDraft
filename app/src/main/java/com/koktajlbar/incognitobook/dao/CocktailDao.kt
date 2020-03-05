@@ -11,7 +11,7 @@ import java.util.*
 @Dao
 interface CocktailDao {
     @Query("SELECT * FROM Cocktail WHERE cocktail_id = :id")
-    fun find_by_uuid(id: UUID): LiveData<Cocktail>
+    fun findByUuid(id: UUID): LiveData<Cocktail>
 
     @get:Query("SELECT * FROM Cocktail GROUP BY name")
     val all: LiveData<MutableList<Cocktail>>

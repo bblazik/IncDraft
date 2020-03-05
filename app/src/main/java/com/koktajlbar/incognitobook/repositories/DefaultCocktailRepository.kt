@@ -5,7 +5,6 @@ import com.koktajlbar.incognitobook.datasources.CocktailLocalDataSource
 import com.koktajlbar.incognitobook.datasources.CocktailRemoteDataSource
 import com.koktajlbar.incognitobook.model.Cocktail
 import java.util.*
-import javax.inject.Inject
 
 class DefaultCocktailRepository(
         private val cocktailsLocalDataSource: CocktailLocalDataSource,
