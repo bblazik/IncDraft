@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="android.view.View" />
+        <import type="android.view.ViewGroup.LayoutParams" />
+        <variable name="viewModel" type="com.koktajlbar.incognitobook.viewmodels.CocktailRowVM" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cocktail_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/material_list_text_first_position_margin_start"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="@dimen/material_list_text_last_position_margin_end"
+        android:minHeight="@dimen/material_list_two_line_normal_height"
+        android:onClick="@{viewModel::onItemClick}"
+        android:onLongClick="@{viewModel::onLongClick}"
+        android:orientation="horizontal"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/material_list_text_first_position_margin_start"
+            android:layout_marginEnd="@dimen/material_list_text_last_position_margin_end"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:contentDescription="TODO"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/placeholder" />
+
+            <TextView
+                android:id="@+id/cocktailName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@{viewModel.name}"
+                android:textSize="@dimen/material_grid_list_header_footer_title_text_size_standard"
+                tools:layout_conversion_absoluteHeight="21dp"
+                tools:layout_conversion_absoluteWidth="928dp"
+                tools:layout_editor_absoluteX="24dp"
+                tools:layout_editor_absoluteY="13dp" />
+
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="6"
+            android:visibility="gone" />
+
+    </androidx.cardview.widget.CardView>
+
+</layout>
